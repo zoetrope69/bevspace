@@ -1,0 +1,22 @@
+{
+  "name": "fyp",
+  "version": "0.0.1",
+  "description": "fyp",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint -c .eslintrc src",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zaccolley/fyp.git"
+  },
+  "author": "Zac Colley <hi@zaccolley.com> (http://zaccolley.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaccolley/fyp/issues"
+  },
+  "devDependencies": {
+    "eslint": "^2.1.0"
+  }
+}
