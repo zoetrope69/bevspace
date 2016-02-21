@@ -15,7 +15,7 @@ module.exports = {
 	},
 
 	resolve: {
-		extensions: ['', '.jsx', '.js', '.json', '.less'],
+		extensions: ['', '.jsx', '.js', '.json', '.scss'],
 		modulesDirectories: [
 			`${__dirname}/src/lib`,
 			`${__dirname}/node_modules`,
@@ -44,18 +44,18 @@ module.exports = {
 				loader: 'babel'
 			},
 			{
-				test: /\.(less|css)$/,
+				test: /\.(scss|css)$/,
 				include: /src\/components\//,
 				loader: ExtractTextPlugin.extract([
 					`css?sourceMap&modules&importLoaders=1&localIdentName=[local]${process.env.CSS_MODULES_IDENT || '_[hash:base64:5]'}`,
 					'postcss',
-					'less?sourceMap'
+					'sass?sourceMap'
 				].join('!'))
 			},
 			{
-				test: /\.(less|css)$/,
+				test: /\.(scss|css)$/,
 				exclude: /src\/components\//,
-				loader: ExtractTextPlugin.extract('css?sourceMap!postcss!less?sourceMap')
+				loader: ExtractTextPlugin.extract('css?sourceMap!postcss!sass?sourceMap')
 			},
 			{
 				test: /\.json$/,
