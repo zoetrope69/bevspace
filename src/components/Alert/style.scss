@@ -1,0 +1,22 @@
+@import '~style/helpers';
+
+.alert {
+  z-index: 10;
+  position: fixed;
+  top: .75em;
+  left: 0;
+  padding: .5em 1em;
+
+  color: white;
+
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: rgba($success, .85);
+
+  transition: opacity .33s;
+}
+
+.alert--hidden {
+  opacity: 0;
+  left: -100%;
+}
