@@ -3,8 +3,8 @@ import { Router } from 'preact-router';
 import { bind } from 'decko';
 
 import Alert from './Alert';
-import Header from './header';
-import Home from './home';
+import Header from './Header';
+import Home from './Home';
 
 export default class App extends Component {
   constructor() {
