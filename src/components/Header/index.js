@@ -9,6 +9,7 @@ export default class Header extends Component {
         <h1>bev.space</h1>
         <nav>
           <Link href="/">Home</Link>
+          <Link href="/recipes">Recipes</Link>
         </nav>
       </header>
     );

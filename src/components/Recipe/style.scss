@@ -1,0 +1,95 @@
+@import '~style/helpers';
+
+.recipe {
+	padding: 1em;
+}
+
+.recipe .info {
+  position: relative;
+  padding: 1em 1em 1.5em;
+
+  border-radius: 5px;
+}
+
+.recipe .info::after {
+  z-index: 5;
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  bottom: -6px;
+
+  box-shadow: 0 0 0 4px $bg;
+  border-radius: 50%;
+  background: white;
+}
+
+.recipe .info .name {
+  line-height: 1em;
+  color: rgba($white, 0.95);
+  font-weight: 500;
+  font-size: 2.5em;
+}
+
+.recipe .info .author {
+  display: block;
+
+  font-weight: 400;
+  color: rgba($black, 0.5);
+}
+
+.recipe .timeline {}
+
+.recipe .timeline .item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5em 0;
+  padding: 1.5em 1em 1em;
+  list-style: none;
+
+  border-radius: 5px;
+  background: #3A3830;
+}
+
+.recipe .timeline .item::before {
+  z-index: 10;
+  content: '';
+  display: block;
+  width: 4px;
+  height: 2em;
+  position: absolute;
+  top: -2.25em;
+  left: 19px;
+
+  background: white;
+}
+
+.recipe .timeline .item::after {
+  z-index: 5;
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: -6px;
+  left: 16px;
+
+  box-shadow: 0 0 0 4px $bg;
+  border-radius: 50%;
+  background: white;
+}
+
+.recipe .timeline .item time {
+  color: $white;
+
+  font-size: .85em;
+}
+
+.recipe .timeline .item .description {
+  flex-grow: 2;
+  padding-left: 1em;
+
+  color: #fff5cc;
+}

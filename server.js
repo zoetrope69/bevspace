@@ -35,7 +35,10 @@ function processRecipe(doc) {
   let timeline = recipe.timeline();
   timeline = timeline.map(item => {
     return {
-      duration: item[0],
+      duration: {
+        raw: item[0],
+        pretty: Brauhaus.displayDuration(item[0])
+      },
       description: item[1]
     };
   });

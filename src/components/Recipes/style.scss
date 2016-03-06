@@ -1,0 +1,33 @@
+@import '~style/helpers';
+
+.recipes {
+	padding: 1em;
+}
+
+.recipes .list {
+  list-style: none;
+}
+
+.recipes .list .item {
+  display: flex;
+  padding: 1em;
+  margin: .5em 0;
+  justify-content: space-between;
+  align-items: center;
+
+  color: $bg;
+  font-weight: 400;
+  text-decoration: none;
+
+  border-left: solid 5px;
+  border-radius: 2px;
+  background: $white;
+
+  opacity: .95;
+
+  transition: opacity .33s ease-in-out;
+}
+
+.recipes .list .item:hover {
+  opacity: 1;
+}
