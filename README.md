@@ -1,6 +1,5 @@
 # fyp
 [![Build Status](https://travis-ci.com/zaccolley/fyp.svg?token=zCabjGsCLsxCRsw98yfZ&branch=master)](https://travis-ci.com/zaccolley/fyp)
-[![Known Vulnerabilities](https://snyk.io/test/npm/fyp/badge.svg)](https://snyk.io/test/npm/fyp)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # dev
