@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { bind } from 'decko';
 
-import Alert from './alert';
+import Alert from './Alert';
 import Header from './header';
 import Home from './home';
 import Profile from './profile';
