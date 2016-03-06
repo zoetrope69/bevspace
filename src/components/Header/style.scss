@@ -2,32 +2,31 @@
 
 .header {
   display: flex;
+  align-items: center;
   padding: 0 1em;
-
-  background: $brand;
 }
 
 .header h1 {
   flex-grow: 1;
-  padding: .75em 0;
+  padding: 1em 0;
   padding-left: 1em;
 
+  line-height: 1em;
   font-size: 1.5em;
-  font-weight: 500;
-  color: black;
+  font-weight: 400;
+  font-style: italic;
+  color: white;
 
   background-image: url('../../assets/malt.svg');
   background-repeat: no-repeat;
-  background-size: auto 55%;
+  background-size: auto 50%;
   background-position: left center;
-
-  opacity: .85;
 
   transition: opacity .15s ease-in;
 }
 
 .header h1:hover {
-  opacity: 1;
+  opacity: .85;
 }
 
 .header nav {
