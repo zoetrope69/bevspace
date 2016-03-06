@@ -1,0 +1,21 @@
+@keyframes fadeIn {
+  from {
+    opacity: .5;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes textIn {
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
