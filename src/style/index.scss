@@ -1,22 +1,34 @@
 @import 'helpers';
 
+*::before,
+*,
+*::after {
+  margin: 0;
+  padding: 0;
+	box-sizing: border-box;
+}
+
 html, body {
 	height: 100%;
 	width: 100%;
-	padding: 0;
-	margin: 0;
-	background: #FAFAFA;
-	font-family: 'Helvetica Neue', arial, sans-serif;
-	font-weight: 400;
-	color: #444;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+
+	font-family: sans-serif;
+	font-weight: 300;
+	color: $white;
+
+  background: $bg;
 }
 
-* {
-	box-sizing: border-box;
+.wf-firasans-n4-active body {
+  font-family: 'Fira Sans', 'Helvetica Neue', 'Arial', sans-serif;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #app {
 	height: 100%;
 }
+
+h1 { font-weight: 500; }
