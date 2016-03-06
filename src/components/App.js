@@ -1,17 +1,22 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { bind } from 'decko';
+import WebFont from 'webfontloader';
 
 import Alert from './Alert';
 import Header from './Header';
 import Home from './Home';
+import Recipes from './Recipes';
+import Recipe from './Recipe';
 
 export default class App extends Component {
   constructor() {
     super();
     // set initial time:
     this.state = {
-      serviceWorkerActivated: false
+      serviceWorkerActivated: false,
+      fontsLoaded: false,
+      recipes: []
     };
   }
 
@@ -65,12 +70,28 @@ export default class App extends Component {
     });
   }
 
+  loadRecipes() {
+    fetch('http://localhost:2337')
+      .then((result) => result.json())
+      .then((recipes) => this.setState({ recipes }));
+  }
+
+  loadFont() {
+    WebFont.load({
+      google: {
+        families: ['Fira Sans']
+      }
+    });
+  }
+
   componentWillMount() {
+    this.loadFont();
+    this.loadRecipes();
     // this.initServiceWorker();
   }
 
   render() {
-    const { serviceWorkerActivated } = this.state;
+    const { serviceWorkerActivated, recipes } = this.state;
 
     return (
 			<div id="app">
@@ -78,6 +99,8 @@ export default class App extends Component {
 				<Header />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+					<Recipes path="/recipes" recipes={recipes} />
+					<Recipe path="/recipe/:id" recipes={recipes} />
 				</Router>
 			</div>
 		);
