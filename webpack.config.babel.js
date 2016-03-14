@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import OfflinePlugin from 'offline-plugin';
 import autoprefixer from 'autoprefixer';
 
 const ENV = process.env.NODE_ENV || 'development';
@@ -87,17 +86,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: { collapseWhitespace: true }
-    }),
-    new OfflinePlugin({
-      // All options are optional
-      caches: 'all',
-      scope: '/',
-      updateStrategy: 'all',
-      version: 'v1',
-      ServiceWorker: {
-        output: 'service-worker.js'
-      },
-      AppCache: false
     })
   ]).concat(ENV==='production' ? [
     new webpack.optimize.OccurenceOrderPlugin(),
