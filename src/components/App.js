@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { bind } from 'decko';
-import WebFont from 'webfontloader';
 
 import Alert from './Alert';
 import Header from './Header';
@@ -76,16 +75,7 @@ export default class App extends Component {
       .then((recipes) => this.setState({ recipes }));
   }
 
-  loadFont() {
-    WebFont.load({
-      google: {
-        families: ['Fira Sans']
-      }
-    });
-  }
-
   componentWillMount() {
-    this.loadFont();
     this.loadRecipes();
     // this.initServiceWorker();
   }

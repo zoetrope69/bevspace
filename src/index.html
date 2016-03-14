@@ -16,7 +16,6 @@
   {% if (o.htmlWebpackPlugin.files.icon) { %}
   <link rel="icon" sizes="192x192" href="{%=o.htmlWebpackPlugin.files.icon%}">
   {% } %}
-  <link href='https://fonts.googleapis.com/css?family=Fira+Sans:300,300italic,400,400italic,500,500italic' rel='stylesheet' type='text/css'>
   {% for (var css in o.htmlWebpackPlugin.files.css) { %}
   <link href="{%=o.htmlWebpackPlugin.files.css[css] %}" rel="stylesheet">
   {% } %}
