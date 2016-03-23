@@ -1,0 +1,153 @@
+\chapter{A Review of your subject area and topics}
+
+\section{Introduction} \label{l-r--introduction}
+
+This first section of this chapter discusses the current landscape for home-brewing with technology. The following section explores the relationship between user experience and modern web development. The analysis and design phase of this project will consider these topics.
+
+
+This covers many areas: we start with the area of Home-brewing (section \ref{l-r--home-brewing}) followed by User Experience through Performance (section \ref{l-r--user-experience-performance}). Finally, section \ref{l-r--summary} summarises the chapter.
+
+\section{Home-brewing} \label{l-r--home-brewing}
+
+% Brief history of pubs, brewing and home-brewing in general
+
+% describe a home brew process
+
+\subsection{A comparison of home-brewing and OSS}
+
+Sharing recipes, set-ups and brewing techniques is analogous to the open source communities surround software and hardware. Bringing the two together is mutually beneficial.
+
+With the popularity of affordable and accessible computing with platforms such as Raspberry PI and Arduino, introducing computing technologies into home brewing means more automation and control.
+
+Due to the open source nature of these platforms, many systems have been created. One example is BrewPi, a fermentation temperature controller for brewing beer or wine. (http://www.brewpi.com/).
+
+\subsection{Existing home-brewing solutions}
+
+Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. (http://www.beerxml.com/) Open and standardized formats in general mean better portability, compatability for data [citation].
+
+With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON (http://www.beerjson.com/).
+
+Malt.io is a community website for these brewing recipes. With the options for revision history and "cloning" of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. 
+
+% Need to review the rest of the brewing software https://homebrew.stackexchange.com/questions/784/what-software-do-most-brewers-use/898]
+% tooling is general offline so any web stuff has to be offline
+
+\section{User Experience through Performance} \label{l-r--user-experience-performance}
+
+What is a good user experience? User experience covers a lot of areas, a common thought is this is the job of designers alone. Based on user research, developers have areas that they should focus on.
+
+Web performance in essence is the perceived speed of websites and the actions taken on them.
+
+% performance is ux, http://designingforperformance.com/performance-is-ux/
+
+\subsection{Speed and timing}
+
+\cite{usability_engineering} shows time limits affect how users behave towards a system. An application feels instantaneous with actions taken under 0.1 seconds.  Anything over 1 second a user can lose their flow of though on an action. After 10 seconds a users will lose attention and start to multi-task.
+
+Worse than that \cite{why_web_performance_matters} confirm that "88\% of online consumers are less likely to return to a site after a bad experience".
+
+Blocking web advertising, a controversial topic as of writing, has been shown to increase performance for users for speed. Typically a browser extension would be used to block adverts. Brave, a browser built with advertisement blocking in from the start claims up to 60\% of page load time is caused by the underlying ad technology that loads into various places each time you hit a page on your favorite news site." (https://brave.com/)
+
+Google have "always viewed speed as a competitive advantage", when running experiments by introducing artificial delays into searches "slowing down the search results page by 100 to 400 milliseconds has a measurable impact on the number of searches per user of -0.2\% to -0.6\%" (http://googleresearch.blogspot.co.uk/2009/06/speed-matters.html)
+
+\subsection{Measuring and techniques}
+
+Measuring and optmising performance has become more important than ever with tools such as Google's PageSpeed and WebPageTest giving developers metrics to improve their site on many areas. [a reference here?]
+
+Best practises include optimising a website's resources and where they are retrieved from. With CSS file growing larger in size [find citation] a emerging approach is through Critical CSS. Serving a part of the CSS on load, loading the rest asynchronously and then caching it all for further visits. [citation critical css, filament group https://www.filamentgroup.com/lab/performance-rwd.html]
+
+% perf
+% http://danielmall.com/articles/how-to-make-a-performance-budget/
+% https://medium.com/google-developers/answers-to-questions-about-performance-9806d2dadfe2#.z973fqsjd
+% https://www.filamentgroup.com/lab/mv-initial-load-times.html
+% https://twitter.com/aerotwist/status/709668062321098752
+% https://www.oreilly.com/ideas/progressive-web-apps-and-whats-next-for-mobile?utm_source=youtube&utm_medium=video&utm_content=fluentcon2016&utm_campaign=inbound_video
+% https://twitter.com/nolanlawson/status/709480413689937920
+
+%\subsubsubsection{Frameworks}
+
+% https://www.filamentgroup.com/lab/mv-initial-load-times.html
+% mvc frameworks and performance \cite{performance_mvc}
+
+\subsection{Animation and perceived performance}
+
+% RAIL, https://www.smashingmagazine.com/2015/10/rail-user-centric-model-performance/
+% https://aerotwist.com/blog/flip-your-animations/
+
+After all the optimisation, and all the refinements sometimes a user interface can still be improved. After all, users are only perceiving the performance through what is shown to them. Different techniques can influence this perceived delay, and timescale of tasks done.
+
+One such technique is Optimistic UIs, this is the idea of showing a user feedback before they corresponding action has taken place thus giving an excellent perceived performance. An example of this is the Instagram like button. On press of the post like button the application doesn't wait for a round trip to the server to check that action was carried out successfully, instead it shows the user that they have liked the post immediately with the 'optimism' that the action will be carried out.
+%[cite this, prolly a better example too]
+
+\subsection{Web typography}
+
+Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called "FOIT" (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. (https://www.filamentgroup.com/lab/font-events.html)
+
+A great reading experience with default system typefaces is easily achieved. As (http://mrmrs.io/writing/2016/03/17/webfonts/) explains: Typography is not about aesthetics, it's about serving the text. If even a small percentage of people don't consume your content due to a use of web fonts, your typography is failing.
+
+There are ways to avoid some of the % If you have to, then use font loading stuff
+
+\subsection{Server side}
+
+Now being described as front end ops
+
+% serverside
+%  streams https://jakearchibald.com/2016/streams-ftw/
+%  http2
+%  https://www.nginx.com/blog/7-tips-for-faster-http2-performance/
+%  https://timkadlec.com/2015/02/client-side-templatings-major-bug/
+
+%\subsubsubsection{Progressive Enhancement}
+
+%[progressive enhancement]
+
+%(https://adactio.com/journal/7706)
+
+%[arguments against progressive enhancement (see tom dale with ember)]
+
+\subsection{Offline First}
+
+"Frequently not having any data connection in even the wealthiest and most developed cities of the world has led us to conclude that no, the mobile connectivity/bandwidth issue isn’t just going to solve itself on a global level anywhere in the near future." 
+
+(http://hood.ie/blog/say-hello-to-offline-first.html)
+
+% bruce's opera talk saying "fuck you for thinking only of the western world"
+
+A offline experience can be progressively enhanced with cached content managed by a Service Worked but even the poorest connection is online.
+Described by Jake Archibald: "Lie-Fi is like offline, but it trolls you by pretending to be online. It'll attempt to make a connection for minutes and still fail."
+
+Previous methods of caching content was through using Appcache, however the lack of control made it a very dangerous technology to use. %[cite]
+
+% https://stackoverflow.com/questions/3181080/how-to-detect-online-offline-event-cross-browser
+% http://offlinefirst.org/
+% https://github.com/jakearchibald/offline-wikipedia
+% https://github.com/mozilla/localForage
+
+\subsection{Workers}
+
+When developing on the web historically this meant running client-side Javascript in a single threaded environment. With the introduction of Workers web content can be handled with background tasks.
+
+The two main Workers are Service Workers and Web Workers.
+
+Web Workers create background tasks that can run Javascript that interface back and forth between the main JavaScript tasks. A use case of Web Workers is syncing data between a clientside database and a remote database. 
+
+Service Workers can be seen more as a proxy server between your server and your main JavaScript thread, the key concept is that of 'installing' a Service Worker file to the browser itself registered to a origin. Service Workers are asyncronous and so don't have access to APIs such as XHR.
+Some use cases of Service Workers include, caching for a better (and sometimes offline) experience, Push notifications, background data syncing.
+(https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers#Other_types_of_worker)
+(https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
+
+
+\subsection{Performance based projects}
+
+Google have set-up the Accelerated Mobile Pages (AMP) Project as a way to create content optimized for mobile. This project grew from a discussion "between publishers and technology companies about the need to improve the entire mobile content ecosystem for everyone". AMP is constrained to ensure reliable performance, at the cost of limited flexibility in content.
+
+
+\section{Summary} \label{l-r--summary}
+
+In Chapter 1 we proposed blah blah blah.
+
+In this chapter the state-of-the-art was categorised into blah (section x) and  blah (section y).  Observations were made on the systems reviewed (section z), and the relevance of the state-of-the-art to blah blah was summarised (section w).
+
+The next chapter presents the design of blah blah, which is a system intended to blah blah.
+
+will-change, edge hack shit. postcss plugin. https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2Fhelloanselm%2Fstatus%2F707927523498323969&sa=D&sntz=1&usg=AFQjCNGvTT0uGKWJ0g8FoTN7g9cKKvgI_Q

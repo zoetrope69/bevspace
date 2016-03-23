@@ -1,0 +1,80 @@
+% ---------------------------
+% Packages and setup
+\documentclass[11pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{fullpage}
+\usepackage{apacite}
+\usepackage{url}
+\usepackage{pdfpages}
+\setcounter{secnumdepth}{5}
+\usepackage[toc,page]{appendix}
+
+\usepackage{nomencl}
+\makenomenclature
+
+\bibliographystyle{apacite}
+
+\graphicspath{ {images/} }
+
+\linespread{1.3}
+% ---------------------------
+
+% ---------------------------
+% Title page def
+\input{title-page.tex}
+% ---------------------------
+
+% ---------------------------
+% Document body
+\begin{document}
+
+    \maketitle
+
+    \input{preface.tex}
+
+    \tableofcontents
+    \pagebreak
+
+    % Figures and Tables
+
+    \pagebreak
+    \listoffigures
+
+    \pagebreak
+    \listoftables
+
+    % Nomenclature and Abstract
+
+    \printnomenclature
+
+    \input{abstract.tex}
+
+    % Chapters
+
+    \input{chapters/introduction.tex}
+
+    \input{chapters/review-of-your-subject-area-and-topics.tex}
+
+    \input{chapters/artefact-design.tex}
+
+    \input{chapters/system-implementation.tex}
+
+    \input{chapters/conclusion.tex}
+
+    % References
+
+    \bibliography{references.bib}
+
+    % Appendices
+
+    \begin{appendices}
+        % \input{appendices/pid.tex}
+    \end{appendices}
+
+\end{document}
+% ---------------------------
+
+% MAKE SURE TO RUN EVERYTHING THROUGH http://www.hemingwayapp.com/
