@@ -17,7 +17,7 @@
   "license": "MIT",
   "author": "Zac Colley <hi@zaccolley.com>",
   "devDependencies": {
-    "autoprefixer": "^6.3.3",
+    "autoprefixer": "^6.3.5",
     "babel": "^6.5.2",
     "babel-core": "^6.5.2",
     "babel-eslint": "^5.0.0",
