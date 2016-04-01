@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
-import { bind } from 'decko';
 
 import Alert from './Alert';
 import Header from './Header';
@@ -23,10 +22,10 @@ export default class App extends Component {
 	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
 	 *	@param {string} event.url	The newly routed URL
 	 */
-	@bind
-  handleRoute(e) {
-    this.currentUrl = e.url;
-  }
+
+  handleRoute = event => {
+    this.currentUrl = event.url;
+  };
 
   initServiceWorker() {
     // register the service worker
