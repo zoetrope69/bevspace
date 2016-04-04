@@ -7,8 +7,6 @@
 .recipe .info {
   position: relative;
   padding: 1em 1em 1.5em;
-
-  border-radius: 5px;
 }
 
 .recipe .info::after {
@@ -21,8 +19,9 @@
   bottom: -6px;
 
   box-shadow: 0 0 0 4px $bg;
-  border-radius: 50%;
   background: white;
+
+  transform: rotate(45deg);
 }
 
 .recipe .info .name {
@@ -49,7 +48,6 @@
   padding: 1.5em 1em 1em;
   list-style: none;
 
-  border-radius: 5px;
   background: #3A3830;
 }
 
@@ -77,8 +75,9 @@
   left: 16px;
 
   box-shadow: 0 0 0 4px $bg;
-  border-radius: 50%;
   background: white;
+
+  transform: rotate(45deg);
 }
 
 .recipe .timeline .item time {
