@@ -31,3 +31,15 @@ node_modules
 
 # built code
 /build
+
+# report
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.fls
+report/*.lof
+report/*.log
+report/*.lot
+report/*.nlo
+report/*.pdf
+report/*.toc
