@@ -19,18 +19,17 @@ Sharing recipes, set-ups and brewing techniques is analogous to the open source 
 
 With the popularity of affordable and accessible computing with platforms such as Raspberry PI and Arduino, introducing computing technologies into home brewing means more automation and control.
 
-Due to the open source nature of these platforms, many systems have been created. One example is BrewPi, a fermentation temperature controller for brewing beer or wine. (http://www.brewpi.com/).
+Due to the open source nature of these platforms, many systems have been created. One example is BrewPi, a fermentation temperature controller for brewing beer or wine. (http://www.brewpi.com/). \cite{brewpi}
 
-\subsection{Existing home-brewing solutions}
+This merge of physical creating and software can be seen all across the tech community. One great example is in farming with the MIT Open Agriculture Initiative, \"Every time users grow and harvest, they will contribute to a library of climate recipes that can be borrowed and scaled so that users around the world can gain access to the best and freshest foods.\". The internet is the perfect platform for this type of recipe sharing and collaboration. \cite{climate_recipes}
 
-Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. (http://www.beerxml.com/) Open and standardized formats in general mean better portability, compatability for data [citation].
+\subsection{Existing home-brewing solutions and APIs}
 
-With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON (http://www.beerjson.com/).
+Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. (http://www.beerxml.com/) Open and standardized formats in general mean better portability, compatability for data. \cite{beerxml}
 
-Malt.io is a community website for these brewing recipes. With the options for revision history and "cloning" of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. 
+With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON (http://www.beerjson.com/). \cite{beerjson}
 
-% Need to review the rest of the brewing software https://homebrew.stackexchange.com/questions/784/what-software-do-most-brewers-use/898]
-% tooling is general offline so any web stuff has to be offline
+Malt.io is a community website for these brewing recipes. With the options for revision history and \"cloning\" of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. \cite{malt.io}
 
 \section{User Experience through Performance} \label{l-r--user-experience-performance}
 
@@ -50,14 +49,15 @@ Blocking web advertising, a controversial topic as of writing, has been shown to
 
 Google have "always viewed speed as a competitive advantage", when running experiments by introducing artificial delays into searches "slowing down the search results page by 100 to 400 milliseconds has a measurable impact on the number of searches per user of -0.2\% to -0.6\%" (http://googleresearch.blogspot.co.uk/2009/06/speed-matters.html)
 
-\subsection{Measuring and techniques}
+\subsection{Measuring and techniques} \label{l-r--measuring-and-techniques}
 
 Measuring and optmising performance has become more important than ever with tools such as Google's PageSpeed and WebPageTest giving developers metrics to improve their site on many areas. [a reference here?]
 
 Best practises include optimising a website's resources and where they are retrieved from. With CSS file growing larger in size [find citation] a emerging approach is through Critical CSS. Serving a part of the CSS on load, loading the rest asynchronously and then caching it all for further visits. [citation critical css, filament group https://www.filamentgroup.com/lab/performance-rwd.html]
 
 % perf
-% http://danielmall.com/articles/how-to-make-a-performance-budget/
+% https://twitter.com/igrigorik/status/706890158323269633
+% http://danielmall.com/articles/how-to-make-a-performance-budget/ \cite{performance_budget}
 % https://medium.com/google-developers/answers-to-questions-about-performance-9806d2dadfe2#.z973fqsjd
 % https://www.filamentgroup.com/lab/mv-initial-load-times.html
 % https://twitter.com/aerotwist/status/709668062321098752
@@ -69,19 +69,31 @@ Best practises include optimising a website's resources and where they are retri
 % https://www.filamentgroup.com/lab/mv-initial-load-times.html
 % mvc frameworks and performance \cite{performance_mvc}
 
-\subsection{Animation and perceived performance}
+% RAIL, https://www.smashingmagazine.com/2015/10/rail-user-centric-model-performance/ \cite{introducing_RAIL}
+standardization of performance techniques
+% https://aerotwist.com/blog/flip-your-animations/ \cite{FLIP}
 
-% RAIL, https://www.smashingmagazine.com/2015/10/rail-user-centric-model-performance/
-% https://aerotwist.com/blog/flip-your-animations/
+Lazy loading is the method of loading content (often images) after initial load for performance. While images are non-blocking and don't affect network performance on the critical path other performance issues such as slow paints. % cite this
+
+base64 shit
+
+srcset, picture elemnt thumbnailing
+
+\subsection{Animation and perceived performance}
 
 After all the optimisation, and all the refinements sometimes a user interface can still be improved. After all, users are only perceiving the performance through what is shown to them. Different techniques can influence this perceived delay, and timescale of tasks done.
 
 One such technique is Optimistic UIs, this is the idea of showing a user feedback before they corresponding action has taken place thus giving an excellent perceived performance. An example of this is the Instagram like button. On press of the post like button the application doesn't wait for a round trip to the server to check that action was carried out successfully, instead it shows the user that they have liked the post immediately with the 'optimism' that the action will be carried out.
-%[cite this, prolly a better example too]
+% [cite this, prolly a better example too]
+
+Lazy-loading, as mentioned in section \ref{l-r--measuring-and-techniques}, is foten be used in an optimistic UI. For images having a placeholder based the source image over a blank background can mean a smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette.
+\cite{image_colours_lazy_loading}
+
+% image here
 
 \subsection{Web typography}
 
-Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called "FOIT" (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. (https://www.filamentgroup.com/lab/font-events.html)
+Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called \"FOIT\" (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. (https://www.filamentgroup.com/lab/font-events.html)
 
 A great reading experience with default system typefaces is easily achieved. As (http://mrmrs.io/writing/2016/03/17/webfonts/) explains: Typography is not about aesthetics, it's about serving the text. If even a small percentage of people don't consume your content due to a use of web fonts, your typography is failing.
 
@@ -99,7 +111,7 @@ Now being described as front end ops
 
 %\subsubsubsection{Progressive Enhancement}
 
-%[progressive enhancement]
+%[progressive enchancement]
 
 %(https://adactio.com/journal/7706)
 
@@ -107,7 +119,7 @@ Now being described as front end ops
 
 \subsection{Offline First}
 
-"Frequently not having any data connection in even the wealthiest and most developed cities of the world has led us to conclude that no, the mobile connectivity/bandwidth issue isn’t just going to solve itself on a global level anywhere in the near future." 
+"Frequently not having any data connection in even the wealthiest and most developed cities of the world has led us to conclude that no, the mobile connectivity/bandwidth issue isn’t just going to solve itself on a global level anywhere in the near future."
 
 (http://hood.ie/blog/say-hello-to-offline-first.html)
 
@@ -129,7 +141,7 @@ When developing on the web historically this meant running client-side Javascrip
 
 The two main Workers are Service Workers and Web Workers.
 
-Web Workers create background tasks that can run Javascript that interface back and forth between the main JavaScript tasks. A use case of Web Workers is syncing data between a clientside database and a remote database. 
+Web Workers create background tasks that can run Javascript that interface back and forth between the main JavaScript tasks. A use case of Web Workers is syncing data between a clientside database and a remote database.
 
 Service Workers can be seen more as a proxy server between your server and your main JavaScript thread, the key concept is that of 'installing' a Service Worker file to the browser itself registered to a origin. Service Workers are asyncronous and so don't have access to APIs such as XHR.
 Some use cases of Service Workers include, caching for a better (and sometimes offline) experience, Push notifications, background data syncing.
