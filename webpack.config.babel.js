@@ -8,10 +8,11 @@ const ENV = process.env.NODE_ENV || 'development';
 const CSS_MAPS = ENV !== 'production';
 
 module.exports = {
-  entry: './src/index.js',
+  context: `${__dirname}/src`,
+  entry: './index.js',
 
   output: {
-    path: './build',
+    path: `${__dirname}/build`,
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -60,7 +61,7 @@ module.exports = {
         exclude: /src\/components\//,
         loader: ExtractTextPlugin.extract('style?singleton', [
           `css?sourceMap=${CSS_MAPS}`,
-          'postcss',
+          `postcss`,
           `sass?sourceMap=${CSS_MAPS}`
         ].join('!'))
       },
@@ -100,19 +101,22 @@ module.exports = {
       'process.env': JSON.stringify({ NODE_ENV: ENV })
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './index.html',
       minify: { collapseWhitespace: true }
     })
   ]).concat(ENV==='production' ? [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: true,
-      comments: false
-    })
+    new webpack.optimize.OccurenceOrderPlugin()
   ] : []),
 
   stats: { colors: true },
+
+  node: {
+    global: true,
+    Buffer: false,
+    __filename: false,
+    __dirname: false,
+    setImmediate: false
+  },
 
   devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
 
