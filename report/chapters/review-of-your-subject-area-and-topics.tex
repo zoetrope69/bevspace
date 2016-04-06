@@ -19,17 +19,17 @@ Sharing recipes, set-ups and brewing techniques is analogous to the open source 
 
 With the popularity of affordable and accessible computing with platforms such as Raspberry PI and Arduino, introducing computing technologies into home brewing means more automation and control.
 
-Due to the open source nature of these platforms, many systems have been created. One example is BrewPi, a fermentation temperature controller for brewing beer or wine. (http://www.brewpi.com/). \cite{brewpi}
+Due to the open source nature of these platforms, many systems have been created. One example is BrewPi, a fermentation temperature controller for brewing beer or wine. \cite{brewpi}
 
-This merge of physical creating and software can be seen all across the tech community. One great example is in farming with the MIT Open Agriculture Initiative, \"Every time users grow and harvest, they will contribute to a library of climate recipes that can be borrowed and scaled so that users around the world can gain access to the best and freshest foods.\". The internet is the perfect platform for this type of recipe sharing and collaboration. \cite{climate_recipes}
+This merge of physical creating and software can be seen all across the tech community. One great example is in farming with the MIT Open Agriculture Initiative, ``Every time users grow and harvest, they will contribute to a library of climate recipes that can be borrowed and scaled so that users around the world can gain access to the best and freshest foods.". The internet is the perfect platform for this type of recipe sharing and collaboration. \cite{climate_recipes}
 
 \subsection{Existing home-brewing solutions and APIs}
 
-Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. (http://www.beerxml.com/) Open and standardized formats in general mean better portability, compatability for data. \cite{beerxml}
+Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. \cite{beerxml} Open and standardized formats in general mean better portability, compatability for data.
 
-With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON (http://www.beerjson.com/). \cite{beerjson}
+With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON. \cite{beerjson}
 
-Malt.io is a community website for these brewing recipes. With the options for revision history and \"cloning\" of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. \cite{malt.io}
+Malt.io is a community website for these brewing recipes. With the options for revision history and `cloning' of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. \cite{malt.io}
 
 \section{User Experience through Performance} \label{l-r--user-experience-performance}
 
@@ -43,11 +43,11 @@ Web performance in essence is the perceived speed of websites and the actions ta
 
 \cite{usability_engineering} shows time limits affect how users behave towards a system. An application feels instantaneous with actions taken under 0.1 seconds.  Anything over 1 second a user can lose their flow of though on an action. After 10 seconds a users will lose attention and start to multi-task.
 
-Worse than that \cite{why_web_performance_matters} confirm that "88\% of online consumers are less likely to return to a site after a bad experience".
+Worse than that \cite{why_web_performance_matters} confirm that ``88\% of online consumers are less likely to return to a site after a bad experience".
 
-Blocking web advertising, a controversial topic as of writing, has been shown to increase performance for users for speed. Typically a browser extension would be used to block adverts. Brave, a browser built with advertisement blocking in from the start claims up to 60\% of page load time is caused by the underlying ad technology that loads into various places each time you hit a page on your favorite news site." (https://brave.com/)
+Blocking web advertising, a controversial topic as of writing, has been shown to increase performance for users for speed. Typically a browser extension would be used to block adverts. Brave, a browser built with advertisement blocking in from the start claims up to 60\% of page load time is caused by the underlying ad technology that loads into various places each time you hit a page on your favorite news site. \cite{brave}
 
-Google have "always viewed speed as a competitive advantage", when running experiments by introducing artificial delays into searches "slowing down the search results page by 100 to 400 milliseconds has a measurable impact on the number of searches per user of -0.2\% to -0.6\%" (http://googleresearch.blogspot.co.uk/2009/06/speed-matters.html)
+Google have ``always viewed speed as a competitive advantage", when running experiments by introducing artificial delays into searches ``slowing down the search results page by 100 to 400 milliseconds has a measurable impact on the number of searches per user of -0.2\% to -0.6\%". \cite{speed_matters}
 
 \subsection{Measuring and techniques} \label{l-r--measuring-and-techniques}
 
@@ -83,19 +83,17 @@ srcset, picture elemnt thumbnailing
 
 After all the optimisation, and all the refinements sometimes a user interface can still be improved. After all, users are only perceiving the performance through what is shown to them. Different techniques can influence this perceived delay, and timescale of tasks done.
 
-One such technique is Optimistic UIs, this is the idea of showing a user feedback before they corresponding action has taken place thus giving an excellent perceived performance. An example of this is the Instagram like button. On press of the post like button the application doesn't wait for a round trip to the server to check that action was carried out successfully, instead it shows the user that they have liked the post immediately with the 'optimism' that the action will be carried out.
-% [cite this, prolly a better example too]
+One such technique is Optimistic UIs, this is the idea of showing a user feedback before they corresponding action has taken place thus giving an excellent perceived performance. An example of this is the Instagram like button. On press of the post like button the application doesn't wait for a round trip to the server to check that action was carried out successfully, instead it shows the user that they have liked the post immediately with the `optimism' that the action will be carried out. \cite{performing_actions_optimisitically}
 
-Lazy-loading, as mentioned in section \ref{l-r--measuring-and-techniques}, is foten be used in an optimistic UI. For images having a placeholder based the source image over a blank background can mean a smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette.
-\cite{image_colours_lazy_loading}
+Lazy-loading, as mentioned in section \ref{l-r--measuring-and-techniques}, is foten be used in an optimistic UI. For images having a placeholder based the source image over a blank background can mean a smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette. \cite{image_colours_lazy_loading}
 
 % image here
 
 \subsection{Web typography}
 
-Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called \"FOIT\" (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. (https://www.filamentgroup.com/lab/font-events.html)
+Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called `FOIT' (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. (https://www.filamentgroup.com/lab/font-events.html)
 
-A great reading experience with default system typefaces is easily achieved. As (http://mrmrs.io/writing/2016/03/17/webfonts/) explains: Typography is not about aesthetics, it's about serving the text. If even a small percentage of people don't consume your content due to a use of web fonts, your typography is failing.
+A great reading experience with default system typefaces is easily achieved. As \cite{against_webfonts} explains: ``Typography is not about aesthetics, it's about serving the text. If even a small percentage of people don't consume your content due to a use of web fonts, your typography is failing."
 
 There are ways to avoid some of the % If you have to, then use font loading stuff
 
@@ -119,14 +117,12 @@ Now being described as front end ops
 
 \subsection{Offline First}
 
-"Frequently not having any data connection in even the wealthiest and most developed cities of the world has led us to conclude that no, the mobile connectivity/bandwidth issue isn’t just going to solve itself on a global level anywhere in the near future."
-
-(http://hood.ie/blog/say-hello-to-offline-first.html)
+``Frequently not having any data connection in even the wealthiest and most developed cities of the world has led us to conclude that no, the mobile connectivity/bandwidth issue isn’t just going to solve itself on a global level anywhere in the near future." \cite{hello_to_offline_first}
 
 % bruce's opera talk saying "fuck you for thinking only of the western world"
 
 A offline experience can be progressively enhanced with cached content managed by a Service Worked but even the poorest connection is online.
-Described by Jake Archibald: "Lie-Fi is like offline, but it trolls you by pretending to be online. It'll attempt to make a connection for minutes and still fail."
+Described by Jake Archibald: ``Lie-Fi is like offline, but it trolls you by pretending to be online. It'll attempt to make a connection for minutes and still fail."
 
 Previous methods of caching content was through using Appcache, however the lack of control made it a very dangerous technology to use. %[cite]
 
@@ -141,18 +137,14 @@ When developing on the web historically this meant running client-side Javascrip
 
 The two main Workers are Service Workers and Web Workers.
 
-Web Workers create background tasks that can run Javascript that interface back and forth between the main JavaScript tasks. A use case of Web Workers is syncing data between a clientside database and a remote database.
+Web Workers create background tasks that can run Javascript that interface back and forth between the main JavaScript tasks. A use case of Web Workers is syncing data between a clientside database and a remote database. \cite{using_web_workers}
 
-Service Workers can be seen more as a proxy server between your server and your main JavaScript thread, the key concept is that of 'installing' a Service Worker file to the browser itself registered to a origin. Service Workers are asyncronous and so don't have access to APIs such as XHR.
-Some use cases of Service Workers include, caching for a better (and sometimes offline) experience, Push notifications, background data syncing.
-(https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers#Other_types_of_worker)
-(https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
-
+Service Workers can be seen more as a proxy server between your server and your main JavaScript thread, the key concept is that of `installing' a Service Worker file to the browser itself registered to a origin. Service Workers are asyncronous and so don't have access to APIs such as XHR.
+Some use cases of Service Workers include, caching for a better (and sometimes offline) experience, Push notifications, background data syncing. \cite{service_worker}
 
 \subsection{Performance based projects}
 
-Google have set-up the Accelerated Mobile Pages (AMP) Project as a way to create content optimized for mobile. This project grew from a discussion "between publishers and technology companies about the need to improve the entire mobile content ecosystem for everyone". AMP is constrained to ensure reliable performance, at the cost of limited flexibility in content.
-
+Google have set-up the Accelerated Mobile Pages (AMP) Project as a way to create content optimized for mobile. This project grew from a discussion ``between publishers and technology companies about the need to improve the entire mobile content ecosystem for everyone". AMP is constrained to ensure reliable performance, at the cost of limited flexibility in content. \cite{intro_to_amp}
 
 \section{Summary} \label{l-r--summary}
 
