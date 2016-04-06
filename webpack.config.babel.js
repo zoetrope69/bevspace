@@ -24,6 +24,7 @@ module.exports = {
       'node_modules'
     ],
     alias: {
+      config: `${__dirname}/config.json`,
       components: `${__dirname}/src/components`,		// used for tests
       style: `${__dirname}/src/style`,
       'react': 'preact-compat',
@@ -77,6 +78,8 @@ module.exports = {
       }
     ]
   },
+
+  noParse: /lie\.js$|\/leveldown\//,
 
   postcss: () => [
     autoprefixer({ browsers: 'last 2 versions' })

@@ -1,5 +1,7 @@
+import config from 'config';
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
+import PouchDB from 'pouchdb';
 
 import Alert from './Alert';
 import Header from './Header';
@@ -7,14 +9,34 @@ import Home from './Home';
 import Recipes from './Recipes';
 import Recipe from './Recipe';
 
+// pouchdb state handling code from: https://pouchdb.com/2015/02/28/efficiently-managing-ui-state-in-pouchdb.html
+
+function binarySearch(arr, docId) {
+  let low = 0, high = arr.length, mid;
+
+  while (low < high) {
+    mid = Math.floor((low + high) / 2);
+    if (arr[mid]._id < docId) {
+      low = mid + 1;
+    } else {
+      high = mid;
+    }
+  }
+
+  return low;
+}
+
 export default class App extends Component {
   constructor() {
     super();
+
     // set initial time:
     this.state = {
       serviceWorkerActivated: false,
       fontsLoaded: false,
-      recipes: []
+      recipes: [],
+      db: new PouchDB(config.db.remote),
+      localDb: new PouchDB(config.db.local)
     };
   }
 
@@ -68,14 +90,60 @@ export default class App extends Component {
     });
   }
 
+  fetchInitialDocs() {
+    return this.state.localDb.allDocs({ include_docs: true }).then((res) => {
+      const recipes = res.rows.map((row) => row.doc);
+      this.setState({ recipes });
+    });
+  }
+
+  reactToChanges() {
+    this.state.localDb.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+      if (change.deleted) {
+        // change.id holds the deleted id
+        this.onDeleted(change.id).bind(this);
+      } else { // updated/inserted
+        // change.doc holds the new doc
+        this.onUpdatedOrInserted(change.doc).bind(this);
+      }
+      renderDocsSomehow();
+    }).on('error', console.log.bind(console));
+  }
+
+  onDeleted(id) {
+    const index = binarySearch(docs, id);
+    const doc = docs[index];
+
+    if (doc && doc._id === id) {
+      docs.splice(index, 1);
+    }
+  }
+
+  onUpdatedOrInserted(newDoc) {
+    const index = binarySearch(docs, newDoc._id);
+    const doc = docs[index];
+
+    if (doc && doc._id === newDoc._id) { // update
+      docs[index] = newDoc;
+    } else { // insert
+      docs.splice(index, 0, newDoc);
+    }
+  }
+
   loadRecipes() {
-    fetch('http://localhost:2337')
-      .then((result) => result.json())
-      .then((recipes) => this.setState({ recipes }));
+    this.fetchInitialDocs()
+      .then(this.reactToChanges)
+      .catch(console.log.bind(console));
   }
 
   componentWillMount() {
-    this.loadRecipes();
+    this.state.localDb
+      .sync(this.state.db, { live: true, retry: true })
+      .on('error', console.log.bind(console));
+
+    if (this.state.recipes.length < 1) {
+      this.loadRecipes();
+    }
     // this.initServiceWorker();
   }
 

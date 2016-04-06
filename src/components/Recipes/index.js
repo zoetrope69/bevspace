@@ -3,6 +3,7 @@ import { Link } from 'preact-router';
 import style from './style';
 
 export default class Recipes extends Component {
+
   render() {
     const { recipes } = this.props;
 
@@ -12,7 +13,7 @@ export default class Recipes extends Component {
         <ul class={style.list}>
           {recipes.map(recipe => (
             <li>
-              <Link class={style.item} style={{ borderColor: recipe.color.style }} href={`/recipe/${recipe._id}`}>
+              <Link class={style.item} href={`/recipe/${recipe._id}`}>
                 <span>{recipe.name}</span>
               </Link>
             </li>
