@@ -1,12 +1,14 @@
+import Brauhaus  from 'brauhaus';
 import { h, Component } from 'preact';
 import style from './style';
-import Brauhaus  from 'brauhaus';
 
 export default class Recipe extends Component {
 
   processRecipe(doc) {
     const recipe = new Brauhaus.Recipe(doc);
     recipe.calculate();
+
+    console.log(recipe);
 
     // generate the start of the output
     const output = recipe.toJSON();
@@ -17,6 +19,7 @@ export default class Recipe extends Component {
       name: recipe.colorName(),
       style: Brauhaus.srmToCss(recipe.color.toFixed(1))
     };
+
 
     // get timeline for brew and tidy up data structure a bit
     let timeline = recipe.timeline();
@@ -44,7 +47,8 @@ export default class Recipe extends Component {
     const { id, recipes } = this.props;
 
     let recipe = recipes.find((recipe) => recipe._id === id);
-    
+    console.log(recipe);
+
     let output;
 
     if (recipe) {
@@ -60,8 +64,8 @@ export default class Recipe extends Component {
         <ul class={style.timeline}>
           {recipe.timeline.map((item) => (
             <li class={style.item}>
-              <time datetime={item.duration.raw}>{item.duration.pretty}</time>
               <span class={style.description}>{item.description}</span>
+              <time datetime={item.duration.raw}>{item.duration.pretty}</time>
             </li>
           ))}
         </ul>

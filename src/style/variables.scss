@@ -1,12 +1,17 @@
 $white: #FFF;
 $grey: #656565;
 $black: #111;
-$brown: #B7653A;
-$green: #5CB73A;
+$green: #C8FD56;
 $red: #B73A3A;
+$pink: #DF2763;
+$cream: #FCEDCA;
+$pinkish: #E49D87;
+
+$brown: #943938;
+$darkBrown: darken($brown, 20%);
 
 $fail: $red;
 $success: $green;
 
-$bg: #130101;
-$brand: $brown;
+$bg: $brown;
+$brand: $pink;

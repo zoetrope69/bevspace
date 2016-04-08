@@ -1,13 +1,16 @@
 body {
   font-family: 'Helvetica Neue', 'Arial', sans-serif;
 	font-weight: 300;
-	color: $white;
+	color: $darkBrown;
   text-rendering: optimizeSpeed;
 }
 
 h1 {
-  letter-spacing: .13em;
-  font-family: 'Georgia', serif;
-  font-weight: 600;
+  margin-bottom: .5em;
+
+  letter-spacing: .25em;
+  font-weight: 700;
+  font-size: 2.75em;
+  line-height: 1em;
   text-transform: uppercase;
 }

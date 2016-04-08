@@ -19,22 +19,21 @@
   bottom: -6px;
 
   box-shadow: 0 0 0 4px $bg;
-  background: white;
+  background: $pinkish;
 
   transform: rotate(45deg);
 }
 
 .recipe .info .name {
-  line-height: 1em;
   color: rgba($white, 0.95);
-  font-weight: 500;
-  font-size: 2.5em;
 }
 
 .recipe .info .author {
   display: block;
+  padding: 0 1em;
 
   font-weight: 400;
+  text-align: right;
   color: rgba($black, 0.5);
 }
 
@@ -48,7 +47,8 @@
   padding: 1.5em 1em 1em;
   list-style: none;
 
-  background: #3A3830;
+  background: $cream;
+  box-shadow: 0 5px 0 $pinkish;
 }
 
 .recipe .timeline .item::before {
@@ -61,7 +61,7 @@
   top: -2.25em;
   left: 19px;
 
-  background: white;
+  background: $pinkish;
 }
 
 .recipe .timeline .item::after {
@@ -75,20 +75,22 @@
   left: 16px;
 
   box-shadow: 0 0 0 4px $bg;
-  background: white;
+  background: $pinkish;
 
   transform: rotate(45deg);
 }
 
 .recipe .timeline .item time {
-  color: $white;
+  color: $darkBrown;
 
   font-size: .85em;
+  font-weight: 500;
 }
 
 .recipe .timeline .item .description {
   flex-grow: 2;
   padding-left: 1em;
 
-  color: #fff5cc;
+  color: $darkBrown;
+  font-weight: 700;
 }
