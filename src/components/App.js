@@ -1,6 +1,7 @@
 import config from 'config';
 import Brauhaus from 'brauhaus';
 import PouchDB from 'pouchdb';
+import PouchDBAuth from 'pouchdb-authentication';
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { binarySearch } from '../utils';
@@ -10,6 +11,10 @@ import Header from './Header';
 import Home from './Home';
 import Recipes from './Recipes';
 import Recipe from './Recipe';
+import Profile from './Profile';
+
+// add the authentication plugin to pouchdb
+PouchDB.plugin(PouchDBAuth);
 
 // pouchdb state handling code based on: https://pouchdb.com/2015/02/28/efficiently-managing-ui-state-in-pouchdb.html
 
@@ -17,7 +22,12 @@ export default class App extends Component {
   constructor() {
     super();
 
-    const remoteDb = new PouchDB(config.db.remote);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.signup = this.signup.bind(this);
+    this.getUser = this.getUser.bind(this);
+
+    const remoteDb = new PouchDB(config.db.remote, { skipSetup: true });
     const localDb = new PouchDB(config.db.local);
 
     const syncHandler = localDb.sync(remoteDb, { live: true, retry: true })
@@ -37,14 +47,14 @@ export default class App extends Component {
         console.log('Database syncing error', error);
       });
 
-    // set initial time:
     this.state = {
       serviceWorkerActivated: false,
       fontsLoaded: false,
       recipes: [],
       remoteDb,
       localDb,
-      syncHandler
+      syncHandler,
+      user: false
     };
   }
 
@@ -197,21 +207,66 @@ export default class App extends Component {
 
   componentWillMount() {
     this.loadRecipes();
+    this.getUser();
 
     // this.initServiceWorker();
   }
 
+  getUser() {
+    return this.state.remoteDb.getSession((err, response) => {
+      if (err) {
+        console.log('session err', err);
+        // network error
+      } else if (!response.userCtx.name) {
+        console.log('nobodys logged in');
+      } else {
+        this.setState({ user: response.userCtx });
+        console.log(response);
+      }
+    });
+  }
+
+  login() {
+    this.state.remoteDb.login('batman', 'brucewayne').then(this.getUser);
+  }
+
+  logout() {
+    this.state.remoteDb.logout().then(this.setState({ user: false }));
+  }
+
+  signup(username, password) {
+    return this.state.remoteDb.signup(username, password, (err, response) => {
+      if (err) {
+        if (err.name === 'conflict') {
+          return console.log('"batman" already exists, choose another username');
+        } else if (err.name === 'forbidden') {
+          return console.log('invalid username', err);
+        }
+
+        return console.log('something went wrong');
+      }
+
+      console.log('response', response);
+    });
+  }
+
   render() {
-    const { serviceWorkerActivated, recipes } = this.state;
+    const { serviceWorkerActivated, recipes, user } = this.state;
+    console.log('user', user);
 
     return (
 			<div id="app">
         <Alert offline={serviceWorkerActivated} />
-				<Header />
+				<Header user={user} />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Recipes path="/recipes" recipes={recipes} />
 					<Recipe path="/recipe/:id" recipes={recipes} />
+					<Profile path="/profile"
+            user={user}
+            login={this.login}
+            logout={this.logout}
+            />
 				</Router>
 			</div>
 		);

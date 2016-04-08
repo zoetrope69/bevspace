@@ -4,11 +4,13 @@ import style from './style';
 
 export default class Header extends Component {
   render() {
+    const { user } = this.props;
     return (
       <header class={style.header}>
         <Link href="/" class={style.logo}><h1>bevspace</h1></Link>
         <nav>
           <Link href="/recipes">Recipes</Link>
+          <Link href="/profile">{user ? user.name : 'Login/Signup'}</Link>
         </nav>
       </header>
     );
