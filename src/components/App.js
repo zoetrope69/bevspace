@@ -1,7 +1,9 @@
 import config from 'config';
+import Brauhaus from 'brauhaus';
+import PouchDB from 'pouchdb';
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
-import PouchDB from 'pouchdb';
+import { binarySearch } from '../utils';
 
 import Alert from './Alert';
 import Header from './Header';
@@ -9,34 +11,40 @@ import Home from './Home';
 import Recipes from './Recipes';
 import Recipe from './Recipe';
 
-// pouchdb state handling code from: https://pouchdb.com/2015/02/28/efficiently-managing-ui-state-in-pouchdb.html
-
-function binarySearch(arr, docId) {
-  let low = 0, high = arr.length, mid;
-
-  while (low < high) {
-    mid = Math.floor((low + high) / 2);
-    if (arr[mid]._id < docId) {
-      low = mid + 1;
-    } else {
-      high = mid;
-    }
-  }
-
-  return low;
-}
+// pouchdb state handling code based on: https://pouchdb.com/2015/02/28/efficiently-managing-ui-state-in-pouchdb.html
 
 export default class App extends Component {
   constructor() {
     super();
+
+    const remoteDb = new PouchDB(config.db.remote);
+    const localDb = new PouchDB(config.db.local);
+
+    const syncHandler = localDb.sync(remoteDb, { live: true, retry: true })
+      .on('change', (info) => {
+        // handle change
+        console.log('Database synced!');
+      }).on('paused', () => {
+        // replication paused (e.g. user went offline)
+      }).on('active', () => {
+        // replicate resumed (e.g. user went back online)
+      }).on('denied', (info) => {
+        // a document failed to replicate (e.g. due to permissions)
+      }).on('complete', (info) => {
+        // handle complete
+      }).on('error', (err) => {
+        // handle error
+        console.log('Database syncing error', error);
+      });
 
     // set initial time:
     this.state = {
       serviceWorkerActivated: false,
       fontsLoaded: false,
       recipes: [],
-      db: new PouchDB(config.db.remote),
-      localDb: new PouchDB(config.db.local)
+      remoteDb,
+      localDb,
+      syncHandler
     };
   }
 
@@ -44,8 +52,7 @@ export default class App extends Component {
 	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
 	 *	@param {string} event.url	The newly routed URL
 	 */
-
-  handleRoute = event => {
+  handleRoute = (event) => {
     this.currentUrl = event.url;
   };
 
@@ -90,60 +97,107 @@ export default class App extends Component {
     });
   }
 
-  fetchInitialDocs() {
+  fetchInitialRecipes() {
     return this.state.localDb.allDocs({ include_docs: true }).then((res) => {
-      const recipes = res.rows.map((row) => row.doc);
+      const recipes = res.rows.map((row) => this.processRecipe(row.doc));
       this.setState({ recipes });
     });
   }
 
-  reactToChanges() {
-    this.state.localDb.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
-      if (change.deleted) {
-        // change.id holds the deleted id
-        this.onDeleted(change.id).bind(this);
-      } else { // updated/inserted
-        // change.doc holds the new doc
-        this.onUpdatedOrInserted(change.doc).bind(this);
-      }
-      renderDocsSomehow();
-    }).on('error', console.log.bind(console));
-  }
+  onDeletedRecipe(id) {
+    const { recipes } = this.state;
+    const index = binarySearch(recipes, id);
+    const recipe = recipes[index];
 
-  onDeleted(id) {
-    const index = binarySearch(docs, id);
-    const doc = docs[index];
-
-    if (doc && doc._id === id) {
-      docs.splice(index, 1);
+    if (recipe && recipe._id === id) {
+      recipes.splice(index, 1);
+      this.setState({ recipes });
     }
   }
 
-  onUpdatedOrInserted(newDoc) {
-    const index = binarySearch(docs, newDoc._id);
-    const doc = docs[index];
+  onUpdatedOrInsertedRecipe(newRecipe) {
+    const { recipes } = this.state;
+    const index = binarySearch(recipes, newRecipe._id);
+    const recipe = recipes[index];
 
-    if (doc && doc._id === newDoc._id) { // update
-      docs[index] = newDoc;
+    if (recipe && recipe._id === newRecipe._id) { // update
+      recipes[index] = this.processRecipe(newRecipe);
+      this.setState({ recipes });
     } else { // insert
-      docs.splice(index, 0, newDoc);
+      recipes.splice(index, 0, this.processRecipe(newRecipe));
+      this.setState({ recipes });
     }
+  }
+
+  processRecipe(recipe) {
+    const processedRecipe = new Brauhaus.Recipe(recipe);
+    processedRecipe.calculate();
+
+    // generate the start of the output
+    const output = processedRecipe.toJSON();
+
+    // add information
+    output.abv = processedRecipe.abv;
+    output.ibu = processedRecipe.ibu;
+
+    // add the brew color to the output
+    output.color = {
+      raw: processedRecipe.color,
+      name: processedRecipe.colorName(),
+      style: Brauhaus.srmToCss(processedRecipe.color.toFixed(1))
+    };
+
+    // get timeline for brew and tidy up data structure a bit
+    let timeline = processedRecipe.timeline();
+    timeline = timeline.map(item => {
+      return {
+        duration: {
+          raw: item[0],
+          pretty: Brauhaus.displayDuration(item[0])
+        },
+        description: item[1]
+      };
+    });
+    // add timeline to output
+    output.timeline = timeline;
+
+    // put in database info
+    output._id = recipe._id;
+    output._rev = recipe._rev;
+    output.type = recipe.type;
+
+    return output;
   }
 
   loadRecipes() {
-    this.fetchInitialDocs()
-      .then(this.reactToChanges)
-      .catch(console.log.bind(console));
+    const { recipes, localDb } = this.state;
+    // localDb.destroy().then(console.log('Database nuked')).catch(console.log.bind(console));
+
+    // if there's no recipes fetch the initial recipes
+    if (recipes.length < 1) {
+      this.fetchInitialRecipes().catch(console.log.bind(console));
+    }
+
+    // now check if the local db changes
+    localDb.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+      if (change.deleted) {
+        // change.id holds the deleted id
+        this.onDeletedRecipe(change.id);
+      } else { // updated/inserted
+        // change.doc holds the new doc
+        this.onUpdatedOrInsertedRecipe(change.doc);
+      }
+    }).on('error', console.log.bind(console));
+  }
+
+  componentWillUnmount() {
+    const { syncHandler } = this.state;
+    syncHandler.cancel();
   }
 
   componentWillMount() {
-    this.state.localDb
-      .sync(this.state.db, { live: true, retry: true })
-      .on('error', console.log.bind(console));
+    this.loadRecipes();
 
-    if (this.state.recipes.length < 1) {
-      this.loadRecipes();
-    }
     // this.initServiceWorker();
   }
 
