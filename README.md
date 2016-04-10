@@ -7,7 +7,7 @@
 
 1. `npm install`
 2. Install CouchDB / Sign-up for a hosting provider
-3. Fill in `config-sample.json` and copy to `config.json` 
+3. Fill in `config-sample.json` and copy to `config.json`
 
 # dev
 
@@ -22,6 +22,8 @@ npm run build
 ```
 
 # deploy
+
+the project deploys automatically through travis but you can also manually deploy using:
 
 ```
 npm run deploy
