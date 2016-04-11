@@ -12,29 +12,56 @@ The design and development of blah blah
 
 \subsection{A Review of Existing Software} \label{a--d--review-of-existing-software}
 
+This section is a review of current homebrewing software.
+
+\subsubsection{BeerSmith}
+
++ Cross platform (Macintosh, Ubuntu and Windows)
+
+\subsubsection{BeerTools Pro}
+\subsubsection{Beer Calculus}
+\subsubsection{ProMash}
+\subsubsection{BrewPal}
+\subsubsection{BrewTarget}
+\subsubsection{BeerAlchemy}
+\subsubsection{Brewer's Friend}
+
 % Need to review the rest of the brewing software https://homebrew.stackexchange.com/questions/784/what-software-do-most-brewers-use/898]
-% tooling is general offline so any web stuff has to be offline
+
+One thing that is common among all of these choices is their inherent offline nature. As they are installed directly to the computer and not in a web browser.
 
 \subsection{Software Life-cycle Methodology} \label{a-d--methodology--life-cycle}
 
 Choosing a methodology is never one size fits all. Instead considering the environment and team around a project is important. Agile software development offers principles that work well with a team, however there is a lot that can be taken for any project.
 
-Agile development embraces changes in development life-cycle and adapts to them, this is in contrast to tradtional plan-driven development in which predictions are used instead. An agile plan is the initial set of goals which will adapt as the project grows. \cite{fowler_agile} % http://martinfowler.com/agile.html
+Agile development embraces changes in development life-cycle and adapts to them, this is in contrast to tradtional plan-driven development in which predictions are used instead. An agile plan is the initial set of goals which will adapt as the project grows. \cite{fowler_agile}
 
 Using an incremental and evolutionary approach is key for this artefact due to it's experimental nature, the goals and proposed solutions will change through-out development.
 
 \subsection{Tools and Services} \label{a-d--methodology--tools}
 
-% cite for kanban
-Kanban boards are a tool to visualise the workflow for a project, an online implementation of this tool is Trello. Trello can be used for multiple scenarios and fits well for a software project. Features, bugs and other research can be represented by cards. \cite{trello}
+Kanban boards are a tool to visualise the workflow for a project, an online implementation of this tool is Trello. Trello can be used for multiple scenarios and fits well for a software project. Features, bugs and other research can be represented by cards. \cite{trello} % cite for kanban
 
-Git is -
+Version control is arguably one of the most important tools in software development. It records changes over time so that a previous version of the project can be revisited later. Git is a free and open source distributed version control system that is used on many projects. \cite{git}
 
-There are many Git repository hosting services. GitHub and Bitbucket are two popular choices. While GitHub encourages Open Source Software on their platform the service itself isn't Open Source. \cite{github} GitLab started as a GitHub clone that is fully Open Source, with the choice to host yourself or use their servers. % cite gitlab and bitbucket
+While being distributed it's often useful to have a centralized repository, there are many Git repository hosting services. GitHub and Bitbucket are two popular choices. While GitHub encourages Open Source Software on their platform the service itself isn't Open Source. \cite{github} GitLab started as a GitHub clone that is fully Open Source, with the choice to host yourself or use their servers. \cite{gitlab} \cite{bitbucket}
 
-These platforms offer similar features but the artefact will be hosted with GitHub due to the familiarity to the author.
+These platforms offer similar features but the artefact will be hosted with GitHub due to the familiarity to the author and also the features it offers.
 
-%example of github usage here with screenshot
+GitHub has a system of `Issues', which allow for tasks to be tracked. These issues can be commented and then closed when deemed completed. For this project the following labels are used:
+
+\begin{itemize}
+  \item \textbf{\colorbox{red}{bug}} - tasks which define a bug in the project
+  \item \textbf{\colorbox{blue}{feature}} -  tasks which introduce a new feature to the project
+  \item \textbf{\colorbox{yellow}{report}} - tasks which are relevant to the report writing itself
+  \item \textbf{\colorbox{green}{greenkeeper}} - a label reserved for the greenkeeper tool (as described in x of this report)
+  \item \textbf{wontfix} - tasks that are out of scope and/or outdated and wont be completed
+\end{itemize}
+
+Following is a screenshot of the issues at one point in the project:
+
+\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{githubissues}
+% have this as a figure?
 
 \section{Requirements} \label{a-d--requirements}
 
@@ -42,9 +69,12 @@ Both the supervisor Rich Boakes and local Portsmouth homebrewer Alan Thompson of
 
 As follows are requirements to create such a application to improve the brewing process when following recipes. After reviewing the current software available in section \ref{a--d--review-of-existing-software} it is clear there are problems in these areas:
 
-+ blah
-+ blah
-+ blah
+\begin{itemize}
+  \item Blah
+  \item Blah
+  \item Blah
+  \item Blah
+\end{itemize}
 
 One key aspect from a lot of this software is as it is installed to a computer it is offline. Something a tradtional web app couldn't achieve. Having the artefact introduce offline features makes for an innovative solution.
 
@@ -84,7 +114,7 @@ The artefact should:
   \item Follow accessiblity guidelines to ensure usage for those of hard of sight
   \item Be documented so that others can maintain
   \item Conform to the performance budget that is set in inital development
-  \item Work in specified browser, os and screen size environment: ___
+  \item Work in specified browser, operating system and screen size environment: x
   \item Pass tests generated throughout and running through continuous integration (such as Travis CI)
 \end{itemize}
 
