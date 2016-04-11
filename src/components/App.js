@@ -11,6 +11,8 @@ import Header from './Header';
 import Home from './Home';
 import Recipes from './Recipes';
 import Recipe from './Recipe';
+import Brews from './Brews';
+import Brew from './Brew';
 import Profile from './Profile';
 
 // add the authentication plugin to pouchdb
@@ -27,34 +29,27 @@ export default class App extends Component {
     this.signup = this.signup.bind(this);
     this.getUser = this.getUser.bind(this);
 
-    const remoteDb = new PouchDB(config.db.remote, { skipSetup: true });
-    const localDb = new PouchDB(config.db.local);
+    const db = {
+      recipes: {
+        remote: new PouchDB(`http://127.0.0.1:5984/recipes`, { skipSetup: true }),
+        local: new PouchDB('recipes')
+      },
+      brews: {
+        remote: new PouchDB(`http://127.0.0.1:5984/brews`, { skipSetup: true }),
+        local: new PouchDB('brews')
+      }
+    };
 
-    const syncHandler = localDb.sync(remoteDb, { live: true, retry: true })
-      .on('change', (info) => {
-        // handle change
-        console.log('Database synced!');
-      }).on('paused', () => {
-        // replication paused (e.g. user went offline)
-      }).on('active', () => {
-        // replicate resumed (e.g. user went back online)
-      }).on('denied', (info) => {
-        // a document failed to replicate (e.g. due to permissions)
-      }).on('complete', (info) => {
-        // handle complete
-      }).on('error', (err) => {
-        // handle error
-        console.log('Database syncing error', error);
-      });
+    // start syncing the databases
+    db.recipes.syncHandler = db.recipes.local.sync(db.recipes.remote, { live: true, retry: true }).on('error', console.log.bind(console));
+    db.brews.syncHandler = db.brews.local.sync(db.brews.remote, { live: true, retry: true }).on('error', console.log.bind(console));
 
     this.state = {
+      db,
       serviceWorkerActivated: false,
-      fontsLoaded: false,
+      user: false,
       recipes: [],
-      remoteDb,
-      localDb,
-      syncHandler,
-      user: false
+      brews: []
     };
   }
 
@@ -103,12 +98,13 @@ export default class App extends Component {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.log('error', error);
     });
   }
 
   fetchInitialRecipes() {
-    return this.state.localDb.allDocs({ include_docs: true }).then((res) => {
+    const { local } = this.state.db.recipes;
+    return local.allDocs({ include_docs: true }).then((res) => {
       const recipes = res.rows.map((row) => this.processRecipe(row.doc));
       this.setState({ recipes });
     });
@@ -162,7 +158,7 @@ export default class App extends Component {
     timeline = timeline.map(item => {
       return {
         duration: {
-          raw: item[0],
+          raw: item[0] * 60000, // minutes to milliseconds
           pretty: Brauhaus.displayDuration(item[0])
         },
         description: item[1]
@@ -180,8 +176,8 @@ export default class App extends Component {
   }
 
   loadRecipes() {
-    const { recipes, localDb } = this.state;
-    // localDb.destroy().then(console.log('Database nuked')).catch(console.log.bind(console));
+    const { recipes, db } = this.state;
+    // db.recipes.local.destroy().then(console.log('Database nuked')).catch(console.log.bind(console));
 
     // if there's no recipes fetch the initial recipes
     if (recipes.length < 1) {
@@ -189,7 +185,7 @@ export default class App extends Component {
     }
 
     // now check if the local db changes
-    localDb.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+    db.recipes.local.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
       if (change.deleted) {
         // change.id holds the deleted id
         this.onDeletedRecipe(change.id);
@@ -200,20 +196,86 @@ export default class App extends Component {
     }).on('error', console.log.bind(console));
   }
 
+  fetchInitialBrews() {
+    const { local } = this.state.db.brews;
+    return local.allDocs({ include_docs: true }).then((res) => {
+      const brews = res.rows.map((row) => {
+        if (!row.doc.recipe) {
+          return false;
+        }
+        return row.doc;
+      });
+      this.setState({ brews });
+    });
+  }
+
+  onDeletedBrew(id) {
+    const { brews } = this.state;
+    const index = binarySearch(brews, id);
+    const brew = brews[index];
+
+    if (brew && brew._id === id) {
+      brews.splice(index, 1);
+      this.setState({ brews });
+    }
+  }
+
+  onUpdatedOrInsertedBrew(newBrew) {
+    const { brews } = this.state;
+    const index = binarySearch(brews, newBrew._id);
+    const brew = brews[index];
+
+    if (brew && brew.recipe && brew._id === newBrew._id) { // update
+      brews[index] = newBrew;
+      this.setState({ brews });
+    } else { // insert
+      brews.splice(index, 0, newBrew);
+      this.setState({ brews });
+    }
+  }
+
+  loadBrews() {
+    const { brews, db } = this.state;
+    // db.brews.local.destroy().then(console.log('Database nuked')).catch(console.log.bind(console));
+
+    // if there's no brewss fetch the initial brewss
+    if (brews.length < 1) {
+      this.fetchInitialBrews().catch(console.log.bind(console));
+    }
+
+    // now check if the local db changes
+    db.brews.local.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+      if (change.deleted) {
+        // change.id holds the deleted id
+        this.onDeletedBrew(change.id);
+      } else { // updated/inserted
+        // change.doc holds the new doc
+        this.onUpdatedOrInsertedBrew(change.doc);
+      }
+    }).on('error', console.log.bind(console));
+  }
+
+  loadData() {
+    this.loadRecipes();
+    this.loadBrews();
+  }
+
   componentWillUnmount() {
-    const { syncHandler } = this.state;
-    syncHandler.cancel();
+    // stop syncing the databases
+    this.state.db.recipes.syncHandler.cancel();
+    this.state.db.brews.syncHandler.cancel();
   }
 
   componentWillMount() {
-    this.loadRecipes();
+    this.loadData();
     this.getUser();
 
     // this.initServiceWorker();
   }
 
   getUser() {
-    return this.state.remoteDb.getSession((err, response) => {
+    const { remote } = this.state.db.brews;
+    return remote.getSession((err, response) => {
       if (err) {
         console.log('session err', err);
         // network error
@@ -221,21 +283,23 @@ export default class App extends Component {
         console.log('nobodys logged in');
       } else {
         this.setState({ user: response.userCtx });
-        console.log(response);
       }
     });
   }
 
   login() {
-    this.state.remoteDb.login('batman', 'brucewayne').then(this.getUser);
+    const { remote } = this.state.db.brews;
+    remote.login('batman', 'brucewayne').then(this.getUser);
   }
 
   logout() {
-    this.state.remoteDb.logout().then(this.setState({ user: false }));
+    const { remote } = this.state.db.brews;
+    remote.logout().then(this.setState({ user: false }));
   }
 
   signup(username, password) {
-    return this.state.remoteDb.signup(username, password, (err, response) => {
+    const { remote } = this.state.db.brews;
+    return remote.signup(username, password, (err, response) => {
       if (err) {
         if (err.name === 'conflict') {
           return console.log('"batman" already exists, choose another username');
@@ -251,8 +315,8 @@ export default class App extends Component {
   }
 
   render() {
-    const { serviceWorkerActivated, recipes, user } = this.state;
-    console.log('user', user);
+    const { serviceWorkerActivated, recipes, brews, user } = this.state;
+    // console.log('state', this.state);
 
     return (
 			<div id="app">
@@ -260,13 +324,27 @@ export default class App extends Component {
 				<Header user={user} />
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
-					<Recipes path="/recipes" recipes={recipes} />
-					<Recipe path="/recipe/:id" recipes={recipes} />
+          <Brews path="/brews"
+                 user={user}
+                 brews={brews}
+                 recipes={recipes}
+                 />
+          <Brew path="/brew/:id"
+                user={user}
+                brews={brews}
+                recipes={recipes}
+                />
+					<Recipes path="/recipes"
+                   recipes={recipes}
+                   />
+					<Recipe path="/recipe/:id"
+                  recipes={recipes}
+                  />
 					<Profile path="/profile"
-            user={user}
-            login={this.login}
-            logout={this.logout}
-            />
+                   user={user}
+                   login={this.login}
+                   logout={this.logout}
+                   />
 				</Router>
 			</div>
 		);

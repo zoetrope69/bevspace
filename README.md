@@ -7,7 +7,6 @@
 
 1. `npm install`
 2. Install CouchDB / Sign-up for a hosting provider
-3. Fill in `config-sample.json` and copy to `config.json`
 
 # dev
 

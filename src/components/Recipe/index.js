@@ -5,8 +5,7 @@ export default class Recipe extends Component {
   render() {
     const { id, recipes, processRecipe } = this.props;
 
-    let recipe = recipes.find((recipe) => recipe._id === id);
-    console.log(recipe);
+    const recipe = recipes.find((recipe) => recipe._id === id);
 
     let output;
 
@@ -21,7 +20,7 @@ export default class Recipe extends Component {
           {recipe.timeline.map((item) => (
             <li class={style.item}>
               <span class={style.description}>{item.description}</span>
-              <time datetime={item.duration.raw}>{item.duration.pretty}</time>
+              <time datetime={item.duration.raw} title={`Timestamp: ${item.duration.raw}`}>{item.duration.pretty}</time>
             </li>
           ))}
         </ul>

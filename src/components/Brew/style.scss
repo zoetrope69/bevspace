@@ -1,0 +1,80 @@
+@import '~style/helpers';
+
+.brew {
+	padding: 1em;
+}
+
+.brew .info {
+  position: relative;
+  padding: 1em 1em 1.5em;
+}
+
+.brew .info .name {
+  color: rgba($white, 0.95);
+}
+
+.brew .info .author {
+  display: block;
+  padding: 0 1em;
+
+  font-weight: 400;
+  text-align: right;
+  color: rgba($black, 0.5);
+}
+
+.brew .timeline {}
+
+.brew .timeline .item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 2.5em 0;
+  padding: 1.5em 1em 1em;
+  list-style: none;
+
+  background: $cream;
+  box-shadow: 0 5px 0 $pinkish;
+}
+
+.brew .timeline .item::before {
+  z-index: 10;
+  content: '';
+  display: block;
+  width: 4px;
+  height: 2em;
+  position: absolute;
+  top: -2.25em;
+  left: 65px;
+
+  background: $pinkish;
+}
+
+.brew .timeline .item::after {
+  z-index: 5;
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: -4px;
+  left: 62px;
+
+  box-shadow: 0 0 0 4px $bg;
+  border-radius: 50%;
+  background: $pinkish;
+}
+
+.brew .timeline .item time {
+  color: $darkBrown;
+
+  font-size: .85em;
+  font-weight: 500;
+}
+
+.brew .timeline .item .description {
+  flex-grow: 2;
+  padding-left: 1em;
+
+  color: $darkBrown;
+  font-weight: 700;
+}

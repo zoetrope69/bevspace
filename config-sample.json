@@ -1,6 +1,0 @@
-{
-  "db": {
-    "remote": "https://<username>:<password>@<username>.cloudant.com/<db_name>",
-    "local": "<db_name>"
-  }
-}
