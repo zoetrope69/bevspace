@@ -2,7 +2,7 @@
 
 Some basic conventions for contributing to this project.
 
-_This is based on [erikras/react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example/blob/master/CONTRIBUTING.md)'s CONTRIBUTING.md_
+_This project uses [commitizen](https://commitizen.github.io/cz-cli/), and you can use this to ensure the guidelines are met_
 
 ### Linting
 
