@@ -1,27 +1,15 @@
 @import '~style/helpers';
+@import '~style/button';
 
 .recipe {
 	padding: 1em;
 }
 
 .recipe .info {
-  position: relative;
   padding: 1em 1em 1.5em;
-}
+  margin-bottom: 1em;
 
-.recipe .info::after {
-  z-index: 5;
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  bottom: -6px;
-
-  box-shadow: 0 0 0 4px $bg;
-  background: $pinkish;
-
-  transform: rotate(45deg);
+  background-color: rgba($white, .15);
 }
 
 .recipe .info .name {
@@ -35,62 +23,4 @@
   font-weight: 400;
   text-align: right;
   color: rgba($black, 0.5);
-}
-
-.recipe .timeline {}
-
-.recipe .timeline .item {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  margin: 2.5em 0;
-  padding: 1.5em 1em 1em;
-  list-style: none;
-
-  background: $cream;
-  box-shadow: 0 5px 0 $pinkish;
-}
-
-.recipe .timeline .item::before {
-  z-index: 10;
-  content: '';
-  display: block;
-  width: 4px;
-  height: 2em;
-  position: absolute;
-  top: -2.25em;
-  left: 19px;
-
-  background: $pinkish;
-}
-
-.recipe .timeline .item::after {
-  z-index: 5;
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: -6px;
-  left: 16px;
-
-  box-shadow: 0 0 0 4px $bg;
-  background: $pinkish;
-
-  transform: rotate(45deg);
-}
-
-.recipe .timeline .item time {
-  color: $darkBrown;
-
-  font-size: .85em;
-  font-weight: 500;
-}
-
-.recipe .timeline .item .description {
-  flex-grow: 2;
-  padding-left: 1em;
-
-  color: $darkBrown;
-  font-weight: 700;
 }

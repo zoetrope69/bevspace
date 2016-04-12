@@ -1,4 +1,5 @@
 @import '~style/helpers';
+@import '~style/button';
 
 .brews {
 	padding: 1em;
@@ -9,51 +10,68 @@
 }
 
 .brews .list .item {
-  display: flex;
-  margin: 0;
-  margin-bottom: 1em;
   justify-content: space-between;
-  align-items: center;
+  padding: 0;
 
   color: $bg;
-  font-weight: 400;
-  text-decoration: none;
+  text-align: left;
 
-  border-left: 10px solid $cream;
   background: $cream;
-  box-shadow: inset 0 -10px 0 rgba(darken($cream, 80%), .05),
-                    0   5px 0 rgba(0, 0, 0, 0.1);
-
-  transition: transform .15s, box-shadow .15s;
 }
 
-.brews .list .item:hover,
-.brews .list .item:active {
-  transform: translateY(5px);
-  box-shadow: inset 0 -10px 0 rgba(darken($cream, 80%), .05),
-                    0   0   0 rgba(0, 0, 0,   0);
-}
-
-.brews .list .item > span {
-  float: left;
-  width: 70%;
+.brews .list .item > div {
   padding: 1em 1em 1.5em;
-
-  border-right: 2px solid rgba(0, 0, 0, .025);
-}
-
-.brews .list .item > span:nth-child(n+2) {
-  float: left;
-  width: 15%;
-  text-align: center;
 }
 
 .brews .list .item .name {
   display: block;
+
   font-weight: 600;
 }
 
 .brews .list .item .author {
   display: block;
   font-size: .9em;
+}
+
+@keyframes progressRotate {
+  to {
+    transform-origin: center;
+    transform: rotate(360deg);
+  }
+}
+
+.brews .list .item .progress {
+  float: left;
+  margin: .2em .5em;
+  line-height: 0;
+
+  animation: progressRotate 2.5s infinite linear;
+}
+
+.brews .list .item .state {
+  float: right;
+  padding: .5em 1em;
+
+  text-transform: uppercase;
+  font-size: .75em;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .5);
+
+  transform: translateY(-.25em);
+
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.brews .list .item .stateBrewing {
+  background: $success;
+}
+
+.brews .list .item .stateReady {
+  background: $brand;
+}
+
+.brews .list .item .stateDone {
+  background: rgba(0, 0, 0, .25);
 }

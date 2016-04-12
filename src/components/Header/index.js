@@ -10,7 +10,7 @@ export default class Header extends Component {
         <Link href="/" class={style.logo}><h1>bevspace</h1></Link>
         <nav>
           <Link href="/recipes">Recipes</Link>
-          {user && <Link href="/brews">Brews</Link>}
+        {user && <Link href="/brews">Brews</Link>}
           <Link href="/profile">{user ? user.name : 'Login/Signup'}</Link>
         </nav>
       </header>

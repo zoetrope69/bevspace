@@ -1,4 +1,5 @@
 @import '~style/helpers';
+@import '~style/button';
 
 .brew {
 	padding: 1em;
@@ -6,10 +7,10 @@
 
 .brew .info {
   position: relative;
-  padding: 1em 1em 1.5em;
 }
 
 .brew .info .name {
+  flex: 1;
   color: rgba($white, 0.95);
 }
 
@@ -28,23 +29,22 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  margin: 2.5em 0;
-  padding: 1.5em 1em 1em;
+  margin: 2.25em 0;
   list-style: none;
 
   background: $cream;
-  box-shadow: 0 5px 0 $pinkish;
+  box-shadow: 0 5px 0 rgba($black, .15);
 }
 
 .brew .timeline .item::before {
   z-index: 10;
   content: '';
-  display: block;
-  width: 4px;
-  height: 2em;
   position: absolute;
+  display: block;
+  width: 5px;
+  height: 2em;
   top: -2.25em;
-  left: 65px;
+  left: 49px;
 
   background: $pinkish;
 }
@@ -52,29 +52,49 @@
 .brew .timeline .item::after {
   z-index: 5;
   content: '';
+  position: absolute;
   display: block;
   width: 10px;
   height: 10px;
-  position: absolute;
-  top: -4px;
-  left: 62px;
+  top: -5px;
+  left: 47px;
 
   box-shadow: 0 0 0 4px $bg;
   border-radius: 50%;
   background: $pinkish;
 }
 
-.brew .timeline .item time {
-  color: $darkBrown;
+.brew .timeline .itemCompleted {
+  background: $success;
+}
 
-  font-size: .85em;
+.brew .timeline .itemCompleted::before,
+.brew .timeline .itemCompleted::after {
+  background: $success;
+}
+
+.brew .timeline .item > div {
+  padding: 1em;
+}
+
+.brew .timeline .item > div:first-child {
+  width: 15%;
+  padding: 0 1em;
+
+  line-height: 2em;
+  font-size: 2.25em;
+  color: rgba(0, 0, 0, .25);
+}
+
+.brew .timeline .item .timeToStart {
+  margin-bottom: .5em;
+
   font-weight: 500;
+  color: rgba($black, .6);
+  font-size: .89em;
 }
 
 .brew .timeline .item .description {
-  flex-grow: 2;
-  padding-left: 1em;
-
-  color: $darkBrown;
   font-weight: 700;
+  color: rgba($black, .75);
 }

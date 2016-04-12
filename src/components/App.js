@@ -27,6 +27,8 @@ export default class App extends Component {
     this.logout = this.logout.bind(this);
     this.signup = this.signup.bind(this);
     this.getUser = this.getUser.bind(this);
+    this.createBrew = this.createBrew.bind(this);
+    this.startBrew = this.startBrew.bind(this);
 
     const db = {
       recipes: {
@@ -320,39 +322,59 @@ export default class App extends Component {
     });
   }
 
+  createBrew(recipe) {
+    const { db, user } = this.state;
+
+    return db.brews.local.post({ recipe, user: user.name });
+  }
+
+  startBrew(brew) {
+    const { db } = this.state;
+
+    brew.startTime = Date.now();
+
+    return db.brews.local.put(brew);
+  }
+
+  processBrew(brew, Recipe) {
+
+  }
+
   render() {
     const { serviceWorkerActivated, recipes, brews, user } = this.state;
-    // console.log('state', this.state);
 
     return (
-			<div id="app">
-        <Alert offline={serviceWorkerActivated} />
-				<Header user={user} />
-				<Router onChange={this.handleRoute}>
-					<Home path="/" />
-          <Brews path="/brews"
-                 user={user}
-                 brews={brews}
+		<div id="app">
+      <Alert offline={serviceWorkerActivated} />
+			<Header user={user} />
+      <Router onChange={this.handleRoute}>
+        <Home path="/" />
+        <Brews path="/brews"
+               user={user}
+               brews={brews}
+               recipes={recipes}
+               />
+        <Brew path="/brew/:id"
+              user={user}
+              brews={brews}
+              recipes={recipes}
+              startBrew={this.startBrew}
+              />
+        <Recipes path="/recipes"
                  recipes={recipes}
                  />
-          <Brew path="/brew/:id"
+        <Recipe path="/recipe/:id"
                 user={user}
-                brews={brews}
                 recipes={recipes}
+                createBrew={this.createBrew}
                 />
-					<Recipes path="/recipes"
-                   recipes={recipes}
-                   />
-					<Recipe path="/recipe/:id"
-                  recipes={recipes}
-                  />
-					<Profile path="/profile"
-                   user={user}
-                   login={this.login}
-                   logout={this.logout}
-                   />
-				</Router>
-			</div>
+        <Profile path="/profile"
+                 user={user}
+                 login={this.login}
+                 logout={this.logout}
+                 />
+      </Router>
+		</div>
 		);
   }
 }

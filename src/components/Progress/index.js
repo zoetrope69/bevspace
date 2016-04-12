@@ -40,7 +40,7 @@ export default class Brew extends Component {
     const dashOffset = ((100 - percent) / 100) * dashLength;
 
     return (
-      <SVG width={(radius * 2) + strokeWidth} height={(radius * 2) + strokeWidth}>
+      <SVG width={(radius * 2) + strokeWidth} height={(radius * 2) + strokeWidth} class={style.progress}>
         <circle
           class={style.container}
           cx={radius + (strokeWidth / 2)}
@@ -64,7 +64,7 @@ export default class Brew extends Component {
           text-anchor="middle"
           dy=".4em"
           >
-          {percent}%
+          {percent.toFixed(0)}%
         </text>
         )}
       </SVG>
