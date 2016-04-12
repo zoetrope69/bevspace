@@ -1,4 +1,3 @@
-import config from 'config';
 import Brauhaus from 'brauhaus';
 import PouchDB from 'pouchdb';
 import PouchDBAuth from 'pouchdb-authentication';
@@ -31,11 +30,11 @@ export default class App extends Component {
 
     const db = {
       recipes: {
-        remote: new PouchDB(`http://127.0.0.1:5984/recipes`, { skipSetup: true }),
+        remote: new PouchDB(`${process.env.REMOTE_DB}/recipes`, { skipSetup: true }),
         local: new PouchDB('recipes')
       },
       brews: {
-        remote: new PouchDB(`http://127.0.0.1:5984/brews`, { skipSetup: true }),
+        remote: new PouchDB(`${process.env.REMOTE_DB}/brews`, { skipSetup: true }),
         local: new PouchDB('brews')
       }
     };

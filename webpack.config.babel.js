@@ -98,7 +98,10 @@ module.exports = {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify({ NODE_ENV: ENV })
+      'process.env': JSON.stringify({
+        NODE_ENV: ENV,
+        REMOTE_DB: process.env.REMOTE_DB || 'http://localhost:5984'
+      })
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
