@@ -2,7 +2,7 @@ import Brauhaus from 'brauhaus';
 import PouchDB from 'pouchdb';
 import PouchDBAuth from 'pouchdb-authentication';
 import { h, Component } from 'preact';
-import { Router } from 'preact-router';
+import { Router, route } from 'preact-router';
 import { binarySearch } from '../utils';
 
 import Alert from './Alert';
@@ -53,10 +53,17 @@ export default class App extends Component {
   }
 
 	/** Gets fired when the route changes.
-	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
+	 *	@param {Object} event "change" event from [preact-router](http://git.io/preact-router)
 	 *	@param {string} event.url	The newly routed URL
 	 */
   handleRoute = (event) => {
+    const { user } = this.state;
+
+    // redirect if no user for the brews section
+    if (event.url.includes('/brew') && !user.name) {
+      route('/profile');
+    }
+
     this.currentUrl = event.url;
   };
 
