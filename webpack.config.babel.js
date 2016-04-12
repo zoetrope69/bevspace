@@ -77,10 +77,10 @@ module.exports = {
         test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
         loader: ENV === 'production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url'
       }
-    ]
-  },
+    ],
 
-  noParse: /lie\.js$|\/leveldown\//,
+    noParse: [/lie\.js$/, /leveldown/, /moment.js/]
+  },
 
   postcss: () => [
     autoprefixer({ browsers: 'last 2 versions' })
