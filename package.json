@@ -11,7 +11,7 @@
     "prebuild": "mkdir -p build && ncp src/assets build/assets",
     "test": "snyk test && npm run lint",
     "lint": "eslint src tests/**/*.js",
-    "deploy": "npm run snyk-protect && npm run test && npm run build && surge ./build -d bev.space",
+    "deploy": "npm run snyk-protect && npm run test && npm run build && surge --project ./build/ --domain bev.space",
     "snyk-protect": "snyk protect",
     "prepublish": "npm run snyk-protect"
   },
