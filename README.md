@@ -1,7 +1,9 @@
 # bev.space :beer::rocket:
 [![PDF Status](https://www.sharelatex.com/github/repos/zaccolley/bevspace/builds/latest/badge.svg)](https://www.sharelatex.com/github/repos/zaccolley/bevspace/builds/latest/output.pdf)
-[![Build Status](https://travis-ci.org/zaccolley/bevspace.svg?branch=dev)](https://travis-ci.org/zaccolley/bevspace)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status](https://travis-ci.org/zaccolley/bevspace.svg?branch=dev)](https://travis-ci.org/zaccolley/bevspace)
+[![Dependency Status](https://david-dm.org/zaccolley/bevspace.svg)](https://david-dm.org/zaccolley/bevspace)
+[![devDependency Status](https://david-dm.org/zaccolley/bevspace/dev-status.svg)](https://david-dm.org/zaccolley/bevspace#info=devDependencies)
 
 # install
 
