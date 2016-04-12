@@ -1,8 +1,13 @@
 {
-  "name": "bev.space - bevs woah",
+  "name": "bev.space",
   "short_name": "bev.space",
-  "start_url": "./index.html",
+
+  "description": "where better to get ur bevs than space",
+
   "display": "standalone",
+
   "gcm_sender_id": "787635300943",
-  "gcm_user_visible_only": true
+  "gcm_user_visible_only": true,
+
+  "start_url": "./index.html"
 }
