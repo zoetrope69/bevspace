@@ -1,7 +1,7 @@
 % ---------------------------
 % Packages and setup
 
-\documentclass[11pt]{report}
+\documentclass[twoside,openright,11pt,a4paper]{report}
 
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -10,6 +10,10 @@
 \usepackage{apacite}
 \usepackage{url}
 \usepackage{pdfpages}
+
+% stop tables from floating
+\usepackage{float}
+\restylefloat{table}
 
 \setcounter{secnumdepth}{5}
 \usepackage[toc,page]{appendix}
@@ -73,10 +77,8 @@
     % Appendices
 
     \begin{appendices}
-        % \input{appendices/pid.tex}
+        \input{appendices/pid.tex}
     \end{appendices}
 
 \end{document}
 % ---------------------------
-
-% MAKE SURE TO RUN EVERYTHING THROUGH http://www.hemingwayapp.com/

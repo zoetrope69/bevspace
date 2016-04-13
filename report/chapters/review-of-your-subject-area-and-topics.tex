@@ -1,18 +1,20 @@
-\chapter{A Review of Home-brewing and User Experience through Performance}
+\chapter{A Review of Home-brewing and User Experience through Performance} \label{l-r}
 
 \section{Introduction} \label{l-r--introduction}
 
-This first section of this chapter discusses the current landscape for home-brewing with technology. The following section explores the relationship between user experience and modern web development. The analysis and design phase of this project will consider these topics.
-
-This covers many areas: we start with the area of Home-brewing (section \ref{l-r--home-brewing}) followed by User Experience through Performance (section \ref{l-r--user-experience-performance}). Finally, section \ref{l-r--summary} summarises the chapter.
+This first section (\ref{l-r--home-brewing}) of this chapter discusses the current landscape for home-brewing and it's integration with technology. The following section (\ref{l-r--user-experience-performance}) explores the relationship between performance, user experience and modern web development. The analysis and design phase of this project will consider these topics. Finally, section \ref{l-r--summary} summarises the chapter.
 
 \section{Home-brewing} \label{l-r--home-brewing}
 
-% Brief history of pubs, brewing and home-brewing in general
+Last year, BBPA (The British Beer and Pub Association) estimated pubs in the UK had ``fallen by 19\% since 2000: from 60,800 to 49,433 in 2012". \cite{BBPA}
 
-% describe a home brew process
+Craft and independent brewing is on the up however. SIBA (The Society of Independent Brewers), saw an increase of  SIBA’s membership has grown by 49 members in 2015. \cite{SIBA}
 
-\subsection{A comparison of home-brewing and OSS}
+Home-brewing, brewing beer on a small personal scale, has been around for thousands of years and has grown popular in the last few years. % citation needed haha
+
+% describe a home brew process?
+
+\subsection{A comparison of home-brewing and OSS} \label{l-r--compare-home-brewing-and-oss}
 
 Sharing recipes, set-ups and brewing techniques is analogous to the open source communities surround software and hardware. Bringing the two together is mutually beneficial.
 
@@ -20,116 +22,137 @@ With the popularity of affordable and accessible computing with platforms such a
 
 Due to the open source nature of these platforms, many systems have been created. One example is BrewPi, a fermentation temperature controller for brewing beer or wine. \cite{brewpi}
 
-This merge of physical creating and software can be seen all across the tech community. One great example is in farming with the MIT Open Agriculture Initiative, ``Every time users grow and harvest, they will contribute to a library of climate recipes that can be borrowed and scaled so that users around the world can gain access to the best and freshest foods.". The internet is the perfect platform for this type of recipe sharing and collaboration. \cite{climate_recipes}
+This merge of physical creating and software can be seen all across the tech community. One great example is in farming with the MIT Open Agriculture Initiative, ``Every time users grow and harvest, they will contribute to a library of climate recipes that can be borrowed and scaled so that users around the world can gain access to the best and freshest foods.". \cite{climate_recipes}
 
-\subsection{Existing home-brewing solutions and APIs}
+Ultimately, the Internet is the perfect platform for this type of recipe sharing and collaboration.
 
-Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. \cite{beerxml} Open and standardized formats in general mean better portability, compatability for data.
+\subsection{Existing home-brewing solutions and APIs} \label{l-r--exisiting-home-brewing-solutions}
 
-With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON. \cite{beerjson}
+Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. \cite{beerxml} Open and standardized formats in general mean better portability, compatibility for data. % cite?
+
+With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON. \cite{beerjson} % cite the amount of usage of json over xml
 
 Malt.io is a community website for these brewing recipes. With the options for revision history and `cloning' of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. \cite{malt.io}
 
+There are many software solutions for various parts of the brewing process. Some of which are reviewed in section \ref{a--d--review-of-existing-software}.
+
 \section{User Experience through Performance} \label{l-r--user-experience-performance}
 
-What is a good user experience? User experience covers a lot of areas, a common thought is this is the job of designers alone. Based on user research, developers have areas that they should focus on.
+User experience (referred to as UX), is how a user feels while using a system. There are many aspects to user experience such as usability and accessibility. \cite{what_is_ux}
 
-Web performance in essence is the perceived speed of websites and the actions taken on them.
+One of the most important aspects of user experience is the performance. When looking at the web specifically, performance in essence is the perceived speed of websites and the actions taken on them.
 
-% performance is ux, http://designingforperformance.com/performance-is-ux/
+When designing and building on the web, performance should be considered at the same level as aesthetics. \cite{performance_is_ux}
 
-\subsection{Speed and timing}
+\subsection{Speed and Timing} \label{l-r--speed}
 
-\cite{usability_engineering} shows time limits affect how users behave towards a system. An application feels instantaneous with actions taken under 0.1 seconds.  Anything over 1 second a user can lose their flow of though on an action. After 10 seconds a users will lose attention and start to multi-task.
+There is a lot of research into users' relationship with time.
 
-Worse than that \cite{why_web_performance_matters} confirm that ``88\% of online consumers are less likely to return to a site after a bad experience".
+\cite{usability_engineering} shows time affect how users behave towards a system. A system feels instantaneous with actions taken under 0.1 seconds. Anything over 1 second a user can lose their flow of though on an action. After 10 seconds a users will lose attention and start to multi-task.
 
-Blocking web advertising, a controversial topic as of writing, has been shown to increase performance for users for speed. Typically a browser extension would be used to block adverts. Brave, a browser built with advertisement blocking in from the start claims up to 60\% of page load time is caused by the underlying ad technology that loads into various places each time you hit a page on your favorite news site. \cite{brave}
+In terms of relative time, users percieve faster or slower tasks when there is a difference of 20\% in time. \cite{setting_a_performance_budget}
 
 Google have ``always viewed speed as a competitive advantage", when running experiments by introducing artificial delays into searches ``slowing down the search results page by 100 to 400 milliseconds has a measurable impact on the number of searches per user of -0.2\% to -0.6\%". \cite{speed_matters}
 
+Performance delays aren't merely an annoyance, a bad first impression can result in users not returning. \cite{why_web_performance_matters} confirm that ``88\% of online consumers are less likely to return to a site after a bad experience". Delays are stressful. \cite{ericsson} found that mobile delays are more stressful than standing in line at a shop or even watching a horror movie.
+
+There is a clear demand for performance when looking at the topic of blocking web advertising. A controversial topic as of writing, one of the benefits shown is the increase in performance for users especially on mobile platforms. Typically a browser extension would be used to block adverts. Brave, a browser built with advertisement blocking in from the start claims up to 60\% of page load time is caused by the underlying advertisement technology that loads into various places each time you hit a page on your favorite news site. \cite{brave}
+
+\subsection{Perceived Performance} \label{l-r--perceived-performance}
+
+Before discussing achieving good performance through development aspects, it's worth noting a user is only perceiving this performance. If this perceived performance often can be achieved without technical development.
+
+Optimistic user interfaces (UIs) show a user feedback before the corresponding action has taken place thus giving an excellent perceived performance.
+
+An example of this is the Instagram like button. On press of the like button the application doesn't wait for a round trip to the server to check that action was carried out successfully, instead it shows the user that they have liked the post immediately with the `optimism' that the action will be carried out. \cite{performing_actions_optimisitically}
+
+Lazy-loading is the method of loading content (often images) after initial load for performance. This is often used as part of an optimistic UI.
+
+Using images as an example, having a placeholder based the source image can mean a smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette. \cite{image_colours_lazy_loading}
+
+% image here
+
 \subsection{Measuring and techniques} \label{l-r--measuring-and-techniques}
 
-Measuring and optmising performance has become more important than ever with tools such as Google's PageSpeed and WebPageTest giving developers metrics to improve their site on many areas. [a reference here?]
+Measuring performance is important, data metrics allows for better. Tools such as Google's PageSpeed and WebPageTest give developers metrics across all aspects of web performance. % cite
 
-Best practises include optimising a website's resources and where they are retrieved from. With CSS file growing larger in size [find citation] a emerging approach is through Critical CSS. Serving a part of the CSS on load, loading the rest asynchronously and then caching it all for further visits. [citation critical css, filament group https://www.filamentgroup.com/lab/performance-rwd.html]
+One metric is SpeedIndex ``is the average time at which visible parts of the page are displayed". The benefit to this metric is it helps measure a usable website over just a loaded website. A website may be usable without all of the content having loaded in. \cite{speed_index}
 
-% perf
+Best practices include optimising a website's resources and where they are retrieved from. With CSS file growing larger in size [find citation] a emerging approach is through Critical CSS. Serving a part of the CSS on load, loading the rest asynchronously and then caching it all for further visits. \cite{fast_as_heck}
+
 % https://twitter.com/igrigorik/status/706890158323269633
-% http://danielmall.com/articles/how-to-make-a-performance-budget/ \cite{performance_budget}
 % https://medium.com/google-developers/answers-to-questions-about-performance-9806d2dadfe2#.z973fqsjd
 % https://www.filamentgroup.com/lab/mv-initial-load-times.html
 % https://twitter.com/aerotwist/status/709668062321098752
-% https://www.oreilly.com/ideas/progressive-web-apps-and-whats-next-for-mobile?utm_source=youtube&utm_medium=video&utm_content=fluentcon2016&utm_campaign=inbound_video
+% https://www.oreilly.com/ideas/progressive-web-apps-and-whats-next-for-mobile
 % https://twitter.com/nolanlawson/status/709480413689937920
+% base64 shit
+% srcset, picture elemnt thumbnailing
 
-%\subsubsubsection{Frameworks}
+\subsubsection{Performance Budgets} \label{l-r--performance-budgets}
+
+Just like budgeting finances, having a performance budget can give a starting point for working with performance in mind. Having this initial constraint can ensure that performance will be thought of while designing. \cite{performance_budget}
+
+One way to find initial metrics is off of similar websites. As described in section \ref{l-r--speed}, setting the target for the metrics at 20\% will mean users perceive the site as faster.
+
+\subsubsection{Front-end Frameworks and Libraries}
+
+TODO
 
 % https://www.filamentgroup.com/lab/mv-initial-load-times.html
 % mvc frameworks and performance \cite{performance_mvc}
 
+\subsubsection{Animation} \label{l-r--animation}
+
 % RAIL, https://www.smashingmagazine.com/2015/10/rail-user-centric-model-performance/ \cite{introducing_RAIL}
-standardization of performance techniques
 % https://aerotwist.com/blog/flip-your-animations/ \cite{FLIP}
+% opacity, transform etc
+% will-change, edge hack shit. postcss plugin. % https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2Fhelloanselm%2Fstatus%2F707927523498323969&sa=D&sntz=1&usg=AFQjCNGvTT0uGKWJ0g8FoTN7g9cKKvgI_Q
 
-Lazy loading is the method of loading content (often images) after initial load for performance. While images are non-blocking and don't affect network performance on the critical path other performance issues such as slow paints. % cite this
+\subsection{Web typography} \label{l-r--web-type}
 
-base64 shit
+Good typography is a great way to improve user experience through usability and accessibility. For example, for some dyslexic users can find incorrectly spaced text hard to read through something called `rivers'. \cite{dyslexia}
 
-srcset, picture elemnt thumbnailing
-
-\subsection{Animation and perceived performance}
-
-After all the optimisation, and all the refinements sometimes a user interface can still be improved. After all, users are only perceiving the performance through what is shown to them. Different techniques can influence this perceived delay, and timescale of tasks done.
-
-One such technique is Optimistic UIs, this is the idea of showing a user feedback before they corresponding action has taken place thus giving an excellent perceived performance. An example of this is the Instagram like button. On press of the post like button the application doesn't wait for a round trip to the server to check that action was carried out successfully, instead it shows the user that they have liked the post immediately with the `optimism' that the action will be carried out. \cite{performing_actions_optimisitically}
-
-Lazy-loading, as mentioned in section \ref{l-r--measuring-and-techniques}, is foten be used in an optimistic UI. For images having a placeholder based the source image over a blank background can mean a smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette. \cite{image_colours_lazy_loading}
-
-% image here
-
-\subsection{Web typography}
-
-Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called `FOIT' (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. (https://www.filamentgroup.com/lab/font-events.html)
+Due to the popularity of web fonts it's easy to think this is a quick and easy way to improving the typographical user experience of your website. However, just using a web font alone doesn't guarantee a better typography for users. Web fonts are slow, and if poorly implemented can leave users with no content at all on bad connections. This can create something called `FOIT' (Flash of Invisible Text), in which a browser hides all text that should be styled with a custom font until that font has finished loading. \cite{FOIT}
 
 A great reading experience with default system typefaces is easily achieved. As \cite{against_webfonts} explains: ``Typography is not about aesthetics, it's about serving the text. If even a small percentage of people don't consume your content due to a use of web fonts, your typography is failing."
 
-There are ways to avoid some of the % If you have to, then use font loading stuff
+There are ways to avoid FOIT through progressively applying fonts once they're loaded. These approaches work well for repeat visits to a website as these fonts can then be cached. \cite{FOIT}
 
-\subsection{Server side}
+\subsection{Serverside} \label{l-r--serverside}
 
-Now being described as front end ops
+TODO
 
-% serverside
-%  streams https://jakearchibald.com/2016/streams-ftw/
-%  http2
-%  https://www.nginx.com/blog/7-tips-for-faster-http2-performance/
-%  https://timkadlec.com/2015/02/client-side-templatings-major-bug/
+% streams https://jakearchibald.com/2016/streams-ftw/
+% https://www.nginx.com/blog/7-tips-for-faster-http2-performance/
+% https://timkadlec.com/2015/02/client-side-templatings-major-bug/
 
-%\subsubsubsection{Progressive Enhancement}
+\subsection{Progressive Enchancement} \label{l-r--progressive-enhancement}
 
-%[progressive enchancement]
+TODO
 
-%(https://adactio.com/journal/7706)
+% https://adactio.com/journal/7706
+% arguments against progressive enhancement (see tom dale with ember)
 
-%[arguments against progressive enhancement (see tom dale with ember)]
-
-\subsection{Offline First}
+\subsection{Offline First} \label{l-r--offline-first}
 
 ``Frequently not having any data connection in even the wealthiest and most developed cities of the world has led us to conclude that no, the mobile connectivity/bandwidth issue isn’t just going to solve itself on a global level anywhere in the near future." \cite{hello_to_offline_first}
 
+One of the biggest problems connecting to the Internet across the world is not the availability of devices but the network connections. Every year global mobile broadband subscriptions increases by 25\%. In Q4 2015 there were 21 million in India, 21 million in Africa, 20 million APAC (excluding China and India). By comparison, 5 million Europe and 5 million in North America. \cite{ericsson}
+
+India's biggest e-commerce site Flipkart found 63\% users reaching their mobile site via a 2G network. \cite{flipkart} Developing with a stable and fast network connection in mind is not an option if considering these users.
+
 % bruce's opera talk saying "fuck you for thinking only of the western world"
 
-A offline experience can be progressively enhanced with cached content managed by a Service Worked but even the poorest connection is online.
-Described by Jake Archibald: ``Lie-Fi is like offline, but it trolls you by pretending to be online. It'll attempt to make a connection for minutes and still fail." \cite{supercharging_page_load}
+A offline experience can be progressively enhanced with cached content managed by a Service Worked but even the poorest connection is online. Described by Jake Archibald: ``Lie-Fi is like offline, but it trolls you by pretending to be online. It'll attempt to make a connection for minutes and still fail." \cite{supercharging_page_load}
+
+This uncertainty with network connectivity means an site can never assume a user is completely offline.
 
 Previous methods of caching content was through using Appcache, however the lack of control made it a very dangerous technology to use. % cite
 
 % https://stackoverflow.com/questions/3181080/how-to-detect-online-offline-event-cross-browser
-% https://github.com/jakearchibald/offline-wikipedia
-% https://github.com/mozilla/localForage
 
-\subsection{Workers}
+\subsection{Workers} \label{l-r--workers}
 
 When developing on the web historically this meant running client-side Javascript in a single threaded environment. With the introduction of Workers web content can be handled with background tasks.
 
@@ -137,7 +160,8 @@ The two main Workers are Service Workers and Web Workers.
 
 Web Workers create background tasks that can run Javascript that interface back and forth between the main JavaScript tasks. A use case of Web Workers is syncing data between a clientside database and a remote database. \cite{using_web_workers}
 
-Service Workers can be seen more as a proxy server between your server and your main JavaScript thread, the key concept is that of `installing' a Service Worker file to the browser itself registered to a origin. Service Workers are asyncronous and so don't have access to APIs such as XHR.
+Service Workers can be seen more as a proxy server between your server and your main JavaScript thread, the key concept is that of `installing' a Service Worker file to the browser itself registered to a origin. Service Workers are asynchronous and so don't have access to APIs such as XHR.
+
 Some use cases of Service Workers include, caching for a better (and sometimes offline) experience, Push notifications, background data syncing. \cite{service_worker}
 
 \subsection{Performance based projects}
@@ -151,5 +175,3 @@ In Chapter 1 we proposed blah blah blah.
 In this chapter the state-of-the-art was categorised into blah (section x) and  blah (section y).  Observations were made on the systems reviewed (section z), and the relevance of the state-of-the-art to blah blah was summarised (section w).
 
 The next chapter presents the design of blah blah, which is a system intended to blah blah.
-
-% will-change, edge hack shit. postcss plugin. % https://www.google.com/url?q=https%3A%2F%2Ftwitter.com%2Fhelloanselm%2Fstatus%2F707927523498323969&sa=D&sntz=1&usg=AFQjCNGvTT0uGKWJ0g8FoTN7g9cKKvgI_Q
