@@ -7,7 +7,7 @@ const REQUIRED_FILES = [
   'bundle.js',
   'index.html',
   'style.css.map',
-  'style.css'
+  'style.css',
 ];
 
 self.addEventListener('install', (event) => {

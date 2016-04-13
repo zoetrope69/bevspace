@@ -10,7 +10,7 @@ export default class Recipe extends Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      brewCreated: false
+      brewCreated: false,
     };
   }
 

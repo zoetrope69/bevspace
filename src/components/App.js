@@ -33,12 +33,12 @@ export default class App extends Component {
     const db = {
       recipes: {
         remote: new PouchDB(`${process.env.REMOTE_DB}/recipes`, { skipSetup: true }),
-        local: new PouchDB('recipes')
+        local: new PouchDB('recipes'),
       },
       brews: {
         remote: new PouchDB(`${process.env.REMOTE_DB}/brews`, { skipSetup: true }),
-        local: new PouchDB('brews')
-      }
+        local: new PouchDB('brews'),
+      },
     };
 
     // start syncing the databases
@@ -50,7 +50,7 @@ export default class App extends Component {
       serviceWorkerActivated: false,
       user: false,
       recipes: [],
-      brews: []
+      brews: [],
     };
   }
 
@@ -79,9 +79,7 @@ export default class App extends Component {
         if (!registration || !registration.active) {
           console.log('No service worker registered. Registering service worker...');
           // Register the ServiceWorker
-          navigator.serviceWorker.register('service-worker.js', {
-            scope: '.'
-          }).then((registration) => {
+          navigator.serviceWorker.register('service-worker.js', { scope: '.' }).then((registration) => {
             console.log('The service worker has been registered ', registration);
             resolve();
           })
@@ -158,7 +156,7 @@ export default class App extends Component {
     output.color = {
       raw: processedRecipe.color,
       name: processedRecipe.colorName(),
-      style: Brauhaus.srmToCss(processedRecipe.color.toFixed(1))
+      style: Brauhaus.srmToCss(processedRecipe.color.toFixed(1)),
     };
 
     // get timeline for brew and tidy up data structure a bit
@@ -167,9 +165,9 @@ export default class App extends Component {
       return {
         duration: {
           raw: item[0] * 60000, // minutes to milliseconds
-          pretty: Brauhaus.displayDuration(item[0])
+          pretty: Brauhaus.displayDuration(item[0]),
         },
-        description: item[1]
+        description: item[1],
       };
     });
     // add timeline to output

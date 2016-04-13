@@ -11,7 +11,7 @@ export default class Brew extends Component {
 
     return {
       x: centerX + (radius * Math.cos(angleInRadians)),
-      y: centerY + (radius * Math.sin(angleInRadians))
+      y: centerY + (radius * Math.sin(angleInRadians)),
     };
   }
 
@@ -23,7 +23,7 @@ export default class Brew extends Component {
 
     const d = [
       'M', start.x, start.y,
-      'A', radius, radius, 0, arcSweep, 0, end.x, end.y
+      'A', radius, radius, 0, arcSweep, 0, end.x, end.y,
     ].join(' ');
 
     return d;

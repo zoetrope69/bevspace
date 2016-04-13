@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: `${__dirname}/build`,
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   resolve: {
@@ -22,15 +22,15 @@ module.exports = {
     modulesDirectories: [
       `${__dirname}/src/lib`,
       `${__dirname}/node_modules`,
-      'node_modules'
+      'node_modules',
     ],
     alias: {
       config: `${__dirname}/config.json`,
       components: `${__dirname}/src/components`,		// used for tests
       style: `${__dirname}/src/style`,
       'react': 'preact-compat',
-      'react-dom': 'preact-compat'
-    }
+      'react-dom': 'preact-compat',
+    },
   },
 
   module: {
@@ -38,14 +38,14 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /src\//,
-        loader: 'source-map'
-      }
+        loader: 'source-map',
+      },
     ],
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        loader: 'babel',
       },
       {
         test: /\.(scss|css)$/,
@@ -53,8 +53,8 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style?singleton', [
           `css?sourceMap=${CSS_MAPS}&modules&importLoaders=1&localIdentName=[local]${process.env.CSS_MODULES_IDENT || '_[hash:base64:5]'}`,
           'postcss',
-          `sass?sourceMap=${CSS_MAPS}`
-        ].join('!'))
+          `sass?sourceMap=${CSS_MAPS}`,
+        ].join('!')),
       },
       {
         test: /\.(scss|css)$/,
@@ -62,53 +62,53 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style?singleton', [
           `css?sourceMap=${CSS_MAPS}`,
           `postcss`,
-          `sass?sourceMap=${CSS_MAPS}`
-        ].join('!'))
+          `sass?sourceMap=${CSS_MAPS}`,
+        ].join('!')),
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json',
       },
       {
         test: /\.(xml|html|txt|md)$/,
-        loader: 'raw'
+        loader: 'raw',
       },
       {
         test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-        loader: ENV === 'production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url'
-      }
+        loader: ENV === 'production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url',
+      },
     ],
 
-    noParse: [/lie\.js$/, /leveldown/, /moment.js/]
+    noParse: [/lie\.js$/, /leveldown/, /moment.js/],
   },
 
   postcss: () => [
-    autoprefixer({ browsers: 'last 2 versions' })
+    autoprefixer({ browsers: 'last 2 versions' }),
   ],
 
   plugins: ([
     new webpack.ProvidePlugin({
       'Promise': 'exports?global.Promise!es6-promise',
-      'fetch': 'exports?self.fetch!whatwg-fetch'
+      'fetch': 'exports?self.fetch!whatwg-fetch',
     }),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin('style.css', {
       allChunks: true,
-      disable: ENV !== 'production'
+      disable: ENV !== 'production',
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify({
         NODE_ENV: ENV,
-        REMOTE_DB: process.env.REMOTE_DB || 'http://localhost:5984'
-      })
+        REMOTE_DB: process.env.REMOTE_DB || 'http://localhost:5984',
+      }),
     }),
     new HtmlWebpackPlugin({
       template: './index.html',
-      minify: { collapseWhitespace: true }
-    })
+      minify: { collapseWhitespace: true },
+    }),
   ]).concat(ENV==='production' ? [
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurenceOrderPlugin(),
   ] : []),
 
   stats: { colors: true },
@@ -118,7 +118,7 @@ module.exports = {
     Buffer: false,
     __filename: false,
     __dirname: false,
-    setImmediate: false
+    setImmediate: false,
   },
 
   devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
@@ -137,6 +137,6 @@ module.exports = {
       // 	target: 'http://target-host.com',
       // 	rewrite: req => { req.url = req.url.replace(/^\/[^\/]+\//, ''); }   // strip first path segment
       // }
-    ]
-  }
+    ],
+  },
 };
