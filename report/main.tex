@@ -15,7 +15,7 @@
 \usepackage{float}
 \restylefloat{table}
 
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{4}
 \usepackage[toc,page]{appendix}
 
 \usepackage{nomencl}
@@ -41,8 +41,9 @@
 
     \input{preface.tex}
 
-    \tableofcontents
     \pagebreak
+    \tableofcontents
+    \raggedbottom
 
     % Figures and Tables
 
@@ -54,8 +55,10 @@
 
     % Nomenclature and Abstract
 
+    \pagebreak
     \printnomenclature
 
+    \pagebreak
     \input{abstract.tex}
 
     % Chapters

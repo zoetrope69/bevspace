@@ -5,11 +5,24 @@
 This chapter described the high-level requirements and design of a system that blah blah blah.  The chapter started by describing blah.  The proposed solution was then discussed in section blah followed by blah in section blah, etc.
 Blah blah is covered in further detail in Chapter 4 which describes the implementation of blah blah.
 
+From design to implementation a few decisions and technologies changed.
+
+Figure \ref{figure-application-stack-implementation}, shows the revised application stack for the implementation.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{application_stack_implementation}
+  \caption{Overview of how the application stack is structured for the implementation}
+  \label{figure-application-stack-implementation}
+\end{figure}
+
+The biggest change was the removal of Node.js stack including Express and Passport. As explained fully in section \ref{s-i--data-and-databases} the data manipulation and authentication functionality were handled through CouchDB.
+
 \section{Packages} \label{s-i--packages}
 
-% compare preact to react
+During implementation and research into React and performance another framework was discovered called Preact. Preact, is a framework that attempts to recreate functionality of React but with the focus of performance. Using Preact means a better development experience. \cite{preact} Preact is 3kb in size in comparison to React which is 53kb in size.
 
-Preact, is a framework that attempts to recreate functionality of React but with the focus of performance. Using Preact means a better development experience. \cite{preact} This was used for rendering views in the artefact which took advantage of Preact's the virtual DOM written in syntactic sugar called JSX.
+The implementation therefor used Preact and was used for rendering views in the artefact.
 
 One principle for software development is DRY (don't repeat yourself). One principle for software development is DRY (don't repeat yourself). ``Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.'' \cite{DRY}
 
@@ -17,9 +30,9 @@ A good example of this is the `moment.js' package used in this artefact, this pa
 
 \section{Data and Databases} \label{s-i--data-and-databases}
 
-As previously mentioned CouchDB is excellent at master-to-master replication of databases. This means syncing is easily implemented:
+As previously mentioned CouchDB is excellent at master-to-master replication of databases. This means syncing is easily implemented.
 
-% insert diagram here
+\colorbox{pink}{TODO: add diagram here}
 
 The remote database and the local databases sync any changes between themselves, when the local database changes the recipes and brews in state are updated.
 
@@ -29,24 +42,28 @@ CouchDB has a user authentication system for handling permission and roles to do
 
 As the data defines a lot of the structure of the application this authentication system has been leveraged for user authentication for the application.
 
-% service worker offline cache setup, push notifs
+% \subsection{User Interface}
+
+% push notifications forced the usage of a microservice server due to the GCM
+% When registering a user for push notifications there are some best practices in terms of UX.
+
+% Signing up a user with no context is strongly discouraged, the user should always know what they've signed up for through an action. Giving the user even more control by being able to toggle the notifications after initially registering is recommended. \cite{best_practises_push_notifications}
 
 \section{Interesting Problems} \label{s-i--interesting-problems}
 
-% ENV variables for CI
+During the implementation of this project several issues came up. This section discusses some of these issues.
 
-During the project implementation several issues were identified that merit discussion. This section addresses those topics, which are blah, blah and blah.
+Using newer technologies such as Webpack, ESLint, Babel and Preact come with difficulties. Due to sometimes the lack of support found online and even some issues can be so new they haven't been documented yet.
 
-% service worker development workflow
+For example, with Preact during implmentation there was an issue with a feature from React not being supported. This was short-circuit boolean templating, the author then reported this bug which was then fixed. Here having the Preact project as an Open Source project meant this could be fixed not just for this artefact but future users of Preact.
 
-% push notifications forced the usage of a microservice server due to the GCM
-When registering a user for push notifications there are some best practices in terms of UX.
+% describe this better
 
-Signing up a user with no context is strongly discouraged, the user should always know what they've signed up for through an action. Giving the user even more control by being able to toggle the notifications after initially registering is recommended. \cite{best_practises_push_notifications}
+Handling cache while developing was an issue in the implementation. Initially flushing the cache of the artefact files was done manually however later it was found that the Chrome Developer Tools has options to stop the Service Worker from caching.
 
-% using newer tech such as webpack, preact etc lead to difficulties. lack of support etc. preact soundcloud thing
+\colorbox{pink}{TODO: add dev tools pic here}
 
-% lack of knowledge meant a strong dependancy on the brauhaus.js package for recipe converstions etc. this dependancy could be removed in future
+Having to depend on the Brauhaus package due to a lack of home-brewing knowledge resulted in having to implement more of the library than potentially needed. This reflects the lack of control of final code expressed in section \ref{l-r--frameworks} discussing frameworks.
 
 \section{Summary} \label{s-i--summary}
 
@@ -64,8 +81,9 @@ Write what you did, why you did it and how you did it here.
 
 In total over n tests were executed. Each test was blah blah blah, and this data was then used to blah. The tests illustrate that blah blah. In the next section, this is evaluated and the extent to which it supports the thesis is discussed.
 
-% travis, tape, jsdom
+\colorbox{pink}{TODO: talk about travis}
 
+% travis, tape, jsdom
 % use of psi, and webpagetest to evaluate performance budget
 
 \section{Evaluation} \label{s-i--evaluation}

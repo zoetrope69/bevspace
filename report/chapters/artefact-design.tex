@@ -10,7 +10,7 @@ This chapter describes the design of blah blah, a system that blah blah.  First,
 
 The design and development of blah blah
 
-\subsection{A Review of Existing Software} \label{a--d--review-of-existing-software}
+\subsection{A Review of Existing Software} \label{a-d--review-of-existing-software}
 
 This section is a review of current home-brewing software.
 
@@ -58,16 +58,20 @@ GitHub has a system of `Issues', which allow for tasks to be tracked. These issu
   \item \textbf{wontfix} - tasks that are out of scope and/or outdated and wont be completed
 \end{itemize}
 
-Following is a screenshot of the issues at one point in the project:
+Figure \ref{figure-github-issues} shows a screenshot of the GitHub issues at one point in the project.
 
-\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{githubissues}
-% have this as a figure?
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{github_issues}
+  \caption{Example of GitHub issues setup}
+  \label{figure-github-issues}
+\end{figure}
 
 \section{Requirements} \label{a-d--requirements}
 
 Both the supervisor Rich Boakes and local Portsmouth home-brewer Alan Thompson of GetBrewing.uk, fueled the initial requirements for this project. They saw a need for applications that help improve the current home-brewing ecosystem.
 
-As follows are requirements to create such a application to improve the brewing process when following recipes. After reviewing the current software available in section \ref{a--d--review-of-existing-software} it is clear there are problems in these areas:
+As follows are requirements to create such a application to improve the brewing process when following recipes. After reviewing the current software available in section \ref{a-d--review-of-existing-software} it is clear there are problems in these areas:
 
 \begin{itemize}
   \item Blah
@@ -114,13 +118,23 @@ The artefact should:
   \item Follow accessibility guidelines to ensure usage for those of hard of sight
   \item Be documented so that others can maintain
   \item Conform to the performance budget that is set in initial development
-  \item Work in specified browser, operating system and screen size environment: x
   \item Pass tests generated throughout and running through continuous integration (such as Travis CI)
 \end{itemize}
 
+\section{User Interface Wireframes}
+
+\colorbox{pink}{TODO: add wireframes}
+
 \section{Proposed Solution} \label{a-d--proposed-solution}
 
-Blah blah blah at a high level, then create subsections that go into detail
+Figure \ref{figure-application-stack-design}, shows an overview of the application stack to be used in the proposed solution. The following sections will describe different parts of this diagram and more.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{application_stack_design}
+  \caption{Overview of how the application stack is structured}
+  \label{figure-application-stack-design}
+\end{figure}
 
 \subsection{Performance Budget}
 
@@ -150,57 +164,80 @@ Any iconography will use SVGs for flexibility and overall performance.
 
 This sub-section will describe the gathering data and the storage of said data and creation of data.
 
-\subsubsection{Recipe Gathering}
+\subsubsection{Recipe Gathering} \label{a-d--d--recipe-gathering}
 
 As noted in section \ref{l-r--exisiting-home-brewing-solutions}, BeerXML is a popular format.
 The proposed solution will scrape (process pages using scripts) existing recipe lists for BeerXML recipes.
 
 These files will then be converted into BeerJSON which will be the main recipe format used.
 
-\subsubsection{Databases}
+\subsubsection{Databases} \label{a-d--d--databases}
 
 Due to the format of choice BeerJSON, a document store style database that deals directly with JSON documents is a great choice.
 
-There are many document store databases to choose from for example MongoDB, however the chosen database for the proposed solution is CouchDB for it's HTTP API and master-to-master replications. \cite{couchdb}. % cite mongo
+There are many document store databases to choose from for example MongoDB, however the chosen database for the proposed solution is CouchDB for it's HTTP API and master-to-master replications. \cite{couchdb} % cite mongo
 
 The artefact can also make use of PouchDB, a JavaScript database which leverages IndexedDB for clientside databases. PouchDB also has the same API as CouchDB allowing them to sync seamlessly.
 
 An alternative to PouchDB would be localForage. localForage, which also allows for offline databases using IndexedDB , is faster than PouchDB however the syncing feature for PouchDB should outweigh the speed increase here. % cite speed of localforage
 
-\subsection{Technologies} \label{a--d-technologies}
+The proposed solution will attempt to use a Web Worker for the syncing and management of data, this will free up the main JavaScript file for presentation tasks.
 
-Node.js is a
+\subsection{Technologies} \label{a-d--technologies}
 
-npm is a package manager for node.js
+Traditionally JavaScript has been in the browser. Node.js allows for using JavaScript on the server using Chrome's V8 JavaScript engine. \cite{node.js}
 
-some packages use epress and passport
+npm is a package manager for Node.js (more generally JavaScript). npm will be used for both serverside and clientside JavaScript dependencies.
 
-% using node with express and passport for data manip and authenication
+The latest version of JavaScript ES2015 (also known as ES6) offers features that will be used in the proposed solution such as [....] . Support for ES2015 is mixed across browsers, therefore converting (transpiling) ES2015 to ES5 will be carried out with Babel a JavaScript transpiler. \cite{babel}
 
-%  sass, postcss, autoprefixer
+\subsubsection{Serverside} \label{a-d--t--serverside}
 
-% using a virtual dom for dev ergonomics - explore react but other virtudal dom stuff
-% jsx, and how it works well with svg too
+In this proposed solution three main packages on the serverside will be: Express, Passport and Brahaus. \cite{npm}
 
-Due to the artefact's knowledge base around home-brewing, a package called Brauhaus was used. Brauhaus handles conversions of brewing recipes and brewing information. Using this package means that the home-brewing knowledge such as calculations is abstracted away, meaning developers don't necessarily to fully understand the knowledge base to create the application. \cite{brauhaus.js}
+Express is a framework which offers features such as path routing and templating. In the proposed solution this package will be used to handle requests from the client to the server and some basic data manipulation from the database. \cite{express}
 
-% workers
+Passport is a framework for authentication, including users and user sessions. In the proposed solution this package will allow for users to sign-up, log-in and have a session in the application. \cite{passport}
 
-\subsection{Workflow} \label{a--d-workflow}
+Due to the artefact's knowledge base around home-brewing, a package called Brauhaus will be used. Brauhaus handles conversions of brewing recipes and brewing information. Using this package means that the home-brewing knowledge such as calculations is abstracted away, meaning developers don't necessarily to fully understand the knowledge base to create the application. \cite{brauhaus.js}
 
-% atom
+\subsubsection{Clientside} \label{a-d--t--clientside}
 
-% talk about \cite{commitzen}
+From the review of frameworks in section \ref{l-r--frameworks}, the proposed solution will use React as it appears to offer the best balance of features to performance.
 
-% talk about linter, babel (es6), snyk
+React's usage of JSX, a syntactic sugar for improving the creation of components will be used through out the project. As SVGs will be used for graphics, JSX will complement SVG. \cite{jsx}
+
+Using Service Workers a cache will be created to enable files to be retrieved even when offline.
+
+\subsubsection{Styling}
+
+For styling various technologies will be used to process into the final CSS stylesheet. CSS preprocessors convert a higher level CSS extension language with features such as variables and functions (often called mixins) to CSS.
+
+There are many preprocessors for CSS, such as LESS, SASS or Stylus. The proposed solution will be using SASS however, due to only using the basic features being used other preprocessors could be used. \cite{SASS}
+
+Styling often comes with some pitfalls, such as browser prefixes for CSS properties which are not stable yet. A postprocessor such as Autoprefixer. \cite{autoprefixer}
+
+`postcss' will be used to transform these styles in the JavaScript environment. \cite{postcss}
+
+\subsection{Workflow} \label{a-d--workflow}
+
+As JavaScript is dynamic and loosely-typed, using a linter can ensure certain common problems are avoided. ESLint is the linter used in the proposed solution due to its extensibility and features for JSX. \cite{eslint}
+
+Linting will be carried out with continuous integration (see section \ref{a-d--continuous-integration}) but also inside IDEs and code editors on save of JavaScript document. For this reason Atom, will be used for it's ESLint plugin.
 
 There are many task runners for improving a development workflow such as Gulp, Grunt and Broccoli. A technology that is used in place of task runners for this artefact is Webpack. Webpack bundles all dependencies that you require and indexes them. Webpack knows what dependencies to bundle into your final file where as Gulp and Grunt have to be told which dependencies to bundle through configuration. This results in a smaller file. \cite{webpack}
 
-A smaller file will help for the proposed performance budget and so Webpack will be used. Other technologies such as rollup, which uses `tree-shaking' to achieve a smaller bundle than Webpack can be explored but due to it's infancy this will seen as an experimental implementation. % cite rollup
+A smaller file will help for the proposed performance budget and so Webpack will be used. Other technologies such as rollup, which uses `tree-shaking' to achieve a smaller bundle than Webpack can be explored but due to it's infancy this will seen as an experimental implementation. \cite{rollup}
+
+Webpack will be used to transpile code using Babel, process Sass, process JSX from React and more.
 
 npm will be used for clientside dependencies. Due to projects such as Browserify which create browser friendly versions of packages it is used for clientside as well as serverside JavaScript. \cite{browserify} Managers such as bower which dedicated itself to front-end dependencies has seen a drop in usage due to this. \cite{bower}
 
-\subsubsection{Continous Integration and Deployment}
+Due to the nautre of npm, dependencies depending on many different dependencies. Tracking security on dependencies is a daunting task. Snyk is a package which finds, patches and monitors vulnerabilities in your code. \cite{snyk} Snyk tests will ensure there isn't a deployed version of the build with known vulnerabilities.
+
+With one of the non-functional requirements needing documentation, a package called commitizen will be used to enforce the contributing guidelines for project. \cite{commitizen}
+
+\subsubsection{Continuous Integration and Deployment} \label{a-d--continuous-integration}
 
 As ThoughtWorks describes ``Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.". \cite{continuous_integration}
 
