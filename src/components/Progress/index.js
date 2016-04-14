@@ -4,7 +4,7 @@ import style from './style';
 
 // code based on http://jsbin.com/cibicecuto
 
-export default class Brew extends Component {
+export default class Progress extends Component {
 
   polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
@@ -30,9 +30,9 @@ export default class Brew extends Component {
   }
 
   render() {
-    const { percent } = this.props;
-    let { strokeWidth, radius } = this.props;
+    let { percent, strokeWidth, radius } = this.props;
 
+    percent = percent || 0;
     strokeWidth = strokeWidth || 10;
     radius = radius || 50;
 

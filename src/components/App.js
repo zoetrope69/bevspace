@@ -52,6 +52,11 @@ export default class App extends Component {
       recipes: [],
       brews: [],
     };
+
+    this.loadData();
+    this.getUser();
+
+    // this.initServiceWorker();
   }
 
 	/** Gets fired when the route changes.
@@ -62,7 +67,7 @@ export default class App extends Component {
     const { user } = this.state;
 
     // redirect if no user for the brews section
-    if (event.url.includes('/brew') && !user.name) {
+    if (event.url.indexOf('/brew') !== -1 && !user.name) {
       route('/profile');
     }
 
@@ -272,21 +277,14 @@ export default class App extends Component {
     this.state.db.brews.syncHandler.cancel();
   }
 
-  componentWillMount() {
-    this.loadData();
-    this.getUser();
-
-    // this.initServiceWorker();
-  }
-
   getUser() {
     const { remote } = this.state.db.brews;
     return remote.getSession((err, response) => {
       if (err) {
-        console.log('session err', err);
         // network error
+        console.log('session err', err);
       } else if (!response.userCtx.name) {
-        console.log('nobodys logged in');
+        // console.log('nobodys logged in');
       } else {
         this.setState({ user: response.userCtx });
       }

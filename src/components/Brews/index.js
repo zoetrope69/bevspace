@@ -71,9 +71,9 @@ export default class Brews extends Component {
               <span class={style.name}>{recipe.name}</span>
               <small class={style.author}>{recipe.author}</small>
             </div>
-            <div style={{ paddingRight: 0, paddingTop: '1em' }}>
-              <span style={{ transform: 'translateY(5%)' }}>
-                {percentCompleted && <div class={style.progress} ><Progress percent={percentCompleted} strokeWidth={3} radius={6} /></div>}
+            <div style={{ paddingRight: 0, paddingTop: '1.5em' }}>
+              <span>
+                {percentCompleted && <div class={style.progress}><Progress percent={percentCompleted} strokeWidth={3} radius={6} /></div>}
               </span>
               <span class={`${style.state} ${stateStyle}`}>{state}</span>
             </div>
