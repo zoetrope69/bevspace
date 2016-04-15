@@ -68,7 +68,7 @@
     "superstatic": "^4.0.2",
     "surge": "^0.17.7",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.14",
+    "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "whatwg-fetch": "^0.11.0"
   },
