@@ -1,4 +1,4 @@
-const version = '1';
+const version = '0.0.2';
 const prefix = 'bevspace';
 const CACHE_NAME = `${prefix}-static-v${version}`;
 
@@ -6,6 +6,7 @@ const REQUIRED_FILES = [
   'bundle.js.map',
   'bundle.js',
   'index.html',
+  '200.html',
   'style.css.map',
   'style.css',
 ];

@@ -100,7 +100,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify({
         NODE_ENV: ENV,
-        REMOTE_DB: process.env.REMOTE_DB || 'http://localhost:5984',
+        REMOTE_DB: process.env.REMOTE_DB || 'https://178.62.98.93:5984',
       }),
     }),
     new HtmlWebpackPlugin({
