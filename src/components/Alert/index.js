@@ -3,10 +3,12 @@ import style from './style';
 
 export default class Alert extends Component {
   render(props, state) {
-    const { offline } = this.props;
+    const { serviceWorkerActivated, recipes } = this.props;
 
+    // if the service worker is activated and there isnt any recipes synced
+    // hide the alert saying its ready to work offline
     let alertHidden;
-    if (!offline) {
+    if (!serviceWorkerActivated && !recipes.length) {
       alertHidden = style['alert--hidden'];
     }
 

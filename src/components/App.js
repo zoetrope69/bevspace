@@ -56,7 +56,9 @@ export default class App extends Component {
     this.loadData();
     this.getUser();
 
-    // this.initServiceWorker();
+    if (process.env.NODE_ENV !== 'development') {
+      this.initServiceWorker();
+    }
   }
 
 	/** Gets fired when the route changes.
@@ -79,8 +81,6 @@ export default class App extends Component {
     new Promise((resolve, reject) => {
       // check to see if there are any registrations already
       navigator.serviceWorker.getRegistration().then((registration) => {
-        registration.unregister(); // debug remove service worker
-
         if (!registration || !registration.active) {
           console.log('No service worker registered. Registering service worker...');
           // Register the ServiceWorker
@@ -341,7 +341,9 @@ export default class App extends Component {
 
     return (
 		<div id="app">
-      <Alert offline={serviceWorkerActivated} />
+      <Alert serviceWorkerActivated={serviceWorkerActivated}
+             recipes={recipes}
+             />
 			<Header user={user} />
       <Router onChange={this.handleRoute}>
         <Home path="/" />
