@@ -11,6 +11,7 @@ export default class Brews extends Component {
   render() {
     let { user, brews, recipes } = this.props;
 
+    // if there's no recipes or brews loaded, show a loading message
     if (!recipes.length || !brews.length) {
       return <Loading />;
     }

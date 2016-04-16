@@ -42,28 +42,32 @@ CouchDB has a user authentication system for handling permission and roles to do
 
 As the data defines a lot of the structure of the application this authentication system has been leveraged for user authentication for the application.
 
-% \subsection{User Interface}
-
-% push notifications forced the usage of a microservice server due to the GCM
-% When registering a user for push notifications there are some best practices in terms of UX.
-
-% Signing up a user with no context is strongly discouraged, the user should always know what they've signed up for through an action. Giving the user even more control by being able to toggle the notifications after initially registering is recommended. \cite{best_practises_push_notifications}
-
 \section{Interesting Problems} \label{s-i--interesting-problems}
 
 During the implementation of this project several issues came up. This section discusses some of these issues.
 
-Using newer technologies such as Webpack, ESLint, Babel and Preact come with difficulties. Due to sometimes the lack of support found online and even some issues can be so new they haven't been documented yet.
+Using newer technologies such as Webpack, ESLint, Babel and Preact come with difficulties. There is a generally a lack of support found online and even some issues can be so new they haven't been documented yet.
 
-For example, with Preact during implmentation there was an issue with a feature from React not being supported. This was short-circuit boolean templating, the author then reported this bug which was then fixed. Here having the Preact project as an Open Source project meant this could be fixed not just for this artefact but future users of Preact.
+For example, with Preact during implementation there was an issue with a feature from React not being supported. This was short-circuit boolean templating, the author then reported this bug which was then fixed. Here having the Preact project as an Open Source project meant this could be fixed not just for this artefact but future users of Preact.
 
 % describe this better
 
-Handling cache while developing was an issue in the implementation. Initially flushing the cache of the artefact files was done manually however later it was found that the Chrome Developer Tools has options to stop the Service Worker from caching.
+While testing the service worker code and implementation difficulties arise when caching files. Originally the author was manually unregistering the service worker then closing and reopening the tab.
 
-\colorbox{pink}{TODO: add dev tools pic here}
+Simply refreshing does not give you any updated version of the service worker files, this is due to the browser making the new page request before unloading the current page so the activated service worker is never released. \cite{refresh_sw}
 
-Having to depend on the Brauhaus package due to a lack of home-brewing knowledge resulted in having to implement more of the library than potentially needed. This reflects the lack of control of final code expressed in section \ref{l-r--frameworks} discussing frameworks.
+As shown in figure \ref{figure-force-update-service-worker}, to solve this problem there is a `Force update on page load' option in the Chrome development tools.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{force_update_service_worker}
+  \caption{The `force update on page load' option}
+  \label{figure-force-update-service-worker}
+\end{figure}
+
+One issue with frameworks and libraries expressed in section \ref{l-r--frameworks} was the lack of control of final code. Having to depend on the Brauhaus package due to a lack of home-brewing knowledge resulted in having to implement more of the library than potentially needed and ultimately a bigger file size reducing performance.
+
+Keeping dependencies up to date is important mostly for security (see Snyk mentioned in section \ref{s-i--testing-summary}),, a tool called Greenkeeper was used through-out which monitors the project's dependancies and sends a Pull Request to the GitHub repository with an updated version of packages. This is great as these Pull Requests can be run through the continuous integration and if it passes the build can be merged straight away.  % cite greenkeeper
 
 \section{Summary} \label{s-i--summary}
 
@@ -81,10 +85,16 @@ Write what you did, why you did it and how you did it here.
 
 In total over n tests were executed. Each test was blah blah blah, and this data was then used to blah. The tests illustrate that blah blah. In the next section, this is evaluated and the extent to which it supports the thesis is discussed.
 
-\colorbox{pink}{TODO: talk about travis}
+karma
 
-% travis, tape, jsdom
-% use of psi, and webpagetest to evaluate performance budget
+mocha
+
+chai
+sinon
+
+phantomjs
+
+travis ci \ref{a-d--continuous-integration}
 
 \section{Evaluation} \label{s-i--evaluation}
 
@@ -92,16 +102,72 @@ Chapter 1 highlighted the problem of blah blah blah. Chapter 2 reviewed the stat
 
 The testing described in section x demonstrates that blah blah blah. In this section therefore, we evaluate the implementation and discuss issues in the underlying technologies that the implementation has highlighted.
 
+~ overall if i managed my time better this project could have been a lot better
+
 \subsection{Requirements Review} \label{s-i--requirements-review}
 
 This section reviews the implemented platform, referring back to the requirements to identify the extent to which each has been fulfilled, and reflecting on their relevance for future work. Each of the requirements is reintroduced and discussed in turn.
 Refer back to each specified requirement and discuss...
 
 
-\subsection{Artefact Review} \label{s-i--artefact-review}
+\subsubsection{Functional Requirements} \label{s-i--requirements--functional}
 
-This section reviews the implemented platform, referring back to the requirements to identify the extent to which each has been fulfilled, and reflecting on their relevance for future work. Each of the requirements is reintroduced and discussed in turn.
-Refer back to each specified requirement and discuss...
+\subsubsection{Non-Functional Requirements} \label{s-i--requirements--non-functional}
+
+The artefact should:
+
+\begin{itemize}
+  \item Follow accessibility guidelines to ensure usage for those of hard of sight
+
+    When looking at the example of the items on the page, there was some need to improve the contrast.
+
+    Fortunately using SASS (as chosen in section \ref{a-d--t--styling}) this is achieved very easily by changing \verb|color: \$brown;| producing \verb|\#943938| to \verb|color: darken(\$brown, 10\%);| producing \verb|\#6F2B2A|.
+
+    Table \ref{table-contrast-changes} shows how the new darkened version of the brown colour is WCAG 2 AAA compliant.
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Colour} & \textbf{Contrast Ratio} & \textbf{WCAG 2 AA Compliant} & \textbf{WCAG 2 AAA Compliant} \\ \hline
+    \cellcolor[HTML]{943938}{\textbf{\textcolor{white}{\#943938}}} & 6.24 & Yes & No \\ \hline
+    \cellcolor[HTML]{6F2B2A}{\textbf{\textcolor{white}{\#6F2B2A}}} & 8.81 & Yes & Yes \\ \hline
+    \caption{Showing the compliance of the different colours against the background}
+    \label{table-contrast-changes}
+    \end{tabular}
+    \end{table}
+
+  \item Be documented so that others can maintain
+
+    For future maintaining of the project documentation should be used. The README file shows instructions to build and work with the project. Comments through out components give explanation for code that isn't straight forward.
+
+    A package called commitizen was used to enforce the contributing guidelines for project. \cite{commitizen}
+
+  \item Conform to the performance budget that is set in initial development
+
+    From the budget set in section \ref{table-performance-budget}, here are the results with the implemented site show in table \ref{table-performance-budget-results}.
+
+    Notice how times change before and after caching with the service worker.
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Site}     & \textbf{Start Render} & \textbf{Document Complete} & \textbf{Fully Loaded} \\ \hline
+    Malt.to           & 2.190s                & 3.998s                     & 4.145s                \\ \hline
+    Proposed solution & 1.752s                & 3.198s                     & 3.316s                \\ \hline
+    Implementation & 0.000s                & 0.000s                     & 0.000s                \\ \hline
+    Implementation w/ SW & 0.000s                & 0.000s                     & 0.000s                \\ \hline
+    \end{tabular}
+    \caption{Performance budget calculation with results}
+    \label{table-performance-budget-results}
+    \end{table}
+
+  \item Pass tests generated throughout and running through continuous integration (such as Travis CI)
+
+    yeppers
+
+\end{itemize}
 
 \section{Testing and Evaluation Summary} \label{s-i--testing-and-evaluation-summary}
 

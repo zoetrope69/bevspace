@@ -26,6 +26,24 @@
 \graphicspath{ {images/} }
 
 \linespread{1.3}
+
+% make blank pages have "This page is intentionally left blank." on them.
+
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside%
+    \ifodd\c@page\else
+    \vspace*{\fill}
+    \hfill
+    \begin{center}
+    This page is intentionally left blank.
+    \end{center}
+    \vspace{\fill}
+    \thispagestyle{plain}
+    \newpage
+    \if@twocolumn\hbox{}\newpage\fi\fi\fi
+}
+\makeatother
+
 % ---------------------------
 
 % ---------------------------

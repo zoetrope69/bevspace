@@ -51,8 +51,8 @@ These platforms offer similar features but the artefact will be hosted with GitH
 GitHub has a system of `Issues', which allow for tasks to be tracked. These issues can be commented and then closed when deemed completed. For this project the following labels are used:
 
 \begin{itemize}
-  \item \textbf{\colorbox{red}{bug}} - tasks which define a bug in the project
-  \item \textbf{\colorbox{blue}{feature}} -  tasks which introduce a new feature to the project
+  \item \textbf{\colorbox{red}{\textcolor{white}{bug}}} - tasks which define a bug in the project
+  \item \textbf{\colorbox{blue}{\textcolor{white}{feature}}} -  tasks which introduce a new feature to the project
   \item \textbf{\colorbox{yellow}{report}} - tasks which are relevant to the report writing itself
   \item \textbf{\colorbox{green}{greenkeeper}} - a label reserved for the greenkeeper tool (as described in x of this report)
   \item \textbf{wontfix} - tasks that are out of scope and/or outdated and wont be completed
@@ -91,8 +91,7 @@ The following requirements will be structured through user stories. % cite
 \subsubsection{Finding recipes}
 
 \begin{itemize}
-  \item As a \textbf{user}, I want to \textbf{search for recipes by recipe and name and description}
-  \item As a \textbf{user}, I want to \textbf{browse for recipes by different recipe categories}
+  \item As a \textbf{user}, I want to \textbf{browse for recipes}
 \end{itemize}
 
 \subsubsection{Starting a brew}
@@ -104,8 +103,7 @@ The following requirements will be structured through user stories. % cite
 \subsubsection{Managing a brew}
 
 \begin{itemize}
-  \item As a \textbf{user}, I want to \textbf{manage the ingredients for a brew}
-  \item As a \textbf{user}, I want to \textbf{be reminded at key stages of a brew}
+  \item As a \textbf{user}, I want to \textbf{be shown what point I am in a brew}
   \item As a \textbf{user}, I want to \textbf{add notes to key stages of a brew}
   \item As a \textbf{user}, I want to \textbf{review and evaluate the brew on completion}
 \end{itemize}
@@ -115,9 +113,9 @@ The following requirements will be structured through user stories. % cite
 The artefact should:
 
 \begin{itemize}
-  \item Follow accessibility guidelines to ensure usage for those of hard of sight
+  \item Compliant to WCAG 2 level AAA to ensure enough contrast ``when viewed by someone having color deficits or when viewed on a black and white screen". \cite{colour_contrast}
   \item Be documented so that others can maintain
-  \item Conform to the performance budget that is set in initial development
+  \item Conform to the performance budget that is set in the proposed solution
   \item Pass tests generated throughout and running through continuous integration (such as Travis CI)
 \end{itemize}
 
@@ -148,7 +146,7 @@ The chosen website is Malt.io, which has similar functionality to the proposed s
 \hline
 \textbf{Site}     & \textbf{Start Render} & \textbf{Document Complete} & \textbf{Fully Loaded} \\ \hline
 Malt.to           & 2.190s                & 3.998s                     & 4.145s                \\ \hline
-Proposed solution & 1.752s                & 3.1984                     & 3.316s                \\ \hline
+Proposed solution & 1.752s                & 3.198s                     & 3.316s                \\ \hline
 \end{tabular}
 \caption{Performance budget calculation}
 \label{table-performance-budget}
@@ -209,9 +207,11 @@ React's usage of JSX, a syntactic sugar for improving the creation of components
 
 Using Service Workers a cache will be created to enable files to be retrieved even when offline.
 
-\subsubsection{Styling}
+\subsubsection{Styling} \label{a-d--t--styling}
 
-For styling various technologies will be used to process into the final CSS stylesheet. CSS preprocessors convert a higher level CSS extension language with features such as variables and functions (often called mixins) to CSS.
+For styling various technologies will be used to process into the final CSS stylesheet. CSS preprocessors convert a higher level CSS extension language with features such as variables and methods to CSS.
+
+\colorbox{pink}{TODO: example of variables for colours}
 
 There are many preprocessors for CSS, such as LESS, SASS or Stylus. The proposed solution will be using SASS however, due to only using the basic features being used other preprocessors could be used. \cite{SASS}
 
@@ -233,15 +233,13 @@ Webpack will be used to transpile code using Babel, process Sass, process JSX fr
 
 npm will be used for clientside dependencies. Due to projects such as Browserify which create browser friendly versions of packages it is used for clientside as well as serverside JavaScript. \cite{browserify} Managers such as bower which dedicated itself to front-end dependencies has seen a drop in usage due to this. \cite{bower}
 
-Due to the nautre of npm, dependencies depending on many different dependencies. Tracking security on dependencies is a daunting task. Snyk is a package which finds, patches and monitors vulnerabilities in your code. \cite{snyk} Snyk tests will ensure there isn't a deployed version of the build with known vulnerabilities.
-
-With one of the non-functional requirements needing documentation, a package called commitizen will be used to enforce the contributing guidelines for project. \cite{commitizen}
+Due to the nature of npm, dependencies depending on many different dependencies. Tracking security on dependencies is a daunting task. Snyk is a package which finds, patches and monitors vulnerabilities in your code. \cite{snyk} Snyk tests will ensure there isn't a deployed version of the build with known vulnerabilities.
 
 \subsubsection{Continuous Integration and Deployment} \label{a-d--continuous-integration}
 
 As ThoughtWorks describes ``Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.". \cite{continuous_integration}
 
-There are different ways to achieve CI, the artefact will use Travis CI. Travis CI is a online software-as-a-service CI platform. It allows developers to define a set of tasks to carry out (through a `.travis.yml` file in the repository). These tasks should have a success and fail conditions for Travis to know the status of a build. Examples of tasks include building from dependences, running tests and even miscellaneous tasks such as processing \LaTeX documents. \footnote{This report was created using \LaTeX, a word processing and document markup languages. \cite{latex} This report uses ShareLatex's CI to automatically build the final report PDF when the \LaTeX files are pushed to the GitHub repository. Magic! \cite{sharelatex}}
+There are different ways to achieve CI, the artefact will use Travis CI. Travis CI is a online software-as-a-service CI platform. It allows developers to define a set of tasks to carry out (through a \verb|.travis.yml| file in the repository). These tasks should have a success and fail conditions for Travis to know the status of a build. Examples of tasks include building from dependences, running tests and even miscellaneous tasks such as processing \LaTeX documents. \footnote{This report was created using \LaTeX, a word processing and document markup languages. \cite{latex} This report uses ShareLatex's CI to automatically build the final report PDF when the \LaTeX files are pushed to the GitHub repository. Magic! \cite{sharelatex}}
 
 The deployment will also be triggered by these tests succeeding, ensuring unstable builds of the application are never deployed.
 

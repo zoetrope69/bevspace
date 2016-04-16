@@ -12,11 +12,11 @@ export default class Profile extends Component {
 
         {user ? (
         <div>
-          <button onclick={logout}>Logout</button>
+          <button class={style.button} onclick={logout}>Logout</button>
         </div>
         ) : (
         <div>
-          <button onclick={login}>Login</button>
+          <button class={style.button} onclick={login}>Login</button>
         </div>
         )}
       </div>

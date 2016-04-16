@@ -10,9 +10,31 @@ Last year, BBPA (The British Beer and Pub Association) estimated pubs in the UK 
 
 Craft and independent brewing is on the up however. SIBA (The Society of Independent Brewers), saw an increase of  SIBA’s membership has grown by 49 members in 2015. \cite{SIBA}
 
-Home-brewing, brewing beer on a small personal scale, has been around for thousands of years and has grown popular in the last few years. % citation needed haha
+Home-brewing, brewing beer on a small personal scale, has been around for thousands of years and has grown popular in the last few years.
 
-\colorbox{pink}{TODO: describe a homebrew process} % describe a home brew process?
+\subsection{Overview of a home-brew}
+
+\cite{brewing_overview} suggest there are four main ingredient and four main steps to brewing beer.
+
+The four main ingredients of a brew are: \textbf{Malt}, \textbf{Hops}, \textbf{Yeast} and \textbf{Water}.
+
+\begin{itemize}
+  \item \textbf{Malt} is a grain used to create the sugar for the yeast and determines how strong a beer is.
+  \item \textbf{Hops} determines how bitter or sweet a beer is as well as other flavours and aromas.
+  \item \textbf{Yeast} consume the sugars from the malt and convert them to alcohol and carbon dioxide (fizz). The yeast converts the wort (unfermented beer) becomes beer.
+  \item \textbf{Water} most of a brew is water, up to 90\% by volume.
+\end{itemize}
+
+Taking these ingredients there are four steps to take: \textbf{Malting}, \textbf{Mashing}, \textbf{Boiling (and Cooling)} and \textbf{Fermenting (and Conditioning)}.
+
+\begin{enumerate}
+  \item \textbf{Malting} starts the process of converting the ingredients into beer. This process results in dried grains by heating (or kilning).
+  \item \textbf{Mashing} soaks the malted grains for the previous step in hot water, this produces the maltose to feed the yeast. This produces wort for the next step.
+  \item \textbf{Boiling (and Cooling)} the wort santises the brew, it's at this point the hops are added. After cooling the yeast is then added.
+  \item \textbf{Fermenting (and Conditioning)} starts to occur, this can last from weeks to months depending on the strength.   Once this step is complete it's time to bottle the brew.
+\end{enumerate}
+
+From the above process it is clear that this process is not trivial.
 
 \subsection{A comparison of home-brewing and OSS} \label{l-r--compare-home-brewing-and-oss}
 
@@ -28,9 +50,9 @@ Ultimately, the Internet is the perfect platform for this type of recipe sharing
 
 \subsection{Existing home-brewing solutions and APIs} \label{l-r--exisiting-home-brewing-solutions}
 
-Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. \cite{beerxml} Open and standardized formats in general mean better portability, compatibility for data. % cite?
+Data formats have been created to handle brewing recipes and other brewing data, the most mature and popular of which is BeerXML. BeerXML uses the XML format for brewing data. \cite{beerxml} Open and standardized formats in general mean better portability, compatibility for data.
 
-With a decline in usage of XML, a JSON alternative has been created aptly named BeerJSON. \cite{beerjson} % cite the amount of usage of json over xml
+With a decline in usage of XML \cite{jsonxml}, a JSON alternative has been created aptly named BeerJSON. \cite{beerjson}
 
 Malt.io is a community website for these brewing recipes. With the options for revision history and `cloning' of recipes it is clear it is inspired by the popular Git repository and social coding network GitHub. \cite{malt.io}
 
@@ -86,13 +108,11 @@ Using images as an example, figure \ref{figure-lazy-loading-images} shows the ge
 
 \subsection{Measuring and techniques} \label{l-r--measuring-and-techniques}
 
-Measuring performance is important, data metrics allows for better. Tools such as Google's PageSpeed and WebPageTest give developers metrics across all aspects of web performance. % cite
+Measuring performance is important, data metrics allows for better. Tools such as Google's PageSpeed and WebPageTest give developers metrics across all aspects of web performance.
 
 One metric is SpeedIndex ``is the average time at which visible parts of the page are displayed". The benefit to this metric is it helps measure a usable website over just a loaded website. A website may be usable without all of the content having loaded in. \cite{speed_index}
 
 Best practices include optimising a website's resources and where they are retrieved from. With CSS file growing larger in size [find citation] a emerging approach is through Critical CSS. Serving a part of the CSS on load, loading the rest asynchronously and then caching it all for further visits. \cite{fast_as_heck}
-
-\colorbox{pink}{TODO: base64 embedding}
 
 \subsubsection{Performance Budgets} \label{l-r--performance-budgets}
 
@@ -117,18 +137,15 @@ Figure \ref{figure-average-first-render} shows React has the quickest render on 
 
 \subsubsection{Animation} \label{l-r--animation}
 
-60 frames per second is the goal to hit when animating on the web. % cite why? \ref{high_performance_animations}
+60 frames per second is the goal to hit when animating on the web due to most screens refreshing at this rate, if a site drops below this there is the screen judders commonly known as `jank'. \cite{jank}
 
-There is a term called `jank' when a page is lagging blah blah % cite
+When animating with CSS generally the properties to stick to are \verb|transform| and \verb|opacity|. These properties are hardware accelerated and therefore reduce jank. \ref{high_performance_animations} \ref{css_triggers}
 
-When animating with CSS generally the properties to stick to are `transform' and `opacity'. These properties are hardware accelerated and therefore reduce jank. \ref{css_triggers}
+Using the \verb|will-change| property tells the browser there is a plan for it to animate. This is to replace using \verb|translateZ()| as a hack to force the browser to hardware accelerate. \ref{animations_and_performance}
 
-Using the `will-change' property tells the browser there is a plan for it to animate. This is to replace using `translateZ()` as a hack to force the browser to hardware accelerate. \ref{animations_and_performance}
+Interestingly, Microsoft Edge do not plan to implement \verb|will-change| as they claim it is already optimised. \cite{will_change_edge}
 
-Interestingly, Microsoft Edge do not plan to implement `will-change' as they claim it is already optimised. \cite{will_change_edge}
-
-\colorbox{pink}{TODO: RAIL} % https://www.smashingmagazine.com/2015/10/rail-user-centric-model-performance/ \cite{introducing_RAIL}
-\colorbox{pink}{TODO: FLIP} % https://aerotwist.com/blog/flip-your-animations/ \cite{FLIP}
+There are attempts to formalise these animation techniques into projects such as RAIL and LIP. \cite{introducing_RAIL} \cite{FLIP}
 
 \subsection{Web typography} \label{l-r--web-type}
 
@@ -139,16 +156,6 @@ Due to the popularity of web fonts it's easy to think this is a quick and easy w
 A great reading experience with default system typefaces is easily achieved. As \cite{against_webfonts} explains: ``Typography is not about aesthetics, it's about serving the text. If even a small percentage of people don't consume your content due to a use of web fonts, your typography is failing."
 
 There are ways to avoid FOIT through progressively applying fonts once they're loaded. These approaches work well for repeat visits to a website as these fonts can then be cached. \cite{FOIT}
-
-\subsection{Serverside} \label{l-r--serverside}
-
-\colorbox{pink}{TODO: streams}
-\colorbox{pink}{TODO: http2}
-\colorbox{pink}{TODO: isomorphic js}
-
-% streams https://jakearchibald.com/2016/streams-ftw/
-% https://www.nginx.com/blog/7-tips-for-faster-http2-performance/
-% https://timkadlec.com/2015/02/client-side-templatings-major-bug/
 
 \subsection{Progressive Enhancement} \label{l-r--progressive-enhancement}
 
@@ -168,10 +175,7 @@ A offline experience can be progressively enhanced with cached content managed b
 
 This uncertainty with network connectivity means an site can never assume a user is completely offline.
 
-Previous methods of caching content was through using Appcache, however the lack of control made it a very dangerous technology to use. % cite
-
-\colorbox{pink}{TODO: offline detection}
-% https://stackoverflow.com/questions/3181080/how-to-detect-online-offline-event-cross-browser
+Previous methods of caching content was through using Appcache, however the lack of control made it a very dangerous technology to use. \cite{appcache}
 
 \subsection{Workers} \label{l-r--workers}
 
@@ -191,8 +195,8 @@ Google have set-up the Accelerated Mobile Pages (AMP) Project as a way to create
 
 \section{Summary} \label{l-r--summary}
 
-In Chapter 1 we proposed blah blah blah.
+In Chapter 1 we proposed user through performance with the example of home-brewing.
 
-In this chapter the state-of-the-art was categorised into blah (section x) and  blah (section y).  Observations were made on the systems reviewed (section z), and the relevance of the state-of-the-art to blah blah was summarised (section w).
+In this chapter home-brewing was introduced (section \ref{l-r--home-brewing}) followed by an extensive review of user experience through performance (section \ref{l-r--user-experience-performance}).
 
-The next chapter presents the design of blah blah, which is a system intended to blah blah.
+The next chapter presents the design of a progressive home-brewing based web application following the discussion from this chapter.

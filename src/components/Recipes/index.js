@@ -10,6 +10,7 @@ export default class Recipes extends Component {
     const { processRecipe } = this.props;
     let { recipes } = this.props;
 
+    // if there are no recipes show a loading message
     if (!recipes.length) {
       return <Loading />;
     }

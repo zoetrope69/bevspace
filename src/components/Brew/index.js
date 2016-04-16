@@ -20,6 +20,7 @@ export default class Brew extends Component {
 
     const brew = brews.find((brew) => brew._id === id);
 
+    // if there's no start time (the brew hasnt started) then start the brew
     if (!brew.startTime) {
       startBrew(brew);
     }
@@ -30,6 +31,7 @@ export default class Brew extends Component {
   render() {
     const { id, brews, recipes, user } = this.props;
 
+    // if there's no recipes or brews loaded, show a loading message
     if (!recipes.length || !brews.length) {
       return <Loading />;
     }

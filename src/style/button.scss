@@ -4,7 +4,7 @@
   padding: 1em 1.5em;
   margin-bottom: 1em;
 
-  color: rgba($black, .5);
+  color: rgba($black, .9);
   font: inherit;
   font-weight: 600;
   text-align: center;
@@ -34,17 +34,21 @@
 }
 
 .buttonPrimary {
+  color: rgba($white, .9);
   background: $brand;
 }
 
 .buttonInfo {
+  color: rgba($white, .9);
   background: $info;
 }
 
 .buttonFail {
+  color: rgba($white, .9);
   background: $fail;
 }
 
 .buttonSuccess {
+  color: rgba($white, .9);
   background: $success;
 }
