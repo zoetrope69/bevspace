@@ -76,7 +76,7 @@ In terms of relative time, users percieve faster or slower tasks when there is a
 
 Google have ``always viewed slain peed as a competitive advantage", when running experiments by introducing artificial delays into searches ``slowing down the search results page by 100 to 400 milliseconds has a measurable impact on the number of searches per user of -0.2\% to -0.6\%". \cite{speed_matters}
 
-Performance delays aren't merely an annoyance, a bad first impression can result in users not returning. \cite{why_web_performance_matters} confirm that ``88\% of online consumers are less likely to return to a site after a bad experience". Delays are stressful. As shown by figure \ref{figure-stress-mobile-delay}, \cite{ericsson} found that mobile delays are more stressful than standing in line at a shop or even watching a horror movie.
+Performance delays aren't merely an annoyance, a bad first impression can result in users not returning. \cite{why_web_performance_matters} confirm that ``88\% of online consumers are less likely to return to a site after a bad experience". Delays are stressful. As shown by Figure \ref{figure-stress-mobile-delay}, \cite{ericsson} found that mobile delays are more stressful than standing in line at a shop or even watching a horror movie.
 
 \begin{figure}[H]
   \centering
@@ -97,7 +97,7 @@ An example of this is the Instagram like button. On press of the like button the
 
 Lazy-loading is the method of loading content (often images) after initial load for performance. This is often used as part of an optimistic UI.
 
-Using images as an example, figure \ref{figure-lazy-loading-images} shows the generation of a placeholder based the source image for a smoother smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette. \cite{image_colours_lazy_loading}
+Using images as an example, Figure \ref{figure-lazy-loading-images} shows the generation of a placeholder based the source image for a smoother smoother transition. One technique to achieve this is to create a tiny thumbnail, let the browser resize and then blur to create a gradient based on the image's colour palette. \cite{image_colours_lazy_loading}
 
 \begin{figure}[H]
   \centering
@@ -139,9 +139,9 @@ Figure \ref{figure-average-first-render} shows React has the quickest render on 
 
 60 frames per second is the goal to hit when animating on the web due to most screens refreshing at this rate, if a site drops below this there is the screen judders commonly known as `jank'. \cite{jank}
 
-When animating with CSS generally the properties to stick to are \verb|transform| and \verb|opacity|. These properties are hardware accelerated and therefore reduce jank. \ref{high_performance_animations} \ref{css_triggers}
+When animating with CSS generally the properties to stick to are \verb|transform| and \verb|opacity|. These properties are hardware accelerated and therefore reduce jank. \cite{high_perf_animations} \cite{css_triggers}
 
-Using the \verb|will-change| property tells the browser there is a plan for it to animate. This is to replace using \verb|translateZ()| as a hack to force the browser to hardware accelerate. \ref{animations_and_performance}
+Using the \verb|will-change| property tells the browser there is a plan for it to animate. This is to replace using \verb|translateZ()| as a hack to force the browser to hardware accelerate. \cite{animations_and_performance}
 
 Interestingly, Microsoft Edge do not plan to implement \verb|will-change| as they claim it is already optimised. \cite{will_change_edge}
 
@@ -159,9 +159,9 @@ There are ways to avoid FOIT through progressively applying fonts once they're l
 
 \subsection{Progressive Enhancement} \label{l-r--progressive-enhancement}
 
-Progressive enhancement is treating extra layers of enhancement (such as images, dynamic behaviours) is optional. With this attitude HTML is the only thing that should be relied upon. Sometimes even HTML can't reach the user (something discussed in section \ref{l-r--offline-first}). \ref{progressive_enhancement}
+Progressive enhancement is treating extra layers of enhancement (such as images, dynamic behaviours) is optional. With this attitude HTML is the only thing that should be relied upon. Sometimes even HTML can't reach the user (something discussed in section \ref{l-r--offline-first}). \cite{progressive_enhancement}
 
-There are arguments against progressive enhancement and that it can't always be achieved. There is a lot of discussion towards the progressive enhancement of JavaScript specifically. \ref{progressive_enhancement_dead} claims that JavaScript can be assumed to be part of the web platform.
+There are arguments against progressive enhancement and that it can't always be achieved. There is a lot of discussion towards the progressive enhancement of JavaScript specifically. \cite{progressive_enhancement_dead} claims that JavaScript can be assumed to be part of the web platform.
 
 \subsection{Offline First} \label{l-r--offline-first}
 

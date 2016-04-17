@@ -16,19 +16,51 @@ This section is a review of current home-brewing software.
 
 \subsubsection{BeerSmith}
 
-+ Cross platform (Macintosh, Ubuntu and Windows)
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{beersmith}
+  \caption{A screenshot of the BeerSmith's interface}
+  \label{figure-maltio}
+\end{figure}
 
-\subsubsection{BeerTools Pro}
-\subsubsection{Beer Calculus}
-\subsubsection{ProMash}
-\subsubsection{BrewPal}
-\subsubsection{BrewTarget}
-\subsubsection{BeerAlchemy}
-\subsubsection{Brewer's Friend}
+\noindent\textbf{Positive}
 
-% Need to review the rest of the brewing software https://homebrew.stackexchange.com/questions/784/what-software-do-most-brewers-use/898]
+\begin{itemize}
+  \item[$\checkmark$] Cross platform (Macintosh, Ubuntu and Windows)
+  \item[$\checkmark$] Offline by nature as it's installed to the computer
+  \item[$\checkmark$] Allows timing of brews and taking notes
+\end{itemize}
 
-Very complex in terms of amount of features
+\noindent\textbf{Negative}
+
+\begin{itemize}
+  \item[$\square$] Complex interface with overwhelming features for beginners
+  \item[$\square$] Simplistic sharing of recipes
+\end{itemize}
+
+\subsubsection{Malt.io}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{maltio}
+  \caption{A screenshot of the Malt.io's home page}
+  \label{figure-maltio}
+\end{figure}
+
+\noindent\textbf{Positive}
+
+\begin{itemize}
+  \item[$\checkmark$] Available on any platform with a web browser
+  \item[$\checkmark$] Social network style features (profiles, sharing)
+  \item[$\checkmark$] History and cloning of recipes
+\end{itemize}
+
+\noindent\textbf{Negative}
+
+\begin{itemize}
+  \item[$\square$] No offline functionality
+  \item[$\square$] Lack of timeline functionality
+\end{itemize}
 
 One thing that is common among all of these choices is their inherent offline nature. As they are installed directly to the computer and not in a web browser.
 
@@ -73,18 +105,19 @@ Figure \ref{figure-github-issues} shows a screenshot of the GitHub issues at one
 
 Both the supervisor Rich Boakes and local Portsmouth home-brewer Alan Thompson of GetBrewing.uk, fueled the initial requirements for this project. They saw a need for applications that help improve the current home-brewing ecosystem.
 
-As follows are requirements to create such a application to improve the brewing process when following recipes. After reviewing the current software available in section \ref{a-d--review-of-existing-software} it is clear there are problems in these areas:
+As follows are requirements to create such a application to improve the brewing process when following recipes. After reviewing the software available in section \ref{a-d--review-of-existing-software} the proposed solution can be influence by their features:
 
 \begin{itemize}
-  \item Blah
-  \item Blah
-  \item Blah
-  \item Blah
+  \item Web based project for the inherent ability to share easily
+  \item Offline accessibility
+  \item Easy to use and focussed feature set
 \end{itemize}
+
+The world wide web was initially developed to share documents, this is still applicable now and makes for a great platform for sharing features in this environment.
 
 One key aspect from a lot of this software is as it is installed to a computer it is offline. Something a traditional web application couldn't achieve. Having the artefact introduce offline features makes for an innovative solution.
 
-This application will look to solve some of these issues.
+BeerSmith chooses to aim at a expert user, Malt.io is more general but still offers many options. A simpler and focussed feature set will be used for the proposed solution for these reason but also in interested of keeping the scope of the project achievable.
 
 \subsection{Functional Requirements} \label{a-d--requirements--functional}
 
@@ -123,7 +156,14 @@ The artefact should:
 
 \section{User Interface Wireframes}
 
-\colorbox{pink}{TODO: add wireframes}
+While the user interface isn't the focus of this project, some design here is important to work towards the simple interface for overall usability.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{wireframes}
+  \caption{Wireframes for the main views}
+  \label{figure-wireframes}
+\end{figure}
 
 \section{Proposed Solution} \label{a-d--proposed-solution}
 
@@ -212,7 +252,12 @@ Using Service Workers a cache will be created to enable files to be retrieved ev
 \subsubsection{Styling} \label{a-d--t--styling}
 For styling various technologies will be used to process into the final CSS stylesheet. CSS preprocessors convert a higher level CSS extension language with features such as variables and methods to CSS.
 
-\colorbox{pink}{TODO: example of variables for colours}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{sass}
+  \caption{Example of SASS variables and methods to manipulate colours}
+  \label{figure-sass}
+\end{figure}
 
 There are many preprocessors for CSS, such as LESS, SASS or Stylus. The proposed solution will be using SASS however, due to only using the basic features being used other preprocessors could be used. \cite{SASS}
 
@@ -240,7 +285,7 @@ Due to the nature of npm, dependencies depending on many different dependencies.
 
 As ThoughtWorks describes ``Continuous Integration (CI) is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early.". \cite{continuous_integration}
 
-There are different ways to achieve CI, the artefact will use Travis CI. Travis CI is a online software-as-a-service CI platform. It allows developers to define a set of tasks to carry out (through a \verb|.travis.yml| file in the repository). These tasks should have a success and fail conditions for Travis to know the status of a build. Examples of tasks include building from dependences, running tests and even miscellaneous tasks such as processing \LaTeX documents. \footnote{This report was created using \LaTeX, a word processing and document markup languages. \cite{latex} This report uses ShareLatex's CI to automatically build the final report PDF when the \LaTeX files are pushed to the GitHub repository. Magic! \cite{sharelatex}}
+There are different ways to achieve CI, the artefact will use Travis CI. Travis CI is a online software-as-a-service CI platform. It allows developers to define a set of tasks to carry out (through a \verb|.travis.yml| file in the repository). These tasks should have a success and fail conditions for Travis to know the status of a build. Examples of tasks include building from dependences, running tests and even miscellaneous tasks such as processing \LaTeX documents. \footnote{This report was created using \LaTeX, a word processing and document markup language. \cite{latex} This report uses ShareLatex's CI to automatically build the final report PDF when the \LaTeX files are pushed to the GitHub repository. Magic! \cite{sharelatex}}
 
 The deployment will also be triggered by these tests succeeding, ensuring unstable builds of the application are never deployed.
 
