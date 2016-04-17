@@ -2,9 +2,7 @@
 
 \section{Introduction} \label{t-e--introduction}
 
-Chapters 3 and 4 described the design and implementation of blah blah, a system that blah blah blah.  In this chapter, we present a testing method and its results that show blah blah blah.  The chapter is organised as follows:  Section x introduces blah and describes blah.  Next, section y presents blah, etc.
-The results of the tests are summarised in section z, before the solution is evaluated in section qqq.
-Write what you did, why you did it and how you did it here.
+Chapters \ref{a-d} and \ref{s-i} described the design and implementation of a progressive web app for use in a home-brewing context. In this chapter, the testing method is discusses with results in section \ref{t-e--testing}. The next chapter evaluates the implementation as a whole in section \ref{t-e--evaluation}. This is followed by a review of the requirements, both functional and non-functional, in section \ref{t-e--requirements-review}.
 
 \section{Testing} \label{t-e--testing}
 
@@ -28,8 +26,6 @@ The tests created are for testing basic rendering of the Preact components and a
 For the continuous integration, the tests running include Snyk, linting and the previously mentioned rendering tests. \ref{a-d--continuous-integration}
 
 \section{Evaluation} \label{t-e--evaluation}
-
-Chapter 1 introduced the idea of progressive web apps and the scope of the report. This followed into Chapter 2 where performance was discussed thoroughly in relation to user experience with home-brewing. Chapter 3 showed design decision for the proposed development of a progressive web app and finally the implementation identified a set of technical requirements underpinning the development of blah, and the implementation of a blah blah was described in Chapter 4.
 
 This testing in the previous section \ref{t-e--testing} shows stability in the application and the foundations for a maintainable testing setup. This section will evaluate the implementation.
 
@@ -57,6 +53,8 @@ This section will review the functional requirements.
   \item As a \textbf{user}, I want to \textbf{browse for recipes}
 
   This is fulfilled with a list of recipes (as seen in Figure \ref{figure-implementation-screenshots}) simply showing the name of the brew, the author fo the brew and the colour of the brew as a strip on the left for context. There is also the IBU (International Bittering Unit) and ABV (Alcohol by Volume) displayed to the right.
+
+  One problem found, when rendering close to 1000 recipes into the DOM there is significant lag. Looking into the cause of this jank it was found that there was a large amount of garbage collection. Using pagination or a virtual list would solve this problem.
 
 \end{itemize}
 
@@ -113,7 +111,7 @@ This section review the non-functional requirements.
 
   \item \textbf{Be documented so that others can maintain}
 
-    For future maintaining of the project documentation should be used. The README file shows instructions to build and work with the project. Comments through out components give explanation for code that isn't straight forward.
+    For future maintaining of the project documentation should be used. The README file shows instructions to build and work with the project. Comments throughout components give explanation for code that isn't straight forward.
 
     A package called commitizen was used to enforce the contributing guidelines for project. \cite{commitizen}
 

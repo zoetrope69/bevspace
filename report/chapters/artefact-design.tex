@@ -2,13 +2,9 @@
 
 \section{Introduction} \label{a-d--introduction}
 
-In Chapter 2 we identified that blah blah...
-This chapter describes the design of blah blah, a system that blah blah.  First, the chapter describes the project’s design methodology (section 3.2), and system requirements (section 3.3).  A proposed solution is then discussed (section 3.4), followed by a blah blah....
+In Chapter \ref{a-d} we identified that one of the biggest aspects of user experience is performance and that home-brewing is a complex area to try and improve through software.
 
-
-\section{Design Methodology} \label{a-d--methodology}
-
-The design and development of blah blah
+This chapter describes the design of a progressive web app with offline functionality for the use in a home-brewing context. First, the chapter reviews existing software in home-brewing (section \ref{a-d--review-of-existing-software}), tools and service to used in the implementation (section \ref{a-d--methodology--tools}) and system requirements (section \ref{a-d--requirements}). A proposed solution is then discussed (section \ref{a-d--proposed-solution}) including initial designs and technologies.
 
 \subsection{A Review of Existing Software} \label{a-d--review-of-existing-software}
 
@@ -70,7 +66,7 @@ Choosing a methodology is never one size fits all. Instead considering the envir
 
 Agile development embraces changes in development life-cycle and adapts to them, this is in contrast to traditional plan-driven development in which predictions are used instead. An agile plan is the initial set of goals which will adapt as the project grows. \cite{fowler_agile}
 
-Using an incremental and evolutionary approach is key for this artefact due to it's experimental nature, the goals and proposed solutions will change through-out development.
+Using an incremental and evolutionary approach is key for this artefact due to its experimental nature, the goals and proposed solutions will change through-out development.
 
 \subsection{Tools and Services} \label{a-d--methodology--tools}
 
@@ -89,7 +85,7 @@ GitHub has a system of `Issues', which allow for tasks to be tracked. These issu
   \item \textbf{\colorbox{blue}{\textcolor{white}{feature}}} -  tasks which introduce a new feature to the project
   \item \textbf{\colorbox{yellow}{report}} - tasks which are relevant to the report writing itself
   \item \textbf{\colorbox{green}{greenkeeper}} - a label reserved for the greenkeeper tool (as described in x of this report)
-  \item \textbf{wontfix} - tasks that are out of scope and/or outdated and wont be completed
+  \item \textbf{wontfix} - tasks that are out of scope and/or outdated and won't be completed
 \end{itemize}
 
 Figure \ref{figure-github-issues} shows a screenshot of the GitHub issues at one point in the project.
@@ -105,7 +101,7 @@ Figure \ref{figure-github-issues} shows a screenshot of the GitHub issues at one
 
 Both the supervisor Rich Boakes and local Portsmouth home-brewer Alan Thompson of GetBrewing.uk, fueled the initial requirements for this project. They saw a need for applications that help improve the current home-brewing ecosystem.
 
-As follows are requirements to create such a application to improve the brewing process when following recipes. After reviewing the software available in section \ref{a-d--review-of-existing-software} the proposed solution can be influence by their features:
+As follows are requirements to create such an application to improve the brewing process when following recipes. After reviewing the software available in section \ref{a-d--review-of-existing-software} the proposed solution can be influenced by their features:
 
 \begin{itemize}
   \item Web based project for the inherent ability to share easily
@@ -117,7 +113,7 @@ The world wide web was initially developed to share documents, this is still app
 
 One key aspect from a lot of this software is as it is installed to a computer it is offline. Something a traditional web application couldn't achieve. Having the artefact introduce offline features makes for an innovative solution.
 
-BeerSmith chooses to aim at a expert user, Malt.io is more general but still offers many options. A simpler and focussed feature set will be used for the proposed solution for these reason but also in interested of keeping the scope of the project achievable.
+BeerSmith chooses to aim at a expert user, Malt.io is more general but still offers many options. A simpler and focussed feature set will be used for the proposed solution for these reason but also in the interest of keeping the scope of the project achievable.
 
 \subsection{Functional Requirements} \label{a-d--requirements--functional}
 
@@ -154,17 +150,6 @@ The artefact should:
   \item Pass tests generated throughout and running through continuous integration (such as Travis CI)
 \end{itemize}
 
-\section{User Interface Wireframes}
-
-While the user interface isn't the focus of this project, some design here is important to work towards the simple interface for overall usability.
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{wireframes}
-  \caption{Wireframes for the main views}
-  \label{figure-wireframes}
-\end{figure}
-
 \section{Proposed Solution} \label{a-d--proposed-solution}
 
 Figure \ref{figure-application-stack-design}, shows an overview of the application stack to be used in the proposed solution. The following sections will describe different parts of this diagram and more.
@@ -174,6 +159,17 @@ Figure \ref{figure-application-stack-design}, shows an overview of the applicati
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{application_stack_design}
   \caption{Overview of how the application stack is structured}
   \label{figure-application-stack-design}
+\end{figure}
+
+\subsection{User Interface Wireframes}
+
+While the user interface isn't the focus of this project, some design here is important to work towards the simple interface for overall usability.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{wireframes}
+  \caption{Wireframes for the main views}
+  \label{figure-wireframes}
 \end{figure}
 
 \subsection{Performance Budget}
@@ -215,7 +211,7 @@ These files will then be converted into BeerJSON which will be the main recipe f
 
 Due to the format of choice BeerJSON, a document store style database that deals directly with JSON documents is a great choice.
 
-There are many document store databases to choose from for example MongoDB, however the chosen database for the proposed solution is CouchDB for it's HTTP API and master-to-master replications. \cite{couchdb}
+There are many document store databases to choose from for example MongoDB, however the chosen database for the proposed solution is CouchDB for its HTTP API and master-to-master replications. \cite{couchdb}
 
 The artefact can also make use of PouchDB, a JavaScript database which leverages IndexedDB for clientside databases. PouchDB also has the same API as CouchDB allowing them to sync seamlessly.
 
@@ -245,7 +241,7 @@ Due to the artefact's knowledge base around home-brewing, a package called Brauh
 
 From the review of frameworks in section \ref{l-r--frameworks}, the proposed solution will use React as it appears to offer the best balance of features to performance.
 
-React's usage of JSX, a syntactic sugar for improving the creation of components will be used through out the project. As SVGs will be used for graphics, JSX will complement SVG. \cite{jsx}
+React's usage of JSX, a syntactic sugar for improving the creation of components will be used throughout the project. As SVGs will be used for graphics, JSX will complement SVG. \cite{jsx}
 
 Using Service Workers a cache will be created to enable files to be retrieved even when offline.
 
@@ -259,9 +255,9 @@ For styling various technologies will be used to process into the final CSS styl
   \label{figure-sass}
 \end{figure}
 
-There are many preprocessors for CSS, such as LESS, SASS or Stylus. The proposed solution will be using SASS however, due to only using the basic features being used other preprocessors could be used. \cite{SASS}
+There are many pre-processors for CSS, such as LESS, SASS or Stylus. The proposed solution will be using SASS however, due to only using the basic features being used other preprocessors could be used. \cite{SASS}
 
-Styling often comes with some pitfalls, such as browser prefixes for CSS properties which are not stable yet. A postprocessor such as Autoprefixer. \cite{autoprefixer}
+Styling often comes with some pitfalls, such as browser prefixes for CSS properties which are not stable yet. A post-processor such as Autoprefixer. \cite{autoprefixer}
 
 `postcss' will be used to transform these styles in the JavaScript environment. \cite{postcss}
 
@@ -271,7 +267,7 @@ As JavaScript is dynamic and loosely-typed, using a linter can ensure certain co
 
 Linting will be carried out with continuous integration (see section \ref{a-d--continuous-integration}) but also inside IDEs and code editors on save of JavaScript document. For this reason Atom, will be used for it's ESLint plugin.
 
-There are many task runners for improving a development workflow such as Gulp, Grunt and Broccoli. A technology that is used in place of task runners for this artefact is Webpack. Webpack bundles all dependencies that you require and indexes them. Webpack knows what dependencies to bundle into your final file where as Gulp and Grunt have to be told which dependencies to bundle through configuration. This results in a smaller file. \cite{webpack}
+There are many task runners for improving a development workflow such as Gulp, Grunt and Broccoli. A technology that is used in place of task runners for this artefact is Webpack. Webpack bundles all dependencies that you require and indexes them. Webpack knows what dependencies to bundle into your final file whereas Gulp and Grunt have to be told which dependencies to bundle through configuration. This results in a smaller file. \cite{webpack}
 
 A smaller file will help for the proposed performance budget and so Webpack will be used. Other technologies such as rollup, which uses `tree-shaking' to achieve a smaller bundle than Webpack can be explored but due to it's infancy this will seen as an experimental implementation. \cite{rollup}
 
@@ -295,5 +291,6 @@ This CI is triggered by pushing to the GitHub repository. This allows for both t
 
 \section{Summary} \label{a-d--summary}
 
-This chapter described the high-level requirements and design of a system that blah blah blah.  The chapter started by describing blah.  The proposed solution was then discussed in section blah followed by blah in section blah, etc.
-Blah blah is covered in further detail in Chapter 4 which describes the implementation of blah blah.
+This chapter described the high-level requirements and design of a progressive web app for home-brewing. The chapter started by the existing software used for home-brewing. The proposed solution was then discussed in following sections.
+
+The implementation based on this design is covered in further detail in Chapter \ref{s-i} which describes the system implementation.
