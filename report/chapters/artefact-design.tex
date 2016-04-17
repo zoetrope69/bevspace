@@ -28,6 +28,8 @@ This section is a review of current home-brewing software.
 
 % Need to review the rest of the brewing software https://homebrew.stackexchange.com/questions/784/what-software-do-most-brewers-use/898]
 
+Very complex in terms of amount of features
+
 One thing that is common among all of these choices is their inherent offline nature. As they are installed directly to the computer and not in a web browser.
 
 \subsection{Software Life-cycle Methodology} \label{a-d--methodology--life-cycle}
@@ -42,7 +44,7 @@ Using an incremental and evolutionary approach is key for this artefact due to i
 
 Kanban boards are a tool to visualise the workflow for a project, an online implementation of this tool is Trello. Trello can be used for multiple scenarios and fits well for a software project. Features, bugs and other research can be represented by cards. \cite{trello} % cite for kanban
 
-Version control is arguably one of the most important tools in software development. It records changes over time so that a previous version of the project can be revisited later. Git is a free and open source distributed version control system that is used on many projects. \cite{git}
+Version control is arguably one of the most important tools in software development. It records changes over time so that a previous version of the project can be revisited later. Git is one of the most popular version control software currently. \cite{git}
 
 While being distributed it's often useful to have a centralized repository, there are many Git repository hosting services. GitHub and Bitbucket are two popular choices. While GitHub encourages Open Source Software on their platform the service itself isn't Open Source. \cite{github} GitLab started as a GitHub clone that is fully Open Source, with the choice to host yourself or use their servers. \cite{gitlab} \cite{bitbucket}
 
@@ -173,11 +175,11 @@ These files will then be converted into BeerJSON which will be the main recipe f
 
 Due to the format of choice BeerJSON, a document store style database that deals directly with JSON documents is a great choice.
 
-There are many document store databases to choose from for example MongoDB, however the chosen database for the proposed solution is CouchDB for it's HTTP API and master-to-master replications. \cite{couchdb} % cite mongo
+There are many document store databases to choose from for example MongoDB, however the chosen database for the proposed solution is CouchDB for it's HTTP API and master-to-master replications. \cite{couchdb}
 
 The artefact can also make use of PouchDB, a JavaScript database which leverages IndexedDB for clientside databases. PouchDB also has the same API as CouchDB allowing them to sync seamlessly.
 
-An alternative to PouchDB would be localForage. localForage, which also allows for offline databases using IndexedDB , is faster than PouchDB however the syncing feature for PouchDB should outweigh the speed increase here. % cite speed of localforage
+An alternative to PouchDB would be localForage. localForage, which also allows for offline databases using IndexedDB, is simpler than PouchDB however the syncing feature is what makes PouchDB the chosen technology.
 
 The proposed solution will attempt to use a Web Worker for the syncing and management of data, this will free up the main JavaScript file for presentation tasks.
 
@@ -187,7 +189,7 @@ Traditionally JavaScript has been in the browser. Node.js allows for using JavaS
 
 npm is a package manager for Node.js (more generally JavaScript). npm will be used for both serverside and clientside JavaScript dependencies.
 
-The latest version of JavaScript ES2015 (also known as ES6) offers features that will be used in the proposed solution such as [....] . Support for ES2015 is mixed across browsers, therefore converting (transpiling) ES2015 to ES5 will be carried out with Babel a JavaScript transpiler. \cite{babel}
+The latest version of JavaScript ES2015 (also known as ES6) offers features that will be used in the proposed solution such as class structure for React components. Support for ES2015 is mixed across browsers, therefore converting (transpiling) ES2015 to ES5 will be carried out with Babel a JavaScript transpiler. \cite{babel}
 
 \subsubsection{Serverside} \label{a-d--t--serverside}
 
@@ -208,7 +210,6 @@ React's usage of JSX, a syntactic sugar for improving the creation of components
 Using Service Workers a cache will be created to enable files to be retrieved even when offline.
 
 \subsubsection{Styling} \label{a-d--t--styling}
-
 For styling various technologies will be used to process into the final CSS stylesheet. CSS preprocessors convert a higher level CSS extension language with features such as variables and methods to CSS.
 
 \colorbox{pink}{TODO: example of variables for colours}

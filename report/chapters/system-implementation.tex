@@ -50,7 +50,7 @@ Using newer technologies such as Webpack, ESLint, Babel and Preact come with dif
 
 For example, with Preact during implementation there was an issue with a feature from React not being supported. This was short-circuit boolean templating, the author then reported this bug which was then fixed. Here having the Preact project as an Open Source project meant this could be fixed not just for this artefact but future users of Preact.
 
-% describe this better
+% describe this better with soundcloud example, also the virtual list thing
 
 While testing the service worker code and implementation difficulties arise when caching files. Originally the author was manually unregistering the service worker then closing and reopening the tab.
 
@@ -67,7 +67,16 @@ As shown in figure \ref{figure-force-update-service-worker}, to solve this probl
 
 One issue with frameworks and libraries expressed in section \ref{l-r--frameworks} was the lack of control of final code. Having to depend on the Brauhaus package due to a lack of home-brewing knowledge resulted in having to implement more of the library than potentially needed and ultimately a bigger file size reducing performance.
 
-Keeping dependencies up to date is important mostly for security (see Snyk mentioned in section \ref{s-i--testing-summary}),, a tool called Greenkeeper was used through-out which monitors the project's dependancies and sends a Pull Request to the GitHub repository with an updated version of packages. This is great as these Pull Requests can be run through the continuous integration and if it passes the build can be merged straight away.  % cite greenkeeper
+Keeping dependencies up to date is important mostly for security (see Snyk mentioned in section \ref{s-i--testing-summary}), a tool called Greenkeeper (shown in figure \ref{figure-greenkeeper}) was used through-out which monitors the project's dependencies and sends a Pull Request to the GitHub repository with an updated version of packages. This is great as these Pull Requests can be run through the continuous integration and if it passes the build can be merged straight away. \cite{greenkeeper}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{greenkeeper}
+  \caption{Example of Greenkeeper testing different package updates}
+  \label{figure-greenkeeper}
+\end{figure}
+
+One problem when developing with service workers (and other web APIs) is needed SSL or https when in production. Thankfully, \verb|localhost| is ignored so these features can be used in development easily. Also with projects such as Let's Encrypt, adding SSL to a web site is free and easy. \cite{letsencrypt}
 
 \section{Summary} \label{s-i--summary}
 
@@ -83,18 +92,24 @@ Write what you did, why you did it and how you did it here.
 
 \subsection{Testing Summary} \label{s-i--testing-summary}
 
-In total over n tests were executed. Each test was blah blah blah, and this data was then used to blah. The tests illustrate that blah blah. In the next section, this is evaluated and the extent to which it supports the thesis is discussed.
+The testing framework used was mocha and complemented by the `chai' and `sinon' packages. This meant simple and targeted tests could be created. \cite{mocha}
 
-karma
+Using a headless browser such as PhantomJS means tests can be run automatically in a browser environment without having to open a browser such as Chrome or FireFox. \cite{phantomjs}
 
-mocha
+Now to run the tests created with mocha in PhantomJS a test runner called Karma was used. \cite{karma} This also handled processing the files through the same Webpack config that is used to build the site normally.
 
-chai
-sinon
+The tests created are for testing basic rendering of the Preact components and also that certain elements do not render if not authenticated. Figure \ref{figure-tests} shows tests running in a terminal environment.
 
-phantomjs
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{tests}
+  \caption{Output to the terminal when running `npm run test'}
+  \label{figure-tests}
+\end{figure}
 
-travis ci \ref{a-d--continuous-integration}
+(Note if ESLint passes linting, it usually doesn't output anything but for this screenshot the \verb|--debug| flag has been added)
+
+For the continuous integration, the tests running include Snyk, linting and the previously mentioned rendering tests. \ref{a-d--continuous-integration}
 
 \section{Evaluation} \label{s-i--evaluation}
 
@@ -102,13 +117,19 @@ Chapter 1 highlighted the problem of blah blah blah. Chapter 2 reviewed the stat
 
 The testing described in section x demonstrates that blah blah blah. In this section therefore, we evaluate the implementation and discuss issues in the underlying technologies that the implementation has highlighted.
 
-~ overall if i managed my time better this project could have been a lot better
+The project since the project initiation document has changed dramatically. Due to the initial client moving away from the project a movement away from the home-brewing focus to the performance focus made sense. % add ref to appendix
+
+Overall, where the project is weakened is through the planning and structuring. With more discipline this project could have been
+
+Saying this, a lot of the technologies used in the project are in their infancy, as seen in section \ref{s-i--interesting-problems}. This means potentially the work flow, tools and technologies will all be outdated soon.
+
+People and their needs don't change so much. Performance will always be important. So the research and work done in this area was very beneficial.
+
+user testing should have been done
 
 \subsection{Requirements Review} \label{s-i--requirements-review}
 
-This section reviews the implemented platform, referring back to the requirements to identify the extent to which each has been fulfilled, and reflecting on their relevance for future work. Each of the requirements is reintroduced and discussed in turn.
-Refer back to each specified requirement and discuss...
-
+% This section reviews the implemented platform, referring back to the requirements to identify the extent to which each has been fulfilled, and reflecting on their relevance for future work. Each of the requirements is reintroduced and discussed in turn.
 
 \subsubsection{Functional Requirements} \label{s-i--requirements--functional}
 
@@ -117,7 +138,7 @@ Refer back to each specified requirement and discuss...
 The artefact should:
 
 \begin{itemize}
-  \item Follow accessibility guidelines to ensure usage for those of hard of sight
+  \item \textbf{Follow accessibility guidelines to ensure usage for those of hard of sight}
 
     When looking at the example of the items on the page, there was some need to improve the contrast.
 
@@ -137,13 +158,13 @@ The artefact should:
     \end{tabular}
     \end{table}
 
-  \item Be documented so that others can maintain
+  \item \textbf{Be documented so that others can maintain}
 
     For future maintaining of the project documentation should be used. The README file shows instructions to build and work with the project. Comments through out components give explanation for code that isn't straight forward.
 
     A package called commitizen was used to enforce the contributing guidelines for project. \cite{commitizen}
 
-  \item Conform to the performance budget that is set in initial development
+  \item \textbf{Conform to the performance budget that is set in initial development}
 
     From the budget set in section \ref{table-performance-budget}, here are the results with the implemented site show in table \ref{table-performance-budget-results}.
 
@@ -163,9 +184,9 @@ The artefact should:
     \label{table-performance-budget-results}
     \end{table}
 
-  \item Pass tests generated throughout and running through continuous integration (such as Travis CI)
+  \item \textbf{Pass tests generated throughout and running through continuous integration (such as Travis CI)}
 
-    yeppers
+    As described in detail in section \ref{s-i--testing-summary}, the artefact is passing all tests including Snyk, Linting and Karma. However, by the nature of Snyk looking for vulnerabilities constantly without maintenance these tests could fail.
 
 \end{itemize}
 
