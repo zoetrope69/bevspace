@@ -4,7 +4,7 @@
 
 In Chapter \ref{a-d} we identified that one of the biggest aspects of user experience is performance and that home-brewing is a complex area to try and improve through software.
 
-This chapter describes the design of a progressive web app with offline functionality for the use in a home-brewing context. First, the chapter reviews existing software in home-brewing (section \ref{a-d--review-of-existing-software}), tools and service to used in the implementation (section \ref{a-d--methodology--tools}) and system requirements (section \ref{a-d--requirements}). A proposed solution is then discussed (section \ref{a-d--proposed-solution}) including initial designs and technologies.
+This chapter describes the design of a progressive web application with offline functionality for the use in a home-brewing context. First, the chapter reviews existing software in home-brewing (section \ref{a-d--review-of-existing-software}), tools and service to used in the implementation (section \ref{a-d--methodology--tools}) and system requirements (section \ref{a-d--requirements}). A proposed solution is then discussed (section \ref{a-d--proposed-solution}) including initial designs and technologies.
 
 \subsection{A Review of Existing Software} \label{a-d--review-of-existing-software}
 
@@ -58,7 +58,9 @@ This section is a review of current home-brewing software.
   \item[$\square$] Lack of timeline functionality
 \end{itemize}
 
-One thing that is common among all of these choices is their inherent offline nature. As they are installed directly to the computer and not in a web browser.
+One thing that is common among these choices is their inherent offline nature. As they are installed directly to the computer and not in a web browser.
+
+As seen in section \ref{a-d--requirements}, this review of existing software will be used to influence the proposed solution's design.
 
 \subsection{Software Life-cycle Methodology} \label{a-d--methodology--life-cycle}
 
@@ -74,7 +76,7 @@ Kanban boards are a tool to visualise the workflow for a project, an online impl
 
 Version control is arguably one of the most important tools in software development. It records changes over time so that a previous version of the project can be revisited later. Git is one of the most popular version control software currently. \cite{git}
 
-While being distributed it's often useful to have a centralized repository, there are many Git repository hosting services. GitHub and Bitbucket are two popular choices. While GitHub encourages Open Source Software on their platform the service itself isn't Open Source. \cite{github} GitLab started as a GitHub clone that is fully Open Source, with the choice to host yourself or use their servers. \cite{gitlab} \cite{bitbucket}
+While being distributed it's often useful to have a centralized repository, there are many Git repository hosting services. GitHub and Bitbucket are two popular choices. While GitHub encourages Open Source Software on their platform the service itself isn't Open Source. \cite{github} GitLab started as a GitHub clone that is fully Open Source, with the choice to host independantly or use their servers. \cite{gitlab} \cite{bitbucket}
 
 These platforms offer similar features but the artefact will be hosted with GitHub due to the familiarity to the author and also the features it offers.
 
@@ -84,7 +86,7 @@ GitHub has a system of `Issues', which allow for tasks to be tracked. These issu
   \item \textbf{\colorbox{red}{\textcolor{white}{bug}}} - tasks which define a bug in the project
   \item \textbf{\colorbox{blue}{\textcolor{white}{feature}}} -  tasks which introduce a new feature to the project
   \item \textbf{\colorbox{yellow}{report}} - tasks which are relevant to the report writing itself
-  \item \textbf{\colorbox{green}{greenkeeper}} - a label reserved for the greenkeeper tool (as described in x of this report)
+  \item \textbf{\colorbox{green}{greenkeeper}} - a label reserved for the greenkeeper tool (as described in section \ref{s-i--interesting-problems})
   \item \textbf{wontfix} - tasks that are out of scope and/or outdated and won't be completed
 \end{itemize}
 
@@ -101,7 +103,7 @@ Figure \ref{figure-github-issues} shows a screenshot of the GitHub issues at one
 
 Both the supervisor Rich Boakes and local Portsmouth home-brewer Alan Thompson of GetBrewing.uk, fueled the initial requirements for this project. They saw a need for applications that help improve the current home-brewing ecosystem.
 
-As follows are requirements to create such an application to improve the brewing process when following recipes. After reviewing the software available in section \ref{a-d--review-of-existing-software} the proposed solution can be influenced by their features:
+As follows are requirements to create such an application to improve the home-brewing process when following recipes. After reviewing the software available in section \ref{a-d--review-of-existing-software} the proposed solution can be influenced by their features:
 
 \begin{itemize}
   \item Web based project for the inherent ability to share easily
@@ -141,7 +143,7 @@ The following requirements will be structured through user stories. % cite
 
 \subsection{Non-Functional Requirements} \label{a-d--requirements--non-functional}
 
-The artefact should:
+The artefact has the following non-functional requirements.
 
 \begin{itemize}
   \item Compliant to WCAG 2 level AAA to ensure enough contrast ``when viewed by someone having color deficits or when viewed on a black and white screen". \cite{colour_contrast}
@@ -184,13 +186,13 @@ The chosen website is Malt.io, which has similar functionality to the proposed s
 \hline
 \textbf{Site}     & \textbf{Start Render} & \textbf{Document Complete} & \textbf{Fully Loaded} \\ \hline
 Malt.to           & 2.190s                & 3.998s                     & 4.145s                \\ \hline
-Proposed solution & 1.752s                & 3.198s                     & 3.316s                \\ \hline
+Target            & 1.752s                & 3.198s                     & 3.316s                \\ \hline
 \end{tabular}
 \caption{Performance budget calculation}
 \label{table-performance-budget}
 \end{table}
 
-The proposed solution will aim to have timings that are equal or below to the results in table \ref{table-performance-budget}.
+The proposed solution will aim to have timings that are equal or below to the results in Table \ref{table-performance-budget}.
 
 With performance in mind initially the project will not implement any web fonts or images. The recipes and brew instructions have been determined as the main content and so will be the main focus.
 
@@ -198,7 +200,7 @@ Any iconography will use SVGs for flexibility and overall performance.
 
 \subsection{Data} \label{a-d--data}
 
-This sub-section will describe the gathering data and the storage of said data and creation of data.
+This sub-section will describe the gathering, creation and storage of data for the proposed solution.
 
 \subsubsection{Recipe Gathering} \label{a-d--d--recipe-gathering}
 
@@ -235,18 +237,18 @@ Express is a framework which offers features such as path routing and templating
 
 Passport is a framework for authentication, including users and user sessions. In the proposed solution this package will allow for users to sign-up, log-in and have a session in the application. \cite{passport}
 
-Due to the artefact's knowledge base around home-brewing, a package called Brauhaus will be used. Brauhaus handles conversions of brewing recipes and brewing information. Using this package means that the home-brewing knowledge such as calculations is abstracted away, meaning developers don't necessarily to fully understand the knowledge base to create the application. \cite{brauhaus.js}
+Due to the artefact's knowledge base around home-brewing, a package called Brauhaus will be used. Brauhaus handles conversions of brewing recipes and brewing information. Using this package means that the home-brewing knowledge such as calculations is abstracted away, meaning developers don't necessarily need to fully understand the knowledge base to create the application. \cite{brauhaus.js}
 
 \subsubsection{Clientside} \label{a-d--t--clientside}
 
 From the review of frameworks in section \ref{l-r--frameworks}, the proposed solution will use React as it appears to offer the best balance of features to performance.
 
-React's usage of JSX, a syntactic sugar for improving the creation of components will be used throughout the project. As SVGs will be used for graphics, JSX will complement SVG. \cite{jsx}
+React's usage of JSX, a syntactic sugar for improving the creation of components will be used throughout the project. SVGs will be used for graphics, this is complimentary as both SVG and JSX. \cite{jsx}
 
-Using Service Workers a cache will be created to enable files to be retrieved even when offline.
+Using a Service Worker a cache will be created to enable files to be retrieved even when offline.
 
 \subsubsection{Styling} \label{a-d--t--styling}
-For styling various technologies will be used to process into the final CSS stylesheet. CSS preprocessors convert a higher level CSS extension language with features such as variables and methods to CSS.
+For styling various technologies will be used to process into the final CSS stylesheet. CSS pre-processors convert a higher level CSS extension language with features such as variables and methods into CSS.
 
 \begin{figure}[H]
   \centering
@@ -257,25 +259,25 @@ For styling various technologies will be used to process into the final CSS styl
 
 There are many pre-processors for CSS, such as LESS, SASS or Stylus. The proposed solution will be using SASS however, due to only using the basic features being used other preprocessors could be used. \cite{SASS}
 
-Styling often comes with some pitfalls, such as browser prefixes for CSS properties which are not stable yet. A post-processor such as Autoprefixer. \cite{autoprefixer}
+Styling often comes with some pitfalls, such as browser prefixes for CSS properties which are not stable yet. A post-processor such as Autoprefixer adds these prefixes automatically. \cite{autoprefixer}
 
 `postcss' will be used to transform these styles in the JavaScript environment. \cite{postcss}
 
 \subsection{Workflow} \label{a-d--workflow}
 
-As JavaScript is dynamic and loosely-typed, using a linter can ensure certain common problems are avoided. ESLint is the linter used in the proposed solution due to its extensibility and features for JSX. \cite{eslint}
+As JavaScript is dynamic and loosely-typed, using a linter can ensure certain common problems are avoided. ESLint will be the linter used in the proposed solution due to its extensibility and features for JSX. \cite{eslint}
 
-Linting will be carried out with continuous integration (see section \ref{a-d--continuous-integration}) but also inside IDEs and code editors on save of JavaScript document. For this reason Atom, will be used for it's ESLint plugin.
+Linting will be carried out with continuous integration (see section \ref{a-d--continuous-integration}) but also inside IDEs and code editors on save of JavaScript documents. For this reason Atom, a code editor, will be used for it's ESLint plugin.
 
-There are many task runners for improving a development workflow such as Gulp, Grunt and Broccoli. A technology that is used in place of task runners for this artefact is Webpack. Webpack bundles all dependencies that you require and indexes them. Webpack knows what dependencies to bundle into your final file whereas Gulp and Grunt have to be told which dependencies to bundle through configuration. This results in a smaller file. \cite{webpack}
+There are many task runners for improving a development workflow such as Gulp, Grunt and Broccoli. A technology that will be used in place of task runners for this artefact is Webpack. Webpack bundles all dependencies that are required by the application and indexes them. Webpack knows what dependencies to bundle into the final file whereas Gulp and Grunt have to be told which dependencies to bundle through configuration. This results in a smaller file. \cite{webpack}
 
 A smaller file will help for the proposed performance budget and so Webpack will be used. Other technologies such as rollup, which uses `tree-shaking' to achieve a smaller bundle than Webpack can be explored but due to it's infancy this will seen as an experimental implementation. \cite{rollup}
 
 Webpack will be used to transpile code using Babel, process Sass, process JSX from React and more.
 
-npm will be used for clientside dependencies. Due to projects such as Browserify which create browser friendly versions of packages it is used for clientside as well as serverside JavaScript. \cite{browserify} Managers such as bower which dedicated itself to front-end dependencies has seen a drop in usage due to this. \cite{bower}
+npm will be used for clientside dependencies. Due to the popularity of projects such as Browserify, which create browser friendly versions of packages, it is used for clientside as well as serverside JavaScript. \cite{browserify} Managers such as bower which dedicated itself to clientside dependencies have seen a drop in usage due to this. \cite{bower}
 
-Due to the nature of npm, dependencies depending on many different dependencies. Tracking security on dependencies is a daunting task. Snyk is a package which finds, patches and monitors vulnerabilities in your code. \cite{snyk} Snyk tests will ensure there isn't a deployed version of the build with known vulnerabilities.
+Due to the nature of npm, dependencies depending on many different dependencies. Tracking security on dependencies is a daunting task. Snyk is a package which finds, patches and monitors vulnerabilities in code. \cite{snyk} Snyk tests will ensure there isn't a deployed version of the build with known vulnerabilities.
 
 \subsubsection{Continuous Integration and Deployment} \label{a-d--continuous-integration}
 
@@ -285,12 +287,12 @@ There are different ways to achieve CI, the artefact will use Travis CI. Travis 
 
 The deployment will also be triggered by these tests succeeding, ensuring unstable builds of the application are never deployed.
 
-Surge (surge.sh) will being used to deploy, it is command-line tool that allows for simple deployment. Installed through npm, it removes any need for FTP, SSH or other more complicated deployment set-ups. Obviously this has limitations, but for front-end web applications this is a simple and effective option. \cite{surge}
+Surge (surge.sh) will be used to deploy, it is command-line tool that allows for simple deployment. Installed through npm, it removes any need for FTP, SSH or other more complicated deployment set-ups. Obviously this has limitations, but for clientside web applications this is a simple and effective option. \cite{surge}
 
 This CI is triggered by pushing to the GitHub repository. This allows for both the code, the tests and deployment to all be together.
 
 \section{Summary} \label{a-d--summary}
 
-This chapter described the high-level requirements and design of a progressive web app for home-brewing. The chapter started by the existing software used for home-brewing. The proposed solution was then discussed in following sections.
+This chapter described the high-level requirements and design of a progressive web application for home-brewing. The chapter started by the existing software used for home-brewing. The proposed solution was then discussed in following sections.
 
 The implementation based on this design is covered in further detail in Chapter \ref{s-i} which describes the system implementation.

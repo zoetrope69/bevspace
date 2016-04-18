@@ -2,7 +2,7 @@
 
 \section{Introduction} \label{t-e--introduction}
 
-Chapters \ref{a-d} and \ref{s-i} described the design and implementation of a progressive web app for use in a home-brewing context. In this chapter, the testing method is discusses with results in section \ref{t-e--testing}. The next chapter evaluates the implementation as a whole in section \ref{t-e--evaluation}. This is followed by a review of the requirements, both functional and non-functional, in section \ref{t-e--requirements-review}.
+Chapters \ref{a-d} and \ref{s-i} described the design and implementation of a progressive web application for use in a home-brewing context. In this chapter, the testing method is discusses with results in section \ref{t-e--testing}. The next chapter evaluates the implementation as a whole in section \ref{t-e--evaluation}. This is followed by a review of the requirements, both functional and non-functional, in section \ref{t-e--requirements-review}.
 
 \section{Testing} \label{t-e--testing}
 
@@ -10,9 +10,9 @@ The testing framework used was mocha and complemented by the `chai' and `sinon' 
 
 Using a headless browser such as PhantomJS means tests can be run automatically in a browser environment without having to open a browser such as Chrome or FireFox. \cite{phantomjs}
 
-Now to run the tests created with mocha in PhantomJS a test runner called Karma was used. \cite{karma} This also handled processing the files through the same Webpack config that is used to build the site normally.
+To run the tests created with mocha in PhantomJS a test runner called Karma was used. \cite{karma} This also handled processing the files through the same Webpack config that is used to build the site normally.
 
-The tests created are for testing basic rendering of the Preact components and also that certain elements do not render if not authenticated. Figure \ref{figure-tests} shows tests running in a terminal environment.
+The tests created are for testing basic rendering of the Preact components and also that certain elements do not render if not authenticated. Figure \ref{figure-tests} shows tests running in a terminal environment. \footnote{Note if ESLint passes linting, it usually doesn't output anything but for this screenshot the `debug' flag has been added}
 
 \begin{figure}[H]
   \centering
@@ -20,8 +20,6 @@ The tests created are for testing basic rendering of the Preact components and a
   \caption{Output to the terminal when running `npm run test'}
   \label{figure-tests}
 \end{figure}
-
-(Note if ESLint passes linting, it usually doesn't output anything but for this screenshot the \verb|--debug| flag has been added)
 
 For the continuous integration, the tests running include Snyk, linting and the previously mentioned rendering tests. \ref{a-d--continuous-integration}
 
@@ -77,7 +75,7 @@ This section will review the functional requirements.
 
   \item As a \textbf{user}, I want to \textbf{add notes to key stages of a brew}
 
-  This functionality wasn't fulfilled in the current implementation, but with CouchDB (and similarly PouchDB) not needing schemas arbitrary data can be added to documents. Therefore this functionality, with more time would be easily implemented.
+  This functionality wasn't fulfilled in the current implementation, but with CouchDB (and similarly PouchDB) not needing schemas, arbitrary data can be added to documents. Therefore this functionality, with more time would be easily implemented.
 
   \item As a \textbf{user}, I want to \textbf{review and evaluate the brew on completion}
 
@@ -86,14 +84,14 @@ This section will review the functional requirements.
 
 \subsection{Non-Functional Requirements} \label{t-e--requirements--non-functional}
 
-This section review the non-functional requirements.
+This section will review the non-functional requirements.
 
 \begin{itemize}
   \item \textbf{Compliant to WCAG 2 level AAA to ensure enough contrast ``when viewed by someone having color deficits or when viewed on a black and white screen". \cite{colour_contrast}}
 
     When looking at the example of the items on the page, there was some need to improve the contrast.
 
-    Fortunately using SASS (as chosen in section \ref{a-d--t--styling}) this is achieved very easily by changing \verb|color: \$brown;| producing \verb|\#943938| to \verb|color: darken(\$brown, 10\%);| producing \verb|\#6F2B2A|.
+    Fortunately using SASS (as chosen in section \ref{a-d--t--styling}) this is achieved very easily by changing variables. For example, \verb|color: \$brown;| producing \verb|\#943938| to \verb|color: darken(\$brown, 10\%);| producing \verb|\#6F2B2A|.
 
     Table \ref{table-contrast-changes} shows how the new darkened version of the brown colour is WCAG 2 AAA compliant.
 
@@ -135,6 +133,8 @@ This section review the non-functional requirements.
     \label{table-performance-budget-results}
     \end{table}
 
+    As shown the performance budget at the current state of the implementation was succeeded. This would be tracked for future work.
+
   \item \textbf{Pass tests generated throughout and running through continuous integration (such as Travis CI)}
 
     As described in detail in section \ref{t-e--testing}, the artefact is passing all tests including Snyk, Linting and Karma. However, by the nature of Snyk looking for vulnerabilities constantly without maintenance these tests could fail.
@@ -143,4 +143,4 @@ This section review the non-functional requirements.
 
 \section{Testing and Evaluation Summary} \label{t-e--testing-and-evaluation-summary}
 
-This chapter introduced the testing and some evaluation of the implementation. In section \ref{t-e--testing} the testing set-up local and with Travis CI. This was followed by an evaluation of the implementation in section \ref{t-e--requirements-review}.
+This chapter introduced the testing and some evaluation of the implementation. In section \ref{t-e--testing} testing locally and with Travis CI is explained. This was followed by an evaluation of the implementation in section \ref{t-e--requirements-review}.

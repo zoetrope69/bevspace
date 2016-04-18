@@ -17,7 +17,7 @@ The biggest change was the removal of Node.js stack including Express and Passpo
 
 \section{Packages} \label{s-i--packages}
 
-During implementation and research into React and performance another framework was discovered called Preact. Preact, is a framework that attempts to recreate functionality of React but with the focus of performance. Using Preact means a better development experience. \cite{preact} Preact is 3kb in size in comparison to React which is 53kb in size.
+During implementation and research into React and performance, another framework called Preact was discovered. Preact, is a framework that attempts to recreate functionality of React but with the focus of performance. Using Preact means a better development experience. \cite{preact} Preact is 3kb in size in comparison to React which is 53kb in size.
 
 The implementation therefore used Preact and was used for rendering views in the artefact.
 
@@ -29,9 +29,9 @@ A good example of this is the `moment.js' package used in this artefact, this pa
 
 Offline caching of files was implemented through service worker. At the time of writing, there is discussion as to whether service worker is too low level for using the caching functionality. It is argued that this functionality could be brought through as a separate caching API. \cite{sw_sledgehammer}
 
-Implementing the caching with service worker wasn't trivial but once learnt was understandable. Having a abstracted caching API could be useful for simpler implementations of offline caching.
+Implementing the caching with service worker wasn't trivial but once learnt was understandable. Having an abstracted caching API could be useful for simpler implementations of offline caching.
 
-Having a clientside database through PouchDB and IndexedDB (as further discussed in section \ref{s-i--data-and-databases}) not only does this mean offline data but also quick retrieval of data even when connected to a network. This is a boost for performance in general.
+Having a clientside database through PouchDB and IndexedDB (as further discussed in section \ref{s-i--data-and-databases}) not only means offline data but also quick retrieval of data even when connected to a network. This is a boost for performance in general.
 
 \section{Data and Databases} \label{s-i--data-and-databases}
 
@@ -62,7 +62,7 @@ For example, with Preact during implementation there was an issue with a feature
 
 While testing the service worker code and implementation difficulties arise when caching files. Originally the author was manually unregistering the service worker then closing and reopening the tab.
 
-Simply refreshing does not give you any updated version of the service worker files, this is due to the browser making the new page request before unloading the current page so the activated service worker is never released. \cite{refresh_sw}
+Simply refreshing does not give any updated version of the service worker files, this is due to the browser making the new page request before unloading the current page so the activated service worker is never released. \cite{refresh_sw}
 
 As shown in Figure \ref{figure-force-update-service-worker}, to solve this problem there is a `Force update on page load' option in the Chrome development tools.
 
