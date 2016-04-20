@@ -8,7 +8,7 @@ $pink: #DF2763;
 $cream: #FCEDCA;
 $pinkish: #E49D87;
 
-$brown: #943938;
+$brown: #823231;
 $darkBrown: darken($brown, 20%);
 
 $info: $blue;
@@ -17,3 +17,8 @@ $success: $green;
 
 $bg: $brown;
 $brand: $pink;
+
+// breakpoints
+
+$extra-small: 20em;
+$small: 35em;

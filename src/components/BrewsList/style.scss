@@ -1,0 +1,43 @@
+@import '~style/list';
+
+.list .item > div:nth-child(n+2) {
+  float: left;
+  width: 30%;
+
+  border-right: 0;
+}
+
+.list .item .progress {
+  float: right;
+  margin: .2em .5em;
+  line-height: 0;
+
+  animation: progressRotate 2.5s infinite linear;
+}
+
+.list .item .state {
+  float: right;
+  padding: .5em 1em;
+
+  text-transform: uppercase;
+  font-size: .75em;
+  font-weight: 600;
+  color: rgba(0, 0, 0, .5);
+
+  transform: translateY(-.25em);
+
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.list .item .stateBrewing {
+  background: $success;
+}
+
+.list .item .stateReady {
+  background: $brand;
+}
+
+.list .item .stateDone {
+  background: rgba(0, 0, 0, .25);
+}

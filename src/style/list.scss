@@ -1,0 +1,45 @@
+@import '~style/helpers';
+@import '~style/button';
+
+.placeholder {
+  padding: 2em;
+  margin-bottom: 1em;
+  background: rgba($black, .25);
+
+  animation: placeholderPulse 1s infinite alternate ease-in-out;
+}
+
+.list {
+  list-style: none;
+}
+
+.list .item {
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+
+  color: darken($bg, 10%);
+  text-align: left;
+
+  background: $cream;
+  border-left: 10px solid $cream;
+}
+
+.list .item > div {
+  float: left;
+  width: 70%;
+  padding: 1em 1em 1.5em;
+
+  border-right: 2px solid rgba(0, 0, 0, .025);
+}
+
+.list .item .name {
+  display: block;
+}
+
+.list .item .author {
+  display: block;
+
+  font-size: .9em;
+  font-weight: 500;
+}

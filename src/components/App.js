@@ -215,6 +215,7 @@ export default class App extends Component {
         if (!row.doc.recipe) {
           return false;
         }
+        
         return row.doc;
       });
       this.setState({ brews });
@@ -331,10 +332,6 @@ export default class App extends Component {
     brew.startTime = Date.now();
 
     return db.brews.local.put(brew);
-  }
-
-  processBrew(brew, Recipe) {
-
   }
 
   render() {

@@ -1,17 +1,31 @@
 @keyframes fadeIn {
   from {
-    opacity: .5;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
   }
 }
 
 @keyframes fadeInOut {
-  0%{
-    opacity: .5;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
+  0%, 100%{
     opacity: 0;
   }
+  10%, 80% {
+    opacity: 1;
+  }
+}
+
+@keyframes progressRotate {
+  to {
+    transform-origin: center;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes placeholderPulse {
+  to { transform: scaleY(0.95); }
 }

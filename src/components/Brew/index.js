@@ -11,8 +11,6 @@ export default class Brew extends Component {
     super();
 
     this.handleClick = this.handleClick.bind(this);
-
-    this.state = {};
   }
 
   handleClick(event) {
@@ -31,9 +29,17 @@ export default class Brew extends Component {
   render() {
     const { id, brews, recipes, user } = this.props;
 
-    // if there's no recipes or brews loaded, show a loading message
+    // if there's no recipes or brews loaded, show a placeholders for optimistic ui
     if (!recipes.length || !brews.length) {
-      return <Loading />;
+
+      // generate some placeholders for optimistically loading
+      const placeholders = [];
+      const placeholdersAmount =  25;
+      for (let i = 0; i < placeholdersAmount; i++) {
+        placeholders.push(<div class={style.placeholder} />);
+      }
+
+      return <div>{placeholders}</div>;
     }
 
     const brew = brews.find((brew) => brew._id === id);
@@ -61,34 +67,31 @@ export default class Brew extends Component {
 
     return (
     <div class={style.brew}>
-      <div class={style.info} style={{ display: 'flex' }}>
-        <div style={{ flex: 1 }}>
+      <div class={style.info}>
+        <div>
+          <h1 class={style.name}>{recipe.name}</h1>
+          <h2 class={style.author}>{recipe.author}</h2>
+        </div>
+        <div>
         {brew.startTime ? (
-          <div style={{ transform: 'translateY(.5em)' }}>
+          <div>
             <Progress percent={percentCompleted} strokeWidth={5} radius={50} />
           </div>
         ) : (
           <button class={`${style.button} ${style.buttonSuccess}`} onclick={this.handleClick}>Start brew</button>
         )}
         </div>
-        <div style={{ flex: 1 }}>
-          <h1>{recipe.name}</h1>
-        </div>
       </div>
-
 
       <ul class={style.timeline}>
         {recipe.timeline.map((item) => (
           <li class={`${style.item} ${item.completed && style.itemCompleted}`}>
-            <div>
-              {item.completed && '✔'}
-            </div>
             <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
               <time class={style.timeToStart}>{item.relativeStartTime.calendar()} ({moment.duration(item.relativeDuration).humanize(true)})</time>
               <span class={style.description}>{item.description}</span>
             </div>
             <div>
-              <time></time>
+              {item.completed && '✔'}
             </div>
           </li>
         ))}

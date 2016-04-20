@@ -1,12 +1,57 @@
 @import '~style/helpers';
 @import '~style/button';
 
+.placeholder {
+  padding: 2em;
+  margin: 2em 1em;
+  background: rgba($black, .25);
+
+  animation: placeholderPulse 1s infinite alternate ease-in-out;
+}
+
+.placeholder:first-child {
+  padding: 4em;
+}
+
 .brew {
 	padding: 1em;
 }
 
+.brew .button {
+  margin: 0;
+}
+
 .brew .info {
+  display: flex;
   position: relative;
+}
+
+.brew .info > div {
+  flex: 1;
+}
+
+.brew .info > div:first-child {
+  flex: 2;
+}
+
+.brew .info > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+@media (max-width: $small) {
+  .brew .info,
+  .brew .info > div{
+    display: block;
+  }
+}
+
+.brew .info > div > div {
+  float: right;
+
+  transform: translateY(.5em);
 }
 
 .brew .info .name {
@@ -16,10 +61,8 @@
 
 .brew .info .author {
   display: block;
-  padding: 0 1em;
 
   font-weight: 400;
-  text-align: right;
   color: rgba($black, 0.5);
 }
 
@@ -44,7 +87,7 @@
   width: 5px;
   height: 2em;
   top: -2.25em;
-  left: 49px;
+  right: 49px;
 
   background: $pinkish;
 }
@@ -57,7 +100,7 @@
   width: 10px;
   height: 10px;
   top: -5px;
-  left: 47px;
+  right: 47px;
 
   box-shadow: 0 0 0 4px $bg;
   border-radius: 50%;
@@ -77,7 +120,7 @@
   padding: 1em;
 }
 
-.brew .timeline .item > div:first-child {
+.brew .timeline .item > div:last-child {
   width: 15%;
   padding: 0 1em;
 

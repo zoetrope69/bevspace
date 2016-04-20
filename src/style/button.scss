@@ -30,6 +30,7 @@
 .button:disabled,
 .buttonDisabled{
   opacity: .75;
+  background: darken($white, 20%);
   cursor: default;
 }
 
@@ -39,7 +40,7 @@
 }
 
 .buttonInfo {
-  color: rgba($white, .9);
+  color: rgba($black, .85);
   background: $info;
 }
 
@@ -49,6 +50,6 @@
 }
 
 .buttonSuccess {
-  color: rgba($white, .9);
+  color: rgba($black, .85);
   background: $success;
 }

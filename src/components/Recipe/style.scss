@@ -1,6 +1,14 @@
 @import '~style/helpers';
 @import '~style/button';
 
+.placeholder {
+  margin: 1em;
+  margin-bottom: 4.5em;
+  padding: 5em;
+
+  background-color: rgba($black, .25);
+}
+
 .recipe {
 	padding: 1em;
 }
@@ -8,8 +16,6 @@
 .recipe .info {
   padding: 1em 1em 1.5em;
   margin-bottom: 1em;
-
-  background-color: rgba($white, .15);
 }
 
 .recipe .info .name {
@@ -18,9 +24,61 @@
 
 .recipe .info .author {
   display: block;
-  padding: 0 1em;
 
   font-weight: 400;
-  text-align: right;
   color: rgba($black, 0.5);
+}
+
+.recipe .ingredientsWrap {
+  flex-grow: 1;
+  padding: 1em;
+
+  color: $brown;
+
+  background: $cream;
+}
+
+.recipe .attributes {
+  display: flex;
+  margin-bottom: 1em;
+
+  @media (max-width: $small) {
+    display: block;
+  }
+}
+
+.recipe .attributes > div {
+  flex-grow: 1;
+
+  @media (max-width: $small) {
+    margin-bottom: 1em;
+  }
+}
+
+.recipe .ibuAbv {
+  color: rgba($black, 0.5);
+  font-weight: 800;
+  font-size: 2em;
+}
+
+.recipe .ibuAbv .abbr {
+  display: inline-block;
+  margin-left: .5em;
+
+  font-size: .5em;
+  font-weight: 600;
+
+  transform: translateY(-.25em);
+}
+
+.recipe .ingredientsWrap h2 {
+  margin-bottom: .5em;
+}
+
+.recipe .ingredients {
+}
+
+.recipe .ingredient {
+  list-style-position: inside;
+  margin-bottom: 1em;
 }
