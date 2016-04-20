@@ -11,7 +11,9 @@ export default class Header extends Component {
         <nav>
           <Link href="/recipes">Recipes</Link>
         {user && <Link href="/brews">Brews</Link>}
-          <Link href="/profile">{user ? user.name : 'Login/Signup'}</Link>
+          <Link href="/profile">{user ? (
+            <div><div class={style.profileImage}/> {user.name}</div>
+          ) : 'Login'}</Link>
         </nav>
       </header>
     );

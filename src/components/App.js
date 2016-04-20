@@ -294,7 +294,7 @@ export default class App extends Component {
 
   login() {
     const { remote } = this.state.db.brews;
-    remote.login('batman', 'brucewayne').then(this.getUser);
+    remote.login('homer', 'doh').then(this.getUser);
   }
 
   logout() {
@@ -307,12 +307,12 @@ export default class App extends Component {
     return remote.signup(username, password, (err, response) => {
       if (err) {
         if (err.name === 'conflict') {
-          return console.log('"batman" already exists, choose another username');
+          return console.log(`${username} already exists, choose another username`);
         } else if (err.name === 'forbidden') {
-          return console.log('invalid username', err);
+          return console.log('Invalid username', err);
         }
 
-        return console.log('something went wrong');
+        return console.log('Something went wrong');
       }
 
       console.log('response', response);
