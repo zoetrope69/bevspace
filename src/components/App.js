@@ -66,12 +66,7 @@ export default class App extends Component {
 	 *	@param {string} event.url	The newly routed URL
 	 */
   handleRoute = (event) => {
-    const { user } = this.state;
-
-    // redirect if no user for the brews section
-    if (event.url.indexOf('/brew') !== -1 && !user.name) {
-      route('/profile');
-    }
+    const { user, recipes, brews } = this.state;
 
     this.currentUrl = event.url;
   };
