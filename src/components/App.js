@@ -111,7 +111,13 @@ export default class App extends Component {
   fetchInitialRecipes() {
     const { local } = this.state.db.recipes;
     return local.allDocs({ include_docs: true }).then((res) => {
-      const recipes = res.rows.map((row) => this.processRecipe(row.doc));
+      const recipes = res.rows.map((row) => {
+        if (!row.doc.name) {
+          return false;
+        }
+
+        return this.processRecipe(row.doc);
+      });
       this.setState({ recipes });
     });
   }
