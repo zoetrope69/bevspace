@@ -3,19 +3,13 @@
 .alert {
   z-index: 10;
   position: fixed;
-  bottom: .75em;
-  left: .75em;
+  bottom: .5em;
+  left: 0;
   padding: .5em 1em;
 
   color: white;
 
-  border-radius: 5px;
   background: rgba($black, .85);
 
-  transition: opacity .33s;
-}
-
-.alert--hidden {
-  opacity: 0;
-  left: -100%;
+  animation: fadeInOut 3s ease-in-out forwards;
 }
