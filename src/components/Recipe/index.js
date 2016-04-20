@@ -12,6 +12,10 @@ export default class Recipe extends Component {
     };
   }
 
+  componentWillUnmount() {
+    this.setState({ brewCreated: false });
+  }
+
   handleClick(event) {
     const { id, createBrew } = this.props;
 
