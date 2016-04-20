@@ -26,9 +26,7 @@ describe('Profile', () => {
     it('should render <Profile /> with no user', () => {
       render(<Profile user={null} />, scratch);
 
-      console.log(scratch.innerHTML);
-
-      expect(scratch.innerHTML).to.contain('<h1>Hey</h1>');
+      expect(scratch.innerHTML).to.contain('<h1>Login</h1>');
     });
 
     it('should render <Profile /> with user', () => {

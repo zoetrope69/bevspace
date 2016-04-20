@@ -33,6 +33,9 @@ describe('Recipe', () => {
         name: "The Amazing Lemonade Brew",
         author: 'Rich Boakes',
         color: { style: 'blue' },
+        fermentables: [],
+        spices: [],
+        yeast: [],
       },
     ];
 
@@ -51,7 +54,9 @@ describe('Recipe', () => {
     it('should render <Recipe /> with no button if no user', () => {
       render(<Recipe id={_id} recipes={recipes} />, scratch);
 
-      expect(scratch.innerHTML).to.not.contain('Create a brew!');
+      console.log(scratch.innerHTML);
+
+      expect(scratch.innerHTML).to.contain('Login to Create a brew!');
     });
   });
 });

@@ -91,7 +91,7 @@ export default class Recipe extends Component {
         <button class={`${style.button} ${style.buttonSuccess}`}
                 onclick={this.handleClick}
                 disabled={!user || brewCreated}>
-          {!user && 'Log in to '}
+          {!user && 'Login to '}
           {brewCreated ? 'Brew created...' : 'Create a brew!'}
         </button>
         )}

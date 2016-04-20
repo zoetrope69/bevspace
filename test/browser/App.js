@@ -42,7 +42,7 @@ describe('App', () => {
       route('/profile');
       rerender();
 
-      expect(scratch.innerHTML).to.contain('Hey');
+      expect(scratch.innerHTML).to.contain('Login');
     });
   });
 });
