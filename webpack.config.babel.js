@@ -38,44 +38,44 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /src\//,
-        loader: 'source-map',
+        loader: 'source-map-loader',
       },
     ],
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
       },
       {
         test: /\.(scss|css)$/,
         include: /src\/components\//,
         loader: ExtractTextPlugin.extract('style?singleton', [
-          `css?sourceMap=${CSS_MAPS}&modules&importLoaders=1&localIdentName=[local]${process.env.CSS_MODULES_IDENT || '_[hash:base64:5]'}`,
-          'postcss',
-          `sass?sourceMap=${CSS_MAPS}`,
+          `css-loader?sourceMap=${CSS_MAPS}&modules&importLoaders=1&localIdentName=[local]${process.env.CSS_MODULES_IDENT || '_[hash:base64:5]'}`,
+          'postcss-loader',
+          `sass-loader?sourceMap=${CSS_MAPS}`,
         ].join('!')),
       },
       {
         test: /\.(scss|css)$/,
         exclude: /src\/components\//,
         loader: ExtractTextPlugin.extract('style?singleton', [
-          `css?sourceMap=${CSS_MAPS}`,
-          `postcss`,
-          `sass?sourceMap=${CSS_MAPS}`,
+          `css-loader?sourceMap=${CSS_MAPS}`,
+          `postcss-loader`,
+          `sass-loader?sourceMap=${CSS_MAPS}`,
         ].join('!')),
       },
       {
         test: /\.json$/,
-        loader: 'json',
+        loader: 'json-loader',
       },
       {
         test: /\.(xml|html|txt|md)$/,
-        loader: 'raw',
+        loader: 'raw-loader',
       },
       {
         test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-        loader: ENV === 'production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url',
+        loader: ENV === 'production' ? 'file-loader?name=[path][name]_[hash:base64:5].[ext]' : 'url',
       },
     ],
 
