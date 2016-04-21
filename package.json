@@ -34,7 +34,7 @@
     "chai": "3.5.0",
     "core-js": "2.2.2",
     "css-loader": "0.23.1",
-    "cz-conventional-changelog": "1.1.5",
+    "cz-conventional-changelog": "1.1.6",
     "es6-promise": "3.1.2",
     "eslint": "2.7.0",
     "exports-loader": "0.6.3",
