@@ -62,7 +62,7 @@
     "sass-loader": "3.1.2",
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
-    "snyk": "1.13.1",
+    "snyk": "1.14.2",
     "source-map-loader": "0.1.5",
     "style-loader": "0.13.1",
     "superstatic": "4.0.2",
