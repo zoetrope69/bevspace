@@ -4,6 +4,8 @@
 [![Dependency Status](https://david-dm.org/zaccolley/bevspace.svg)](https://david-dm.org/zaccolley/bevspace)
 [![devDependency Status](https://david-dm.org/zaccolley/bevspace/dev-status.svg)](https://david-dm.org/zaccolley/bevspace#info=devDependencies)
 
+my university project (with [report](https://github.com/zaccolley/bevspace/blob/dev/report.pdf))
+
 # preinstall
 
 1. install node (version 5.0.0) and npm
